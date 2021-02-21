@@ -1,8 +1,8 @@
 echo "Começando a compilação do projeto"
 
-g++ main.cpp -o main
+g++ main.cpp -o main ./Classes/ArvB/ArvB.cpp
 if [ $? -eq 0 ];then 
-   echo "compilado com sucesso!"
+   echo "Compilado com sucesso! :)"
 else
-   echo "nao compilado"
+   echo "Nao compilado :("
 fi
