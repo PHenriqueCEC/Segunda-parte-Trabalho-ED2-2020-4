@@ -1,0 +1,5 @@
+--Compilação
+Sempre ao criar uma classe nova adicione essa classe no compile.sh para compilar a classe,
+ a inclusão deve ser da seguinte maneira : 
+
+Criei uma classe ArvBin, vou no compile.sh e adiciono ./Classes/ArvBin/ArvBin.cpp na linha do g++
