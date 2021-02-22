@@ -1,5 +1,5 @@
-#ifndef ARVB_H_INCLUDED
-#define ARVB_H_INCLUDED
+#ifndef BTREE_H_INCLUDED
+#define BTREE_H_INCLUDED
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -9,13 +9,12 @@
 
 using namespace std;
 
-class Sorting
+class BTree
 {
-    private:
-
-    public:
-       Arvb();
-    
+private:
+public:
+    BTree();
+    ~BTree();
 };
 
 #endif
