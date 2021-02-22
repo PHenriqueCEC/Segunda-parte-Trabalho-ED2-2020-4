@@ -1,5 +1,5 @@
-#ifndef ARVB_H_INCLUDED
-#define ARVB_H_INCLUDED
+#ifndef NOB_H_INCLUDED
+#define NOB_H_INCLUDED
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -9,12 +9,12 @@
 
 using namespace std;
 
-class Sorting
+class NoB
 {
     private:
 
     public:
-       Arvb();
+       NoB();
     
 };
 
