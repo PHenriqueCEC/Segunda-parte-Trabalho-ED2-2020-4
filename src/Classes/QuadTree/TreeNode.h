@@ -11,10 +11,10 @@ class TreeNode
 private:
 
     CityInfo *rootValue;
-    CityInfo *SE;
-    CityInfo *SW;
-    CityInfo *NE;
-    CityInfo *NW;
+    TreeNode *SE;
+    TreeNode *SW;
+    TreeNode *NE;
+    TreeNode *NW;
 
 public:
     TreeNode();
@@ -24,13 +24,13 @@ public:
     void SetSW(CityInfo *SW);
     void SetNE(CityInfo *NE);
     void SetNW(CityInfo *NEW);
-    CityInfo* GetSE();
-    CityInfo* GetSW();
-    CityInfo* GetNE();
-    CityInfo* GetNW();
+    TreeNode* GetSE();
+    TreeNode* GetSW();
+    TreeNode* GetNE();
+    TreeNode* GetNW();
     CityInfo* GetRootValue();
-    CityInfo* GetValueInQuadrant(string quadrant);
-    
+    TreeNode* GetValueInQuadrant(string quadrant);
+    void InsertInQuadrant(string quadrant , CityInfo* value);
 };
 
 #endif

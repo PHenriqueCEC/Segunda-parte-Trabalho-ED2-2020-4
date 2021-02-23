@@ -12,7 +12,7 @@ FileHandler::~FileHandler()
 void FileHandler::processCityInfo(string filename)
 {
   int line = 0;
-  ifstream arq("teste.csv");
+  ifstream arq("brazil_cities_coordinates.csv");
   string state_code, city_code, city_name, latitutde, longitude, IsCapital;
   if (arq.is_open())
   {
@@ -38,8 +38,6 @@ void FileHandler::processCityInfo(string filename)
         tree->Insert(tree->root, info);
       }
       line++;
-      if (line == 3)
-        break;
     }
     tree->Print();
     cout << "Arquivo processado com sucesso" << endl;
