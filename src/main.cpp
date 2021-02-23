@@ -1,9 +1,10 @@
 #include<iostream>
-
+#include "./Classes/FileHandler/FileHandler.h"
 using namespace std;
 
 int main(int argc, char **argv){
-    string diretorio = argv[1];
-    cout << "Diretório " << argv[1] << endl;
-    cout << "Trabalho ED2 Parte 2" << endl;
+    //string diretorio = argv[1];
+    FileHandler fileHandler;
+    fileHandler.processCityInfo("./teste.csv");
+   
 }
