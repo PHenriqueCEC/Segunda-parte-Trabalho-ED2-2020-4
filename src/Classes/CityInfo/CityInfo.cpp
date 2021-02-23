@@ -7,8 +7,21 @@ CityInfo::CityInfo(int state_code,string city_code,string city_name,float latitu
     this->latitude = latitude;
     this->longitude = longitude;
     this->isCapital = isCapital;
+    this->empty = false;
+}
+
+CityInfo::CityInfo(){
+    this->empty = true;
 }
 
 bool CityInfo::CompareCoordinates(float latitude,float longitude){
     return (this->latitude == latitude && this->longitude == longitude);
+}
+
+void CityInfo::SetIsEmpty(bool isEmpty){
+    this->empty = isEmpty;
+}
+
+bool CityInfo::isEmpty(){
+    return this->empty;
 }

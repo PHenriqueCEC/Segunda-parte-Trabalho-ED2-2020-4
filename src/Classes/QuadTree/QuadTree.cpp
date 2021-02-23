@@ -2,7 +2,7 @@
 
 QuadTree::QuadTree()
 {
-    this->root = NULL;
+    this->root = new TreeNode();
 }
 //X = Latitude
 //Y = Longitude
@@ -31,12 +31,14 @@ string QuadTree::GetQuadrant(CityInfo *inserted, CityInfo *toInsert)
 
 void QuadTree::Insert(TreeNode *root,CityInfo* toInsert){
     //Arvore inicialmente vazia
-    if(root == NULL){
-        root->SetRootValue(toInsert);
+    cout << "Vamo inserir" << toInsert ->city_name << endl;
+    if(this->root->GetRootValue()->isEmpty()){
+        this->root->SetRootValue(toInsert);
+        cout <<" Inserido" << this->root->GetRootValue()->city_name << endl; 
     }else{
         string quadrant = this->GetQuadrant(this->root->GetRootValue(),toInsert);
-        CityInfo *quadrantPointer = root->GetValueInQuadrant(quadrant);
-        quadrantPointer = toInsert;
+        cout << "Quadrante " << quadrant << endl;
+
     }
 }
 

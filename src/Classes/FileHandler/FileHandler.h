@@ -1,4 +1,3 @@
-
 #ifndef FILEHANDLER_H_INCLUDED
 #define FILEHANDLER_H_INCLUDED
 #include"../CityInfo/CityInfo.h"

@@ -2,10 +2,11 @@
 
 TreeNode::TreeNode()
 {
-    this->SE = NULL;
-    this->NE = NULL;
-    this->NW = NULL;
-    this->SW = NULL;
+    this->rootValue = new CityInfo();
+    this->SE = new CityInfo();
+    this->NE = new CityInfo();
+    this->NW = new CityInfo();
+    this->SW = new CityInfo();
 }
 
 //Getters
@@ -50,8 +51,9 @@ CityInfo *TreeNode::GetValueInQuadrant(string quadrant)
 
 void TreeNode::SetRootValue(CityInfo *rootValue)
 {
-    cout << "root" << rootValue->city_name << endl;
+    cout << "root" << this->rootValue->city_code << endl;
     this->rootValue = rootValue;
+    cout << "Saiu" << endl;
 }
 
 void TreeNode::SetNW(CityInfo *NW)
@@ -72,4 +74,9 @@ void TreeNode::SetNE(CityInfo *NE)
 void TreeNode::SetSW(CityInfo *SW)
 {
     this->SW = SW;
+}
+
+TreeNode::~TreeNode()
+{
+
 }

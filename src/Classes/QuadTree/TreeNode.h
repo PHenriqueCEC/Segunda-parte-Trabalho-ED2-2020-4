@@ -18,6 +18,7 @@ private:
 
 public:
     TreeNode();
+    ~TreeNode();
     void SetRootValue(CityInfo *rootValue);
     void SetSE(CityInfo *SE);
     void SetSW(CityInfo *SW);
@@ -29,7 +30,7 @@ public:
     CityInfo* GetNW();
     CityInfo* GetRootValue();
     CityInfo* GetValueInQuadrant(string quadrant);
-    ~TreeNode();
+    
 };
 
 #endif

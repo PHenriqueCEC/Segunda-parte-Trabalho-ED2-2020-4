@@ -16,9 +16,12 @@ public:
   //Y = Longitude
   float latitude, longitude;
   bool isCapital;
+  bool empty;
   CityInfo(int state_code,string city_code, string city_name, float latitude, float longitude, bool isCapital);
   CityInfo();
   ~CityInfo();
+  void SetIsEmpty(bool isEmpty);
+  bool isEmpty();
   bool CompareCoordinates(float latitude, float longitude);
 };
 
