@@ -30,7 +30,7 @@ void ArvoreB::Inserir()
 
 }
 
-void ArvoreB::Remover()
+void ArvoreB::Remover(NoB *p)
 {
 
 }

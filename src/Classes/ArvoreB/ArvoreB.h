@@ -19,9 +19,18 @@ class ArvoreB
 
     public:
        ArvoreB();
-       void Buscar();
-       void Inserir();
-       void Remover();
+       void Buscar(); // CovidInfo* Buscar(CoviInfo* info, NoB *p);
+       void Inserir(); //colocar como parametro o "tipo" covid *CovidInfo p
+       void Remover(NoB* p);
+       void Cisao(); //*CovidInfo info, NoB* (algum ponteiro)
+       NoB* Remocao(); //CovidInfo* info
+       NoB* Insercao(); //CovidInfo* info 
+       NoB* GetRaiz(); 
+       void SetRaiz(NoB* raiz);
+       void imprimirRaiz();
+
+        //int get_t();
+        //void set_t(int T);
   
 };
 
