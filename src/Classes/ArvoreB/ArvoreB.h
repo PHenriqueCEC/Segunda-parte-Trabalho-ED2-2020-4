@@ -12,26 +12,26 @@ using namespace std;
 
 class ArvoreB
 {
+    public:
+        ArvoreB();
+        ~ArvoreB();
+
+        bool Buscar();  // CovidInfo* Buscar(CoviInfo* info, NoB *p);
+        void Inserir(); //colocar como parametro o "tipo" covid *CovidInfo p
+        void Remover(NoB *p);
+        //void Cisao(CovidInfo* info, NoB* c); //*CovidInfo info, NoB* (algum ponteiro)
+        NoB *Remocao();  //CovidInfo* info
+        NoB *Insercao(); //CovidInfo* info
+        NoB *GetRaiz();
+        void SetRaiz(NoB *raiz);
+        void imprimirRaiz();
+
+        //int get_t();
+        //void set_t(int T);
     private:
         int numTrocas;
         int numComparacoes;
         NoB *raiz;
-
-    public:
-       ArvoreB();
-       void Buscar(); // CovidInfo* Buscar(CoviInfo* info, NoB *p);
-       void Inserir(); //colocar como parametro o "tipo" covid *CovidInfo p
-       void Remover(NoB* p);
-       void Cisao(); //*CovidInfo info, NoB* (algum ponteiro)
-       NoB* Remocao(); //CovidInfo* info
-       NoB* Insercao(); //CovidInfo* info 
-       NoB* GetRaiz(); 
-       void SetRaiz(NoB* raiz);
-       void imprimirRaiz();
-
-        //int get_t();
-        //void set_t(int T);
-  
 };
 
 #endif

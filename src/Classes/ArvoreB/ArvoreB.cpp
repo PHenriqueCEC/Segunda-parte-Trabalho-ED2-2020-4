@@ -19,7 +19,7 @@ ArvoreB::~ArvoreB()
     //remover(raiz);
 }
 
-void ArvoreB::Buscar()
+bool ArvoreB::Buscar()
 {
 
 }
@@ -33,3 +33,8 @@ void ArvoreB::Remover(NoB *p)
 {
 
 }
+
+/*void ArvoreB::Cisao(CovidInfo* info, NoB* c)
+{
+
+}*/
