@@ -1,6 +1,6 @@
 echo "Começando a compilação do projeto"
 
-g++ main.cpp -o main ./Classes/ArvB/ArvB.cpp
+cd ./Classes && g++ ./CityInfo/CityInfo.cpp ./QuadTree/QuadTree.cpp ./QuadTree/TreeNode.cpp ./FileHandler/FileHandler.cpp ../main.cpp -o ../main
 if [ $? -eq 0 ];then 
    echo "Compilado com sucesso! :)"
 else
