@@ -13,8 +13,10 @@ class AvlTree
 {
 private:
   AvlTree *root;
-  void rotateTwice();
-  void rotateOnce();
+  AvlNode *simpleRotationLeft(AvlNode *node);
+  AvlNode *simpleRotationRight(AvlNode *node);
+  AvlNode *doubleRotationLeft(AvlNode *node);
+  AvlNode *doubleRotationRight(AvlNode *node);
   void updateBalance();
   void insert(string key, string value, AvlNode *node, bool &changedH);
   bool remove(string key, AvlNode *node, bool &changedH);

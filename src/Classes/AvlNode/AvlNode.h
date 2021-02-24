@@ -12,8 +12,6 @@ using namespace std;
 class AvlNode
 {
 private:
-  AvlNode *left;
-  AvlNode *right;
   int data;
   int height;
   string key;
@@ -23,6 +21,8 @@ private:
 public:
   AvlNode(string key, string value);
   ~AvlNode();
+  AvlNode *left;
+  AvlNode *right;
 };
 
 #endif
