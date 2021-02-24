@@ -34,7 +34,6 @@ void FileHandler::processCityInfo(string filename)
       {
         //@Todo inserção dos dados obtidos na quadtree;
         CityInfo *info = new CityInfo(stoi(state_code), city_code, city_name, stof(latitutde), stof(longitude), true);
-
         tree->Insert(tree->root, info);
       }
       line++;

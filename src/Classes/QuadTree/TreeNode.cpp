@@ -38,20 +38,42 @@ CityInfo *TreeNode::GetRootValue()
 TreeNode *TreeNode::GetValueInQuadrant(string quadrant)
 {
     if (quadrant == "NW")
+    {
+        if (NW == NULL)
+        {
+            NW = new TreeNode();
+        }
         return NW;
+    }
+
     else if (quadrant == "NE")
-        return NW;
+    {
+        if (NE == NULL)
+        {
+            NE = new TreeNode();
+        }
+        return NE;
+    }
+
     else if (quadrant == "SE")
+    {
+        if (SE == NULL)
+        {
+            SE = new TreeNode();
+        }
         return SE;
-    else
-        return SW;
+    }
+    
+    if (SW == NULL)
+        SW = new TreeNode();
+
+    return SW;
 }
 
 //Setters
 
 void TreeNode::SetRootValue(CityInfo *rootValue)
 {
-    cout << "root" << this->rootValue->city_code << endl;
     this->rootValue = rootValue;
 }
 
