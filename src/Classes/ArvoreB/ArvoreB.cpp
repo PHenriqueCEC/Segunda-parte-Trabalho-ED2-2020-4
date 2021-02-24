@@ -12,7 +12,6 @@ ArvoreB::ArvoreB()
     raiz = nullptr;
     numTrocas = 0;
     numComparacoes = 0;
-
 }
 
 ArvoreB::~ArvoreB()
