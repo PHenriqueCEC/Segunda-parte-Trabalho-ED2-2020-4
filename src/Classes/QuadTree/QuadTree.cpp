@@ -59,6 +59,7 @@ bool QuadTree::Find(CityInfo *value)
         //Vejo a qual quadrante o elemento deveria pertencer
         string quadrant = this->GetQuadrant(this->root->GetRootValue(), value);
         aux = aux->GetValueInQuadrant(quadrant);
+        cout << "To no " << aux->GetRootValue()->city_name << endl;
         if (aux->GetRootValue()->city_name == value->city_name)
             return true;
     }
@@ -68,15 +69,37 @@ bool QuadTree::Find(CityInfo *value)
 void QuadTree::Print()
 {
     TreeNode *aux = new TreeNode();
-
+    int cidades = 0;
     aux = this->root;
-    this->root->PrintTree();
-    aux = aux->GetNW();
     while (aux != nullptr)
     {
         aux->PrintTree();
         aux = aux->GetNW();
+        cidades++;
     }
+    aux = this->root;
+    while (aux != nullptr)
+    {
+        aux->PrintTree();
+        aux = aux->GetNE();
+        cidades++;
+    }
+    aux = this->root;
+    while (aux != nullptr)
+    {
+        aux->PrintTree();
+        aux = aux->GetSE();
+        cidades++;
+    }
+    aux = this->root;
+    while (aux != nullptr)
+    {
+        aux->PrintTree();
+        aux = aux->GetSW();
+        cidades++;
+    }
+
+    cout << "Num de cidades" << cidades << endl;
     /*
     cout << "----------------------------------------------------------------------" << endl;
     aux = this->root;
