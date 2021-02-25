@@ -30,6 +30,7 @@ public:
     TreeNode* GetNW();
     CityInfo* GetRootValue();
     TreeNode* GetValueInQuadrant(string quadrant);
+    void PrintTree();
     void InsertInQuadrant(string quadrant , CityInfo* value);
 };
 

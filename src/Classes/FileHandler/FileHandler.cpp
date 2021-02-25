@@ -39,6 +39,8 @@ void FileHandler::processCityInfo(string filename)
       line++;
     }
     tree->Print();
+    cout << " --------------------------" << endl;
+    cout << "Tem salvador ? " << tree->Find(new CityInfo(29,"2927408","Salvador", -12.9718,-38.5011,true)) << endl;
     cout << "Arquivo processado com sucesso" << endl;
   }
   else
