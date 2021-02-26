@@ -3,10 +3,10 @@
 TreeNode::TreeNode()
 {
     this->rootValue = new CityInfo();
-    this->SE = NULL;
-    this->NE = NULL;
-    this->NW = NULL;
-    this->SW = NULL;
+    this->SE = nullptr;
+    this->NE = nullptr;
+    this->NW = nullptr;
+    this->SW = nullptr;
 }
 
 //Getters
@@ -63,7 +63,7 @@ TreeNode *TreeNode::GetValueInQuadrant(string quadrant)
         }
         return SE;
     }
-    
+
     if (SW == NULL)
         SW = new TreeNode();
 
@@ -123,6 +123,21 @@ void TreeNode::InsertInQuadrant(string quadrant, CityInfo *value)
         this->NW->SetRootValue(value);
         return;
     }
+}
+
+void TreeNode::PrintTree()
+{
+    cout << "--------------------------------------------------------------" << endl;
+    cout << "Nó raiz  : " << this->GetRootValue()->city_name << endl;
+    if (this->GetNE())
+        cout << "Ao NE :" << this->GetNE()->GetRootValue()->city_name << endl;
+    if (this->GetSE())
+        cout << "Ao SE :" << this->GetSE()->GetRootValue()->city_name << endl;
+    if (this->GetSW())
+        cout << "Ao SW :" << this->GetSW()->GetRootValue()->city_name << endl;
+    if (this->GetNW())
+        cout << "Ao Nw :" << this->GetNW()->GetRootValue()->city_name << endl;
+    cout << "--------------------------------------------------------------" << endl;
 }
 
 TreeNode::~TreeNode()

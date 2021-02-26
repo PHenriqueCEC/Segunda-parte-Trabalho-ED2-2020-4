@@ -16,6 +16,7 @@ public:
     string GetQuadrant(CityInfo *inserted, CityInfo *toInsert);
     void Insert(TreeNode *root, CityInfo *toInsert);
     void Print();
+    bool Find(CityInfo *value);
 };
 
 #endif
