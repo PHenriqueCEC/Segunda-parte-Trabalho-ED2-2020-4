@@ -1,6 +1,7 @@
 #ifndef ARVOREB_H_INCLUDED
 #define ARVOREB_H_INCLUDED
 #include "./NoB.h"
+#include "./Classes/CityInfo/CityInfo.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -16,12 +17,12 @@ class ArvoreB
         ArvoreB();
         ~ArvoreB();
 
-        bool Buscar();  // CovidInfo* Buscar(CoviInfo* info, NoB *p);
-        void Inserir(); //colocar como parametro o "tipo" covid *CovidInfo p
+        NoB* Buscar(CityInfo* info, NoB *p);  
+        void Inserir(CityInfo* p); 
         void Remover(NoB *p);
-        //void Cisao(CovidInfo* info, NoB* c); //*CovidInfo info, NoB* (algum ponteiro)
-        NoB *Remocao();  //CovidInfo* info
-        NoB *Insercao(); //CovidInfo* info
+        void Cisao(CityInfo* info, NoB* c);
+        NoB *Remocao(CityInfo* info);  
+        NoB *Insercao(CityInfo* info); 
         NoB *GetRaiz();
         void SetRaiz(NoB *raiz);
         void imprimirRaiz();
@@ -32,6 +33,7 @@ class ArvoreB
         int numTrocas;
         int numComparacoes;
         NoB *raiz;
+        int max;
 };
 
 #endif

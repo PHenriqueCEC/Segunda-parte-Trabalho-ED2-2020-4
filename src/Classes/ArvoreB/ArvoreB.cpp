@@ -19,14 +19,54 @@ ArvoreB::~ArvoreB()
     //remover(raiz);
 }
 
-bool ArvoreB::Buscar()
+NoB* ArvoreB::Buscar(CityInfo* info, NoB *p)
 {
+    if(raiz == nullptr)
+    {
+        return false;
+    }
+
+    else
+    {
+        int i = 0;
+        //procura a primeira chave maior ou igual a k
+        while (i < p->GetN() && info > chave[i])
+        {
+            i++; //Precisa de id
+        }
+        
+        //retorna esse no caso a chave foi encontrada
+        if(chave[i] == info)
+        {
+            return chave[i];
+        }
+
+        //Se a chave nao foi encontrada e este eh um no folha
+        if(folha)
+        {
+            return nullptr;
+        }
+
+        return Buscar(info, p);
+    }
+
 
 }
 
-void ArvoreB::Inserir()
+void ArvoreB::Inserir(CityInfo* info)
 {
+    if(raiz == nullptr)
+    {
+        NoB* p = new NoB(max); //Memoria alocada para a raiz
+        raiz = p;
+        raiz->SetN(1); //Atualiza valor de n
+        raiz->AtualizarChave(0, info); //Atualiza chave
+    }
 
+    else
+    {
+        
+    }
 }
 
 void ArvoreB::Remover(NoB *p)
@@ -34,7 +74,7 @@ void ArvoreB::Remover(NoB *p)
 
 }
 
-/*void ArvoreB::Cisao(CovidInfo* info, NoB* c)
+void ArvoreB::Cisao(CityInfo* info, NoB* c)
 {
 
-}*/
+}

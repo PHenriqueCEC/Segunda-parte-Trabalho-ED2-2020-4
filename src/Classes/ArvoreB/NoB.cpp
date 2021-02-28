@@ -7,27 +7,28 @@
 
 using namespace std;
 
-NoB::NoB(int _m)
+NoB::NoB(int _max)
 {
-    m = _m; //tamanho
+    max = _max; 
+    min = max / 2;
     n = 0;
     folha = true;
     pai = nullptr;
 
-    filhos = new NoB(m); //cria filhos com o numero maximo m
-    //chaves = new NoB(m - 1); Cria chave de ordem m - 1
+    filhos = new NoB*[max]; //cria filhos com o numero maximo m
+    chave = new CityInfo*[max]; //Cria chave de ordem m - 1
 
-    for(int i = 0; i < m; i++) //inicializa os filhos com nullptr
-        filhos[i] = NULL; //Pq nullptr NAO funciona?
+    for(int i = 0; i < max; i++) //inicializa os filhos com nullptr
+        filhos[i] = nullptr; //Pq nullptr NAO funciona?
     
-    //for(int i = 0; i < m - 1; i++) //cria chaves com o numero maximo m - 1
-        //chaves[i] = nullptr;
+    for(int i = 0; i < max - 1; i++) //cria chaves com o numero maximo m - 1
+        chave[i] = nullptr;
 
 }
 
 NoB::~NoB()
 {
-    //delete [] chaves;
+    delete [] chave;
     delete [] filhos;
 }
 
@@ -41,15 +42,15 @@ void NoB::SetFolha(bool _folha)
     folha = _folha;
 }
 
-/*CovidInfo* NoB::GetChave(int i)
+CityInfo* NoB::GetChave(int i)
 {
     return chave[i];
-}*/
+}
 
-/*void NoB::SetChave(int i, CovidInfo* val)
+void NoB::AtualizarChave(int i, CityInfo* info)
 {
-    chave[i] = val
-}*/
+    chave[i] = info;
+}
 
 int NoB::GetN()
 {
@@ -79,15 +80,16 @@ void NoB::SetPai(NoB *p)
 void NoB:: SetFilhos(int i, NoB* val)
 {
     filhos[i] = val; 
-}*/
+}
 
-/*CovidInfo* NoB::GetAnt(int i)
+CityInfo* NoB::GetAnt(int i)
 {
 
 }
 
-CovidInfo* NoB::SetProx(int i)
+CityInfo* NoB::SetProx(int i)
 {
 
 }*/
+
 
