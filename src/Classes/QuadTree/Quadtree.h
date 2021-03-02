@@ -9,14 +9,20 @@ using namespace std;
 class QuadTree
 {
 private:
+    int size;
 public:
     TreeNode *root;
     QuadTree();
     ~QuadTree();
-    string GetQuadrant(CityInfo *inserted, CityInfo *toInsert);
-    void Insert(TreeNode *root, CityInfo *toInsert);
-    void Print();
-    bool Find(CityInfo *value);
+    string getQuadrant(CityInfo *inserted, CityInfo *toInsert);
+    void insert(TreeNode *root, CityInfo *toInsert);
+    void auxPrint(TreeNode *node);
+    void print();
+    bool find(CityInfo *value);
+    bool auxFind(TreeNode *tree);
+    int getSize();
+    void setSize(int size);
+    TreeNode* clean(TreeNode *node);
 };
 
 #endif

@@ -14,11 +14,11 @@ CityInfo::CityInfo(){
     this->empty = true;
 }
 
-bool CityInfo::CompareCoordinates(float latitude,float longitude){
+bool CityInfo::compareCoordinates(float latitude,float longitude){
     return (this->latitude == latitude && this->longitude == longitude);
 }
 
-void CityInfo::SetIsEmpty(bool isEmpty){
+void CityInfo::setIsEmpty(bool isEmpty){
     this->empty = isEmpty;
 }
 

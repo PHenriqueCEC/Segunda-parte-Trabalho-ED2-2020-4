@@ -10,32 +10,32 @@ TreeNode::TreeNode()
 }
 
 //Getters
-TreeNode *TreeNode::GetNW()
+TreeNode *TreeNode::getNW()
 {
     return this->NW;
 }
 
-TreeNode *TreeNode::GetSE()
+TreeNode *TreeNode::getSE()
 {
     return this->SE;
 }
 
-TreeNode *TreeNode::GetNE()
+TreeNode *TreeNode::getNE()
 {
     return this->NE;
 }
 
-TreeNode *TreeNode::GetSW()
+TreeNode *TreeNode::getSW()
 {
     return this->SW;
 }
 
-CityInfo *TreeNode::GetRootValue()
+CityInfo *TreeNode::getRootValue()
 {
     return this->rootValue;
 }
 
-TreeNode *TreeNode::GetValueInQuadrant(string quadrant)
+TreeNode *TreeNode::getValueInQuadrant(string quadrant)
 {
     if (quadrant == "NW")
     {
@@ -72,74 +72,85 @@ TreeNode *TreeNode::GetValueInQuadrant(string quadrant)
 
 //Setters
 
-void TreeNode::SetRootValue(CityInfo *rootValue)
+void TreeNode::setRootValue(CityInfo *rootValue)
 {
     this->rootValue = rootValue;
 }
 
-void TreeNode::SetNW(CityInfo *NW)
+void TreeNode::setNW(TreeNode *NW)
 {
-    this->NW->SetRootValue(NW);
+    this->NW = NW;
 }
 
-void TreeNode::SetSE(CityInfo *SE)
+void TreeNode::setSE(TreeNode *SE)
 {
-    this->SE->SetRootValue(SE);
+    this->SE = SE;
 }
 
-void TreeNode::SetNE(CityInfo *NE)
+void TreeNode::setNE(TreeNode *NE)
 {
-    this->NE->SetRootValue(NE);
+    this->NE =NE;
 }
 
-void TreeNode::SetSW(CityInfo *SW)
+void TreeNode::setSW(TreeNode *SW)
 {
-    this->SW->SetRootValue(SW);
+    this->SW = SW;
 }
 
-void TreeNode::InsertInQuadrant(string quadrant, CityInfo *value)
+void TreeNode::insertInQuadrant(string quadrant, CityInfo *value)
 {
     if (quadrant == "SE")
     {
         this->SE = new TreeNode();
-        this->SE->SetRootValue(value);
+        this->SE->setRootValue(value);
         return;
     }
     else if (quadrant == "SW")
     {
         this->SW = new TreeNode();
-        this->SW->SetRootValue(value);
+        this->SW->setRootValue(value);
         return;
     }
     if (quadrant == "NE")
     {
         this->NE = new TreeNode();
-        this->NE->SetRootValue(value);
+        this->NE->setRootValue(value);
         return;
     }
     if (quadrant == "NW")
     {
         this->NW = new TreeNode();
-        this->NW->SetRootValue(value);
+        this->NW->setRootValue(value);
         return;
     }
 }
-
-void TreeNode::PrintTree()
+/*
+void TreeNode::print()
 {
-    cout << "--------------------------------------------------------------" << endl;
-    cout << "Nó raiz  : " << this->GetRootValue()->city_name << endl;
-    if (this->GetNE())
-        cout << "Ao NE :" << this->GetNE()->GetRootValue()->city_name << endl;
-    if (this->GetSE())
-        cout << "Ao SE :" << this->GetSE()->GetRootValue()->city_name << endl;
-    if (this->GetSW())
-        cout << "Ao SW :" << this->GetSW()->GetRootValue()->city_name << endl;
-    if (this->GetNW())
-        cout << "Ao Nw :" << this->GetNW()->GetRootValue()->city_name << endl;
-    cout << "--------------------------------------------------------------" << endl;
+    auxPrintTree(this->GetNW());
+    auxPrintTree(this->GetSW());
+    auxPrintTree(this->GetSE());
+    auxPrintTree(this->GetNE());
 }
 
+void TreeNode::auxPrint(TreeNode *tree)
+{
+    cout << "--------------------------------------------------------------" << endl;
+    if (tree)
+    {
+        cout << "Nó raiz  : " << tree->GetRootValue()->city_name << endl;
+        if (tree->GetNE())
+            cout << "Ao NE :" << tree->GetNE()->GetRootValue()->city_name << endl;
+        if (tree->GetSE())
+            cout << "Ao SE :" << tree->GetSE()->GetRootValue()->city_name << endl;
+        if (tree->GetSW())
+            cout << "Ao SW :" << tree->GetSW()->GetRootValue()->city_name << endl;
+        if (tree->GetNW())
+            cout << "Ao NW " << tree->GetNW()->GetRootValue()->city_name << endl;
+    }
+}
+
+*/
 TreeNode::~TreeNode()
 {
 }

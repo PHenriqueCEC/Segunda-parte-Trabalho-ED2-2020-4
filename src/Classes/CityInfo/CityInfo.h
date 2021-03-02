@@ -20,9 +20,9 @@ public:
   CityInfo(int state_code,string city_code, string city_name, float latitude, float longitude, bool isCapital);
   CityInfo();
   ~CityInfo();
-  void SetIsEmpty(bool isEmpty);
+  void setIsEmpty(bool isEmpty);
   bool isEmpty();
-  bool CompareCoordinates(float latitude, float longitude);
+  bool compareCoordinates(float latitude, float longitude);
 };
 
 #endif

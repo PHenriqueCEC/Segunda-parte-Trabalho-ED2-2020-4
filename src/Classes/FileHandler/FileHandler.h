@@ -12,11 +12,12 @@ class FileHandler
 private:
 
 public:
-  //Função de processamento do csv
+
   FileHandler();
   ~FileHandler();
+  //Função de processamento do csv
   void processCityInfo(string filename);
-  //Função para obter n registros aleatórios do arquivo processado
+  
 };
 
 #endif

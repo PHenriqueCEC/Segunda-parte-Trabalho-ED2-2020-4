@@ -16,22 +16,25 @@ private:
     TreeNode *NE;
     TreeNode *NW;
 
+    int size = 0;
+
 public:
     TreeNode();
     ~TreeNode();
-    void SetRootValue(CityInfo *rootValue);
-    void SetSE(CityInfo *SE);
-    void SetSW(CityInfo *SW);
-    void SetNE(CityInfo *NE);
-    void SetNW(CityInfo *NEW);
-    TreeNode* GetSE();
-    TreeNode* GetSW();
-    TreeNode* GetNE();
-    TreeNode* GetNW();
-    CityInfo* GetRootValue();
-    TreeNode* GetValueInQuadrant(string quadrant);
-    void PrintTree();
-    void InsertInQuadrant(string quadrant , CityInfo* value);
+    void setRootValue(CityInfo *rootValue);
+    void setSE(TreeNode *SE);
+    void setSW(TreeNode *SW);
+    void setNE(TreeNode *NE);
+    void setNW(TreeNode *NW);
+    TreeNode* getSE();
+    TreeNode* getSW();
+    TreeNode* getNE();
+    TreeNode* getNW();
+    CityInfo* getRootValue();
+    TreeNode* getValueInQuadrant(string quadrant);
+    /*void printTree();
+    void auxPrintTree(TreeNode *tree);*/
+    void insertInQuadrant(string quadrant , CityInfo* value);
 };
 
 #endif
