@@ -3,6 +3,7 @@
 QuadTree::QuadTree()
 {
     this->root = new TreeNode();
+    size = 0;
 }
 //X = Latitude
 //Y = Longitude
@@ -47,95 +48,42 @@ void QuadTree::Insert(TreeNode *root, CityInfo *toInsert)
             auxNode = auxNode->GetValueInQuadrant(quadrant);
         }
         auxNode->SetRootValue(toInsert);
+        this->size++;
     }
 }
 
-bool QuadTree::Find(CityInfo *value)
+bool QuadTree::find(CityInfo *value)
 {
     TreeNode *aux = this->root;
 
     while (!aux->GetRootValue()->isEmpty())
     {
         //Vejo a qual quadrante o elemento deveria pertencer
-        string quadrant = this->GetQuadrant(this->root->GetRootValue(), value);
+        string quadrant = this->GetQuadrant(aux->GetRootValue(), value);
         aux = aux->GetValueInQuadrant(quadrant);
-        cout << "To no " << aux->GetRootValue()->city_name << endl;
         if (aux->GetRootValue()->city_name == value->city_name)
             return true;
     }
     return false;
 }
 
-void QuadTree::Print()
+int QuadTree::getSize()
 {
-    TreeNode *aux = new TreeNode();
-    int cidades = 0;
-    aux = this->root;
-    while (aux != nullptr)
-    {
-        aux->PrintTree();
-        aux = aux->GetNW();
-        cidades++;
-    }
-    aux = this->root;
-    while (aux != nullptr)
-    {
-        aux->PrintTree();
-        aux = aux->GetNE();
-        cidades++;
-    }
-    aux = this->root;
-    while (aux != nullptr)
-    {
-        aux->PrintTree();
-        aux = aux->GetSE();
-        cidades++;
-    }
-    aux = this->root;
-    while (aux != nullptr)
-    {
-        aux->PrintTree();
-        aux = aux->GetSW();
-        cidades++;
-    }
+    return this->size;
+}
 
-    cout << "Num de cidades" << cidades << endl;
-    /*
-    cout << "----------------------------------------------------------------------" << endl;
-    aux = this->root;
-    cout << "Nó de referência  : " << aux->GetRootValue()->city_name << endl;
-    bool is = aux->GetRootValue()->isEmpty();
-    cout << "SW " << endl;
-
-    while (aux != nullptr)
-    {
-        cout << aux->GetRootValue()->city_name << endl;
-        aux = aux->GetSW();
+void QuadTree::auxPrint(TreeNode *node){
+    if(node != nullptr){
+        cout << node->GetRootValue()->city_name << " ,";
+        auxPrint(node->GetNE());
+        auxPrint(node->GetNW());
+        auxPrint(node->GetSE());
+        auxPrint(node->GetSW());
     }
-    aux = this->root;
-    cout << "SE " << endl;        cout << "Quadrante " << quadrant << endl;
+}
 
-    aux = aux->GetSE();
-    while (aux != nullptr)
-    {
-        cout << aux->GetRootValue()->city_name << endl;
-        aux = aux->GetSE();
-    }        cout << "Quadrante " << quadrant << endl;
-
+void QuadTree::print()
+{
+    this->auxPrint(this->root);
     cout << endl;
-    aux = this->root;
-    cout << "NE " << endl;
-    aux = aux->GetNE();
-    while (aux != nullptr)
-    {
-        cout << aux->GetRootValue()->city_name << endl;
-        aux = aux->GetNE();
-    }
-    cout << endl;
-    /*
-    cout << "Tem ao SW : " << this->root->GetSW()->GetRootValue()->city_name << endl;
-    cout << "Tem ao SE : " << this->root->GetSE()->GetRootValue() << endl;
-    cout << "Tem ao NE : " << this->root->GetNE()->GetRootValue() << endl;
-    cout << "Tem ao NW : " << this->root->GetNW()->GetRootValue() << endl;
-    */
 }

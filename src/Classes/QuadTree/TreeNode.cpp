@@ -124,22 +124,33 @@ void TreeNode::InsertInQuadrant(string quadrant, CityInfo *value)
         return;
     }
 }
-
-void TreeNode::PrintTree()
+/*
+void TreeNode::print()
 {
-    cout << "--------------------------------------------------------------" << endl;
-    cout << "Nó raiz  : " << this->GetRootValue()->city_name << endl;
-    if (this->GetNE())
-        cout << "Ao NE :" << this->GetNE()->GetRootValue()->city_name << endl;
-    if (this->GetSE())
-        cout << "Ao SE :" << this->GetSE()->GetRootValue()->city_name << endl;
-    if (this->GetSW())
-        cout << "Ao SW :" << this->GetSW()->GetRootValue()->city_name << endl;
-    if (this->GetNW())
-        cout << "Ao Nw :" << this->GetNW()->GetRootValue()->city_name << endl;
-    cout << "--------------------------------------------------------------" << endl;
+    auxPrintTree(this->GetNW());
+    auxPrintTree(this->GetSW());
+    auxPrintTree(this->GetSE());
+    auxPrintTree(this->GetNE());
 }
 
+void TreeNode::auxPrint(TreeNode *tree)
+{
+    cout << "--------------------------------------------------------------" << endl;
+    if (tree)
+    {
+        cout << "Nó raiz  : " << tree->GetRootValue()->city_name << endl;
+        if (tree->GetNE())
+            cout << "Ao NE :" << tree->GetNE()->GetRootValue()->city_name << endl;
+        if (tree->GetSE())
+            cout << "Ao SE :" << tree->GetSE()->GetRootValue()->city_name << endl;
+        if (tree->GetSW())
+            cout << "Ao SW :" << tree->GetSW()->GetRootValue()->city_name << endl;
+        if (tree->GetNW())
+            cout << "Ao NW " << tree->GetNW()->GetRootValue()->city_name << endl;
+    }
+}
+
+*/
 TreeNode::~TreeNode()
 {
 }
