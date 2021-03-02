@@ -14,8 +14,8 @@ public:
     TreeNode *root;
     QuadTree();
     ~QuadTree();
-    string GetQuadrant(CityInfo *inserted, CityInfo *toInsert);
-    void Insert(TreeNode *root, CityInfo *toInsert);
+    string getQuadrant(CityInfo *inserted, CityInfo *toInsert);
+    void insert(TreeNode *root, CityInfo *toInsert);
     void auxPrint(TreeNode *node);
     void print();
     bool find(CityInfo *value);

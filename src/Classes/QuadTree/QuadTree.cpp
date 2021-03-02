@@ -7,7 +7,7 @@ QuadTree::QuadTree()
 }
 //X = Latitude
 //Y = Longitude
-string QuadTree::GetQuadrant(CityInfo *inserted, CityInfo *toInsert)
+string QuadTree::getQuadrant(CityInfo *inserted, CityInfo *toInsert)
 {
     if (inserted->latitude < toInsert->latitude)
     {
@@ -30,24 +30,24 @@ string QuadTree::GetQuadrant(CityInfo *inserted, CityInfo *toInsert)
     }
 }
 
-void QuadTree::Insert(TreeNode *root, CityInfo *toInsert)
+void QuadTree::insert(TreeNode *root, CityInfo *toInsert)
 {
     //Arvore inicialmente vazia
     TreeNode *initialNode = this->root;
-    if (this->root->GetRootValue()->isEmpty())
+    if (this->root->getRootValue()->isEmpty())
     {
-        this->root->SetRootValue(toInsert);
+        this->root->setRootValue(toInsert);
     }
     else
     {
-        string quadrant = this->GetQuadrant(this->root->GetRootValue(), toInsert);
-        TreeNode *auxNode = initialNode->GetValueInQuadrant(quadrant);
-        while (!auxNode->GetRootValue()->isEmpty())
+        string quadrant = this->getQuadrant(this->root->getRootValue(), toInsert);
+        TreeNode *auxNode = initialNode->getValueInQuadrant(quadrant);
+        while (!auxNode->getRootValue()->isEmpty())
         {
-            quadrant = this->GetQuadrant(auxNode->GetRootValue(), toInsert);
-            auxNode = auxNode->GetValueInQuadrant(quadrant);
+            quadrant = this->getQuadrant(auxNode->getRootValue(), toInsert);
+            auxNode = auxNode->getValueInQuadrant(quadrant);
         }
-        auxNode->SetRootValue(toInsert);
+        auxNode->setRootValue(toInsert);
         this->size++;
     }
 }
@@ -56,12 +56,12 @@ bool QuadTree::find(CityInfo *value)
 {
     TreeNode *aux = this->root;
 
-    while (!aux->GetRootValue()->isEmpty())
+    while (!aux->getRootValue()->isEmpty())
     {
         //Vejo a qual quadrante o elemento deveria pertencer
-        string quadrant = this->GetQuadrant(aux->GetRootValue(), value);
-        aux = aux->GetValueInQuadrant(quadrant);
-        if (aux->GetRootValue()->city_name == value->city_name)
+        string quadrant = this->getQuadrant(aux->getRootValue(), value);
+        aux = aux->getValueInQuadrant(quadrant);
+        if (aux->getRootValue()->city_name == value->city_name)
             return true;
     }
     return false;
@@ -74,11 +74,11 @@ int QuadTree::getSize()
 
 void QuadTree::auxPrint(TreeNode *node){
     if(node != nullptr){
-        cout << node->GetRootValue()->city_name << " ,";
-        auxPrint(node->GetNE());
-        auxPrint(node->GetNW());
-        auxPrint(node->GetSE());
-        auxPrint(node->GetSW());
+        cout << node->getRootValue()->city_name << " ,";
+        auxPrint(node->getNE());
+        auxPrint(node->getNW());
+        auxPrint(node->getSE());
+        auxPrint(node->getSW());
     }
 }
 

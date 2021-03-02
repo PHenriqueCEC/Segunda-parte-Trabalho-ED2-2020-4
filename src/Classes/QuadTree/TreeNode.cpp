@@ -10,32 +10,32 @@ TreeNode::TreeNode()
 }
 
 //Getters
-TreeNode *TreeNode::GetNW()
+TreeNode *TreeNode::getNW()
 {
     return this->NW;
 }
 
-TreeNode *TreeNode::GetSE()
+TreeNode *TreeNode::getSE()
 {
     return this->SE;
 }
 
-TreeNode *TreeNode::GetNE()
+TreeNode *TreeNode::getNE()
 {
     return this->NE;
 }
 
-TreeNode *TreeNode::GetSW()
+TreeNode *TreeNode::getSW()
 {
     return this->SW;
 }
 
-CityInfo *TreeNode::GetRootValue()
+CityInfo *TreeNode::getRootValue()
 {
     return this->rootValue;
 }
 
-TreeNode *TreeNode::GetValueInQuadrant(string quadrant)
+TreeNode *TreeNode::getValueInQuadrant(string quadrant)
 {
     if (quadrant == "NW")
     {
@@ -72,55 +72,55 @@ TreeNode *TreeNode::GetValueInQuadrant(string quadrant)
 
 //Setters
 
-void TreeNode::SetRootValue(CityInfo *rootValue)
+void TreeNode::setRootValue(CityInfo *rootValue)
 {
     this->rootValue = rootValue;
 }
 
-void TreeNode::SetNW(CityInfo *NW)
+void TreeNode::setNW(CityInfo *NW)
 {
-    this->NW->SetRootValue(NW);
+    this->NW->setRootValue(NW);
 }
 
-void TreeNode::SetSE(CityInfo *SE)
+void TreeNode::setSE(CityInfo *SE)
 {
-    this->SE->SetRootValue(SE);
+    this->SE->setRootValue(SE);
 }
 
-void TreeNode::SetNE(CityInfo *NE)
+void TreeNode::setNE(CityInfo *NE)
 {
-    this->NE->SetRootValue(NE);
+    this->NE->setRootValue(NE);
 }
 
-void TreeNode::SetSW(CityInfo *SW)
+void TreeNode::setSW(CityInfo *SW)
 {
-    this->SW->SetRootValue(SW);
+    this->SW->setRootValue(SW);
 }
 
-void TreeNode::InsertInQuadrant(string quadrant, CityInfo *value)
+void TreeNode::insertInQuadrant(string quadrant, CityInfo *value)
 {
     if (quadrant == "SE")
     {
         this->SE = new TreeNode();
-        this->SE->SetRootValue(value);
+        this->SE->setRootValue(value);
         return;
     }
     else if (quadrant == "SW")
     {
         this->SW = new TreeNode();
-        this->SW->SetRootValue(value);
+        this->SW->setRootValue(value);
         return;
     }
     if (quadrant == "NE")
     {
         this->NE = new TreeNode();
-        this->NE->SetRootValue(value);
+        this->NE->setRootValue(value);
         return;
     }
     if (quadrant == "NW")
     {
         this->NW = new TreeNode();
-        this->NW->SetRootValue(value);
+        this->NW->setRootValue(value);
         return;
     }
 }
