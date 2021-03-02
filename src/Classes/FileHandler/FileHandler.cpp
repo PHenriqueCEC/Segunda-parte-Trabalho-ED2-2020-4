@@ -13,7 +13,7 @@ void FileHandler::processCityInfo(string filename)
 {
   int line = 0;
   ifstream arq("brazil_cities_coordinates.csv");
-  string state_code, city_code, city_name, latitutde, longitude, IsCapital;
+  string state_code, city_code, city_name, latitutde, longitude, isCapital;
   if (arq.is_open())
   {
     cout << "Arq opened" << endl;
@@ -27,13 +27,13 @@ void FileHandler::processCityInfo(string filename)
       getline(arq, city_name, ',');
       getline(arq, latitutde, ',');
       getline(arq, longitude, ',');
-      getline(arq, IsCapital);
+      getline(arq, isCapital);
 
       //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
       if (line >= 1)
       {
         //@Todo inserção dos dados obtidos na quadtree;
-        CityInfo *info = new CityInfo(stoi(state_code), city_code, city_name, stof(latitutde), stof(longitude), true);
+        CityInfo *info = new CityInfo(stoi(state_code), city_code, city_name, stof(latitutde), stof(longitude), isCapital == "TRUE");
         tree->Insert(tree->root, info);
       }
       line++;
