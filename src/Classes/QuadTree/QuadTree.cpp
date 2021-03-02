@@ -72,8 +72,10 @@ int QuadTree::getSize()
     return this->size;
 }
 
-void QuadTree::auxPrint(TreeNode *node){
-    if(node != nullptr){
+void QuadTree::auxPrint(TreeNode *node)
+{
+    if (node != nullptr)
+    {
         cout << node->getRootValue()->city_name << " ,";
         auxPrint(node->getNE());
         auxPrint(node->getNW());
@@ -87,3 +89,25 @@ void QuadTree::print()
     this->auxPrint(this->root);
     cout << endl;
 }
+
+TreeNode *QuadTree::clean(TreeNode *node)
+{
+    if (node != NULL && !node->getRootValue()->isEmpty()) 
+    {
+        node->setNE(clean(node->getValueInQuadrant("NE")));
+        node->setNW(clean(node->getValueInQuadrant("NW")));
+        node->setSE(clean(node->getValueInQuadrant("SE")));
+        node->setSW(clean(node->getValueInQuadrant("SW")));
+        delete node;
+        node = NULL;
+    }
+
+    return NULL;
+}
+
+QuadTree::~QuadTree(){
+    this->root = this->clean(this->root);
+        cout << "Tree deletada " << endl;
+
+}
+

@@ -77,24 +77,24 @@ void TreeNode::setRootValue(CityInfo *rootValue)
     this->rootValue = rootValue;
 }
 
-void TreeNode::setNW(CityInfo *NW)
+void TreeNode::setNW(TreeNode *NW)
 {
-    this->NW->setRootValue(NW);
+    this->NW = NW;
 }
 
-void TreeNode::setSE(CityInfo *SE)
+void TreeNode::setSE(TreeNode *SE)
 {
-    this->SE->setRootValue(SE);
+    this->SE = SE;
 }
 
-void TreeNode::setNE(CityInfo *NE)
+void TreeNode::setNE(TreeNode *NE)
 {
-    this->NE->setRootValue(NE);
+    this->NE =NE;
 }
 
-void TreeNode::setSW(CityInfo *SW)
+void TreeNode::setSW(TreeNode *SW)
 {
-    this->SW->setRootValue(SW);
+    this->SW = SW;
 }
 
 void TreeNode::insertInQuadrant(string quadrant, CityInfo *value)

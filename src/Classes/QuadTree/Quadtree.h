@@ -22,6 +22,7 @@ public:
     bool auxFind(TreeNode *tree);
     int getSize();
     void setSize(int size);
+    TreeNode* clean(TreeNode *node);
 };
 
 #endif

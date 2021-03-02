@@ -22,10 +22,10 @@ public:
     TreeNode();
     ~TreeNode();
     void setRootValue(CityInfo *rootValue);
-    void setSE(CityInfo *SE);
-    void setSW(CityInfo *SW);
-    void setNE(CityInfo *NE);
-    void setNW(CityInfo *NEW);
+    void setSE(TreeNode *SE);
+    void setSW(TreeNode *SW);
+    void setNE(TreeNode *NE);
+    void setNW(TreeNode *NW);
     TreeNode* getSE();
     TreeNode* getSW();
     TreeNode* getNE();
