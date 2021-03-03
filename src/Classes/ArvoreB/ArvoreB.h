@@ -20,12 +20,14 @@ class ArvoreB
         NoB* Buscar(CityInfo* info, NoB *p);  
         void Inserir(CityInfo* p); 
         void Remover(NoB *p);
-        void Cisao(CityInfo* info, NoB* c);
-        NoB *Remocao(CityInfo* info);  
-        NoB *Insercao(CityInfo* info); 
-        NoB *GetRaiz();
+        void cisao(CityInfo* info, NoB* c);
+        NoB* Remocao(CityInfo* info);  
+        NoB* Insercao(CityInfo* info); 
+        NoB* GetRaiz();
         void SetRaiz(NoB *raiz);
         void imprimirRaiz();
+        int getMin();
+        int getMax();
 
         //int get_t();
         //void set_t(int T);

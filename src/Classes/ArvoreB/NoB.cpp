@@ -92,4 +92,50 @@ CityInfo* NoB::SetProx(int i)
 
 }*/
 
+void NoB::inserirNo(CityInfo* info)
+{
+    int i = n - 1; //Indice com o elemento mais a direita
 
+    if(folha == true)
+    {
+        while(i >= 0 && chave[i] > info) //Encontra a posicao da nova chave a ser inserida
+        {
+            chave[i + 1] = chave[i];
+            i--;
+            //numComparacoes += 1;
+        }
+
+        chave[i + 1] = chave[i];
+        n += 1;
+
+    }
+
+    else
+    {
+        while(i >= 0 && chave[i] > info) //Procura o filho que terá a nova chave
+        {
+            i--;
+            //numComparacoes += 1;
+        }
+
+        if(filhos[i + 1]->GetN() == max - 1)
+        {
+            overflow(i + 1, filhos[i + 1]); //Se o filho esta cheio
+
+            if(chave[i + 1] < info)
+                i++;    
+        }
+
+        filhos[i + 1]->inserirNo(info);
+
+    }
+
+}
+
+void NoB::overflow(int i, NoB *p)
+{
+    NoB* aux = new NoB(max / 2);
+
+    
+
+}

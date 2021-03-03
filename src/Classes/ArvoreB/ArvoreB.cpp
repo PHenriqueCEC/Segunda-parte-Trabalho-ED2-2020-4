@@ -55,9 +55,9 @@ NoB* ArvoreB::Buscar(CityInfo* info, NoB *p)
 
 void ArvoreB::Inserir(CityInfo* info)
 {
-    if(raiz == nullptr)
+    if(raiz == nullptr) //Arvore vazia
     {
-        NoB* p = new NoB(max); //Memoria alocada para a raiz
+        NoB* p = new NoB(max / 2); //Memoria alocada para a raiz
         raiz = p;
         raiz->SetN(1); //Atualiza valor de n
         raiz->AtualizarChave(0, info); //Atualiza chave
@@ -65,6 +65,17 @@ void ArvoreB::Inserir(CityInfo* info)
 
     else
     {
+        if(raiz->GetN() == max - 1)
+        {
+            NoB* aux = new NoB(max / 2); //Memoria alocada para o novo no
+
+            cisao(info, raiz); //Faz a cisão 
+        }
+
+        else
+        {
+            raiz->inserirNo(info); //Caso a raiz nao esteja cheia
+        }
         
     }
 }
@@ -74,7 +85,7 @@ void ArvoreB::Remover(NoB *p)
 
 }
 
-void ArvoreB::Cisao(CityInfo* info, NoB* c)
+void ArvoreB::cisao(CityInfo* info, NoB* c)
 {
 
 }

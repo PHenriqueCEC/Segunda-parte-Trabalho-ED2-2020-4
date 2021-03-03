@@ -28,6 +28,8 @@ class NoB
         void SetChave(int i, CityInfo* val);
         int GetN();
         void SetN(int _n);
+        void inserirNo(CityInfo* info);
+        void overflow(int i, NoB *p);
 
 
         //CityInfo* GetAnt(int i);
