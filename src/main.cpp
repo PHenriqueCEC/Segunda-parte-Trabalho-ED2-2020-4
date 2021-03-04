@@ -1,6 +1,8 @@
 #include<iostream>
 #include "./Classes/FileHandler/FileHandler.h"
-using namespace std;
+
+using std::cout;
+using std::endl;
 
 int main(int argc, char **argv){
     //string diretorio = argv[1];
