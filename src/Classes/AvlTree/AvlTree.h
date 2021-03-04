@@ -17,15 +17,15 @@ private:
   AvlNode *simpleRotationRight(AvlNode *node);
   AvlNode *doubleRotationLeft(AvlNode *node);
   AvlNode *doubleRotationRight(AvlNode *node);
-  void updateBalance();
-  void insert(string key, string value, AvlNode *node, bool &changedH);
-  bool remove(string key, AvlNode *node, bool &changedH);
 
 public:
   AvlTree();
   ~AvlTree();
-  void Insert(string key, string value);
-  bool Search(string key, string value);
+  bool search(string key, string value);
+  AvlNode *insert(AvlNode *node, string value);
+  AvlNode *balance(AvlNode *node);
+  int height(AvlNode *node);
+  int difference(AvlNode *node);
   void Print();
   void PrintNodeDetails();
 };
