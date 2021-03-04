@@ -16,18 +16,18 @@ class NoB
     public:
         NoB(int _max);
         ~NoB();
-        bool GetFolha();
-        void SetFolha(bool _folha);
-        NoB* GetFilhos(int i);
-        void SetFilhos(int i, NoB* val);
-        int GetChaves(int i);
-        void AtualizarChave(int i, CityInfo* info);
-        NoB* GetPai();
-        void SetPai(NoB *p);
-        CityInfo* GetChave(int i);
-        void SetChave(int i, CityInfo* val);
-        int GetN();
-        void SetN(int _n);
+        bool getFolha();
+        void setFolha(bool _folha);
+        NoB* getFilhos(int i);
+        void setFilhos(int i, NoB* val);
+        int getChaves(int i);
+        void atualizarChave(int i, CityInfo* info);
+        NoB* getPai();
+        void setPai(NoB *p);
+        CityInfo* getChave(int i);
+        void setChave(int i, CityInfo* val);
+        int getN();
+        void setN(int _n);
         void inserirNo(CityInfo* info);
         void overflow(int i, NoB *p);
 
