@@ -90,9 +90,42 @@ void QuadTree::print()
     cout << endl;
 }
 
+int QuadTree::getNumberOfCityInCoordinates(Coordinate *coordinates)
+{
+    int citysInRange = 0;
+    auxGetNumberOfCityInCoordinates(this->root, coordinates, citysInRange);
+   
+
+    return citysInRange;
+}
+
+void QuadTree::auxGetNumberOfCityInCoordinates(TreeNode *node, Coordinate *coordinates, int &citysInRange)
+{
+    if (node != nullptr)
+    {
+        //Verifico se existe uma cidade no valor raiz do nó, e se ela esta no intervalo a ser comparado
+        if (!node->getRootValue()->isEmpty())
+        {
+            float currentLatitude = node->getRootValue()->latitude;
+            float currentLongitude = node->getRootValue()->longitude;
+
+            if ((currentLatitude > coordinates->x1 && currentLatitude < coordinates->x2) &&
+                (currentLongitude > coordinates->y1 && currentLongitude < coordinates->y2))
+            {
+                citysInRange++;
+            }
+
+            auxGetNumberOfCityInCoordinates(node->getNE(), coordinates, citysInRange);
+            auxGetNumberOfCityInCoordinates(node->getSE(), coordinates, citysInRange);
+            auxGetNumberOfCityInCoordinates(node->getNW(), coordinates, citysInRange);
+            auxGetNumberOfCityInCoordinates(node->getSW(), coordinates, citysInRange);
+        }
+    }
+}
+
 TreeNode *QuadTree::clean(TreeNode *node)
 {
-    if (node != NULL && !node->getRootValue()->isEmpty()) 
+    if (node != NULL && !node->getRootValue()->isEmpty())
     {
         node->setNE(clean(node->getValueInQuadrant("NE")));
         node->setNW(clean(node->getValueInQuadrant("NW")));
@@ -105,9 +138,8 @@ TreeNode *QuadTree::clean(TreeNode *node)
     return NULL;
 }
 
-QuadTree::~QuadTree(){
+QuadTree::~QuadTree()
+{
     this->root = this->clean(this->root);
-        cout << "Tree deletada " << endl;
-
+    cout << "Tree deletada " << endl;
 }
-

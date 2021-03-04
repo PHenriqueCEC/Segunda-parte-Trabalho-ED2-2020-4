@@ -1,4 +1,5 @@
 #include "./FileHandler.h"
+#include "../Coordinate/Coordinate.h"
 
 FileHandler::FileHandler()
 {
@@ -41,6 +42,9 @@ void FileHandler::processCityInfo(string filename)
     tree->print();
     cout << " --------------------------" << endl;
     cout << "Tem salvador ? " << tree->find(new CityInfo(29,"2927408","Salvador", -12.9718,-38.5011,true)) << endl;
+    Coordinate *teste = new Coordinate(-20,-40,-16,-1);
+    
+    cout << "Num de cidades no intervalo : " << tree->getNumberOfCityInCoordinates(teste) << endl;
     delete tree;
     cout << "Arquivo processado com sucesso" << endl;
   }
