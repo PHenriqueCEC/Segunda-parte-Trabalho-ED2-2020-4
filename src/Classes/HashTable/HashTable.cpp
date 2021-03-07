@@ -230,6 +230,7 @@ void HashTable::duplicateHashTable()
     {
         if(i % 2 == 0)
         {
+            rows[i].second->setBucketKey(getFirstBDigits(convertDecToSTRBin(i)));
             row r(getFirstBDigits(convertDecToSTRBin(i)), rows[i].second);
             newRows.push_back(r);
         }
@@ -240,5 +241,5 @@ void HashTable::duplicateHashTable()
         }
     }
 
-    rows = newRows;
+   rows = newRows;
 }

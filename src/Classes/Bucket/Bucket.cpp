@@ -25,15 +25,6 @@ void Bucket::setBucketKey(string _bucketKey)
 {
     this->bucketKey = _bucketKey;
     this->bucketKeyLength = this->bucketKey.size();
-
-    list <Value>::iterator itV;
-    for(itV = values.begin(); itV != values.end(); itV++)
-    {
-        if(itV->getKey().size() != this->bucketKeyLength)
-        {
-            itV->setKeyLength(this->bucketKeyLength);
-        }
-    }
 }
 
 int Bucket::getBucketLength()
@@ -46,69 +37,105 @@ string Bucket::getBucketKey()
     return this->bucketKey;
 }
 
-list <Value> Bucket::getValues()
+vector <CovidInfo> Bucket::getValues()
 {
     return this->values;
 }
 
-bool Bucket::addValue(Value _value)
+bool Bucket::addValue(CovidInfo _CI)
 {
     if(values.size() < M)
     {
-        this->values.push_back(_value);
+        this->values.push_back(_CI);
         return true;
     }
 
     return false;
 }
 
-void Bucket::removeValue(Value _value)
+void Bucket::removeValue(string _hashedValue)
 {
-    values.remove(_value);
-}
-
-Value Bucket::popValue(Value _value)
-{
-    list <Value>::iterator it;
-    Value value;
-
-    for (it = values.begin(); it != values.end(); ++it)
+    for(auto i = values.begin(); i != values.end(); i++)
     {
-        if(it->getKey() == _value.getKey())
+        if(convertDecToSTRBin(polynomialRollingHash(*i)) == _hashedValue)
         {
-            value.setInfo(it->getInfo());
-            value.setKey(it->getKey());
-            values.erase(it);
+            values.erase(i);
             break;
         }
     }
-    return value;
 }
 
-Value Bucket::popValue(string _key)
+CovidInfo Bucket::popValue(string _hashedValue)
 {
-    list <Value>::iterator it;
-    Value value;
-
-    for (it = values.begin(); it != values.end(); ++it)
+    for(auto i = values.begin(); i != values.end(); i++)
     {
-        if(it->getKey() == _key)
+        if(convertDecToSTRBin(polynomialRollingHash(*i)) == _hashedValue)
         {
-            value.setInfo(it->getInfo());
-            value.setKey(it->getKey());
-            values.erase(it);
-            break;
+            CovidInfo *ci = addressof(*i);
+            values.erase(i);
+            return *ci;
         }
     }
-    return value;
 }
 
 void Bucket::print()
 {
-    cout << "Bucket: " << bucketKey << endl;
-    for (auto i = values.begin(); i != values.end(); i++)
+
+}
+
+long long Bucket::polynomialRollingHash(CovidInfo &_CI)
+{
+    // P and M
+    int p = 97;
+    int m = 1e9 + 9;
+    long long power_of_p = 1;
+    long long hash_val = 0;
+    string str = _CI.date + to_string(_CI.code);
+    int strSize = str.size();
+    
+    // Loop to calculate the hash value
+    // by iterating over the elements of string
+    for (int i = 0; i < strSize ; i++)
     {
-        i->print();   
+        hash_val = (hash_val + (str[i] - 'a' + 1) * power_of_p) % m;
+        power_of_p = (power_of_p * p) % m;
     }
-    cout << ":::::::::::::::::::" << endl;
+
+    return hash_val;
+}
+
+string Bucket::convertDecToSTRBin(long long _dec)
+{
+    vector<short> binaryNum; 
+    string STRBin;
+  
+    int i = 0; 
+    
+    while (_dec > 0)
+    { 
+        binaryNum.push_back(_dec%2); 
+        _dec =_dec / 2; 
+        i++; 
+    }
+
+    if(i == 0 and _dec == 0)
+    {
+        binaryNum.push_back(0);
+        i++;
+    }
+
+    while(i < bucketKeyLength)
+    {
+        binaryNum.push_back(0);
+        i++;
+    }
+
+    reverse(binaryNum.begin(), binaryNum.end());
+
+    for(int i = 0; i < binaryNum.size(); i++)
+    {
+        STRBin += to_string(binaryNum[i]);
+    }
+    
+    return STRBin;
 }

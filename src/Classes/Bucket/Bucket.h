@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <algorithm>
 
 #include "../CovidInfo/CovidInfo.h"
 
@@ -15,6 +16,9 @@ class Bucket
         string bucketKey;
         int bucketKeyLength;
         vector <CovidInfo> values;
+
+        long long polynomialRollingHash(CovidInfo &_CI);
+        string convertDecToSTRBin(long long _dec);
 
     public:
         Bucket();
