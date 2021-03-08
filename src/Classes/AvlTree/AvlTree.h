@@ -12,22 +12,25 @@ using namespace std;
 class AvlTree
 {
 private:
-  AvlTree *root;
-  AvlNode *simpleRotationLeft(AvlNode *node);
-  AvlNode *simpleRotationRight(AvlNode *node);
-  AvlNode *doubleRotationLeft(AvlNode *node);
-  AvlNode *doubleRotationRight(AvlNode *node);
+  AvlNode *root;
+  bool balanced;
+  int comparisons;
 
 public:
   AvlTree();
   ~AvlTree();
-  bool search(string key, string value);
-  AvlNode *insert(AvlNode *node, string value);
-  AvlNode *balance(AvlNode *node);
-  int height(AvlNode *node);
-  int difference(AvlNode *node);
-  void Print();
-  void PrintNodeDetails();
+  void simpleRotationLeft(AvlNode *node);
+  void simpleRotationRight(AvlNode *node);
+  void doubleRotationLeft(AvlNode *node);
+  void doubleRotationRight(AvlNode *node);
+  void insert(int value);
+  void updateBalanceFactor(AvlNode *p);
+  void verifyBalance(AvlNode *p);
+  int getHeight();
+  int auxGetHeight(AvlNode *p);
+  int getComparisons();
+  bool getBalance();
+  AvlNode *search(int value);
 };
 
 #endif

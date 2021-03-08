@@ -12,6 +12,8 @@ AvlTree::AvlTree()
 {
   // Inicializamos a raíz com null.
   this->root = NULL;
+  this->comparisons = 0;
+  this->balanced = true;
 }
 
 // Destrutor
@@ -22,105 +24,166 @@ AvlTree::~AvlTree()
   this->root = NULL;
 }
 
-//Ja está certo
-AvlNode *AvlTree::simpleRotationLeft(AvlNode *p)
+int AvlTree::getComparisons()
 {
-  AvlNode *q = p->left;
-  p->left = q->right;
-  q->right = p;
-  return q;
+  return this->comparisons;
 }
-
-//Ja está certo
-AvlNode *AvlTree::simpleRotationRight(AvlNode *p)
+bool AvlTree::getBalance()
 {
-  AvlNode *q = p->right;
-  p->right = q->left;
-  q->left = p;
-  return q;
+  return this->balanced;
 }
-
-AvlNode *AvlTree::doubleRotationLeft(AvlNode *p)
-{
-  simpleRotationRight(p);
-  simpleRotationLeft(p);
-}
-
-AvlNode *AvlTree::doubleRotationRight(AvlNode *p)
-{
-  simpleRotationLeft(p);
-  simpleRotationRight(p);
-}
-
-AvlNode *AvlTree::insert(AvlNode *node, string value)
+int AvlTree::auxGetHeight(AvlNode *p)
 {
 
-  if (node == nullptr)
+  if (p == NULL)
+    return -1;
+  else
   {
-    node = new AvlNode;
-    node->data = value; //o que é esse data?
-    node->left = nullptr;
-    node->right = nullptr;
-    return node;
+    int he = auxGetHeight(p->getLeft());
+    int hd = auxGetHeight(p->getRight());
+
+    if (he < hd)
+      return hd + 1;
+    else
+      return he + 1;
   }
-  else if (value < node->data)
-  {
-    node->left = insert(node->left, value);
-    node = balance(node);
-  }
-  else if (value >= node->data)
-  {
-    node->right = insert(node->right, value);
-    node = balance(node);
-  }
-  return node;
 }
 
-int AvlTree::height(AvlNode *node)
+int AvlTree::getHeight()
 {
-  int h = 0;
-  if (node != nullptr)
-  {
-    int leftHeight = height(node->left);
-    int rightHeight = height(node->right);
-    int maxHeight = max(leftHeight, rightHeight);
-    h = maxHeight + 1;
-  }
-  return h;
+  return this->auxGetHeight(this->root);
 }
 
-int AvlTree::difference(AvlNode *node)
+AvlNode *AvlTree::search(int value)
 {
-  int leftHeight = height(node->left);
-  int rightHeight = height(node->right);
-  int balanceFactor = leftHeight - rightHeight;
-  return balanceFactor;
-}
 
-AvlNode *AvlTree::balance(AvlNode *node)
-{
-  int balanceFactor = difference(node);
-  if (balanceFactor > 1)
+  AvlNode *p = this->root;
+
+  while (p != NULL)
   {
-    if (difference(node->left) > 0)
+
+    if (p->getValue() == value)
     {
-      node = simpleRotationLeft(node);
+
+      return p;
+    }
+
+    if (value > p->getValue())
+    {
+      p = p->getRight();
     }
     else
     {
-      node = doubleRotationRight(node);
+      p = p->getLeft();
     }
   }
-  else if (balanceFactor < -1)
+  return NULL;
+}
+
+void AvlTree::updateBalanceFactor(AvlNode *p)
+{
+  int balanceFactor;
+  if (!p->getRight() && !p->getLeft())
+    balanceFactor = 0;
+  else if (p->getRight() != NULL && p->getLeft() != NULL)
+    balanceFactor = p->getRight()->getBalanceFactor() - p->getLeft()->getBalanceFactor();
+  else if (p->getRight() != NULL)
+    balanceFactor = 1;
+  else
+    balanceFactor = -1;
+  p->setBalanceFactor(balanceFactor);
+}
+
+void AvlTree::verifyBalance(AvlNode *p)
+{
+  while (p != NULL)
   {
-    if (difference(node->right) > 0)
+    updateBalanceFactor(p);
+    if (p->getBalanceFactor() == 2 && (p->getRight()->getBalanceFactor() == +1 || p->getRight()->getBalanceFactor() == 0))
+      simpleRotationLeft(p);
+    if (p->getBalanceFactor() == -2 && (p->getRight()->getBalanceFactor() == -1 || p->getRight()->getBalanceFactor() == 0))
+      simpleRotationRight(p);
+    if (p->getBalanceFactor() == 2 && p->getRight()->getBalanceFactor() == -1)
+      doubleRotationLeft(p);
+    if (p->getBalanceFactor() == -2 && p->getRight()->getBalanceFactor() == +1)
+      doubleRotationRight(p);
+
+    p = p->getNodeFather();
+  }
+}
+
+void AvlTree::insert(int value)
+{
+  AvlNode *p = new AvlNode(value);
+
+  if (this->root == NULL)
+  {
+    this->root = p;
+  }
+  else
+  {
+    AvlNode *q = this->root;
+    AvlNode *aux;
+
+    while (q != NULL)
     {
-      node = doubleRotationLeft(node);
+      aux = q;
+
+      if (q->getValue() == value)
+      {
+        this->comparisons++;
+        return;
+      }
+
+      if (value > p->getValue())
+        q = q->getRight();
+      else
+        q = q->getLeft();
+      this->comparisons++;
     }
+
+    if (value > aux->getValue())
+    {
+      aux->setRight(p);
+    }
+
     else
     {
-      node = simpleRotationRight(node);
+      aux->setLeft(p);
+    }
+
+    p->setNodeFather(aux);
+
+    if (balanced)
+    {
+      verifyBalance(p);
     }
   }
-  return node;
+}
+//Ja está certo
+void AvlTree::simpleRotationLeft(AvlNode *p)
+{
+  AvlNode *q = p->getLeft();
+  p->setLeft(q->getRight());
+  q->setRight(p);
+}
+
+//Ja está certo
+void AvlTree::simpleRotationRight(AvlNode *p)
+{
+  AvlNode *q = p->getRight();
+  p->setRight(q->getLeft());
+  q->setLeft(p);
+}
+//Já está certo
+void AvlTree::doubleRotationLeft(AvlNode *p)
+{
+  simpleRotationRight(p->getRight());
+  simpleRotationLeft(p);
+}
+//Já está certo
+void AvlTree::doubleRotationRight(AvlNode *p)
+{
+  simpleRotationLeft(p->getLeft());
+  simpleRotationRight(p);
 }

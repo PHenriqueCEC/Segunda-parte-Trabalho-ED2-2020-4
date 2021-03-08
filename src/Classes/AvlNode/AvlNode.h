@@ -13,17 +13,26 @@ class AvlNode
 {
 private:
   int height;
-  string key;
-  string value;
-  unsigned short balance;
+  int balanceFactor;
+  int value;
+  AvlNode *nodeFather;
+  AvlNode *left;
+  AvlNode *right;
 
 public:
-  AvlNode(string key, string value);
+  AvlNode(int v);
   AvlNode();
   ~AvlNode();
-  AvlNode *left;
-  string data;
-  AvlNode *right;
+  int getValue();
+  int getBalanceFactor();
+  AvlNode *getLeft();
+  AvlNode *getRight();
+  AvlNode *getNodeFather();
+  void setValue(int v);
+  void setBalanceFactor(int factor);
+  void setLeft(AvlNode *p);
+  void setRight(AvlNode *p);
+  void setNodeFather(AvlNode *p);
 };
 
 #endif
