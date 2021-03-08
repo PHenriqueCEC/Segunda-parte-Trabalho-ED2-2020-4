@@ -1,5 +1,3 @@
-#include "../AvlNode/AvlNode.h"
-#include "../AvlNode/AvlNode.cpp"
 #include "./AvlTree.h"
 #include <iostream>
 #include <string>
