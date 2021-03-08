@@ -90,16 +90,16 @@ void QuadTree::print()
     cout << endl;
 }
 
-int QuadTree::getNumberOfCityInCoordinates(Coordinate *coordinates)
+vector<string> QuadTree::getCitysInCoordinates(Coordinate *coordinates)
 {
-    int citysInRange = 0;
-    auxGetNumberOfCityInCoordinates(this->root, coordinates, citysInRange);
+    vector<string>citysInRange;
+    auxGetCitysInCoordinates(this->root, coordinates, citysInRange);
    
 
     return citysInRange;
 }
 
-void QuadTree::auxGetNumberOfCityInCoordinates(TreeNode *node, Coordinate *coordinates, int &citysInRange)
+void QuadTree::auxGetCitysInCoordinates(TreeNode *node, Coordinate *coordinates, vector<string> &citysInRange)
 {
     if (node != nullptr)
     {
@@ -112,13 +112,14 @@ void QuadTree::auxGetNumberOfCityInCoordinates(TreeNode *node, Coordinate *coord
             if ((currentLatitude > coordinates->x1 && currentLatitude < coordinates->x2) &&
                 (currentLongitude > coordinates->y1 && currentLongitude < coordinates->y2))
             {
-                citysInRange++;
+                //Salvo o código da cidade no meu vetor de citys In Range
+                citysInRange.push_back(node->getRootValue()->city_code);
             }
 
-            auxGetNumberOfCityInCoordinates(node->getNE(), coordinates, citysInRange);
-            auxGetNumberOfCityInCoordinates(node->getSE(), coordinates, citysInRange);
-            auxGetNumberOfCityInCoordinates(node->getNW(), coordinates, citysInRange);
-            auxGetNumberOfCityInCoordinates(node->getSW(), coordinates, citysInRange);
+            auxGetCitysInCoordinates(node->getNE(), coordinates, citysInRange);
+            auxGetCitysInCoordinates(node->getSE(), coordinates, citysInRange);
+            auxGetCitysInCoordinates(node->getNW(), coordinates, citysInRange);
+            auxGetCitysInCoordinates(node->getSW(), coordinates, citysInRange);
         }
     }
 }

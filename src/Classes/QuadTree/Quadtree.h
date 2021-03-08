@@ -4,6 +4,7 @@
 #include "../Coordinate/Coordinate.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -29,8 +30,8 @@ public:
     bool auxFind(TreeNode *tree);
     int getSize();
     void setSize(int size);
-    int getNumberOfCityInCoordinates(Coordinate *coordinates);
-    void auxGetNumberOfCityInCoordinates(TreeNode *tree,Coordinate *coordinates,int &citysInRange);
+    vector<string> getCitysInCoordinates(Coordinate *coordinates);
+    void auxGetCitysInCoordinates(TreeNode *tree,Coordinate *coordinates,vector<string> &citysInRange);
     TreeNode* clean(TreeNode *node);
 };
 

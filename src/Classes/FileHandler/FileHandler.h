@@ -3,7 +3,8 @@
 #include"../CityInfo/CityInfo.h"
 #include"../QuadTree/Quadtree.h"
 #include<iostream>
-#include <fstream>
+#include<fstream>
+#include<vector>
 
 using namespace std;
 
