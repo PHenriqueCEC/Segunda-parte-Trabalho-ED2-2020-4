@@ -39,7 +39,7 @@ cd src
 
 2. Para dar autorização ao shellscript digite no terminal 
 ```
-chmod +x compile.sh 
+chmod +x compilesh 
 ```
 
 3. execute no terminal

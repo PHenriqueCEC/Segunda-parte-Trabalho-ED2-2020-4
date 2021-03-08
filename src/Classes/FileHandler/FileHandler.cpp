@@ -1,0 +1,56 @@
+#include "./FileHandler.h"
+#include "../Coordinate/Coordinate.h"
+
+FileHandler::FileHandler()
+{
+}
+
+FileHandler::~FileHandler()
+{
+}
+
+/*Função para armazenar os registros do csv brazil_covid19_cities.csv em um Array da classe CovidInfo*/
+void FileHandler::processCityInfo(string filename)
+{
+  int line = 0;
+  ifstream arq("brazil_cities_coordinates.csv");
+  string state_code, city_code, city_name, latitutde, longitude, isCapital;
+  if (arq.is_open())
+  {
+    cout << "Arq opened" << endl;
+    QuadTree *tree = new QuadTree();
+    //Vai ate o final do arquivo separando cada elemento do csv por ,
+    while (!arq.eof())
+    {
+
+      getline(arq, state_code, ',');
+      getline(arq, city_code, ',');
+      getline(arq, city_name, ',');
+      getline(arq, latitutde, ',');
+      getline(arq, longitude, ',');
+      getline(arq, isCapital);
+
+      //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
+      if (line >= 1)
+      {
+        //@Todo inserção dos dados obtidos na quadtree;
+        CityInfo *info = new CityInfo(stoi(state_code), city_code, city_name, stof(latitutde), stof(longitude), isCapital == "TRUE");
+        tree->insert(tree->root, info);
+      }
+      line++;
+    }
+    tree->print();
+    cout << " --------------------------" << endl;
+    cout << "Tem salvador ? " << tree->find(new CityInfo(29,"2927408","Salvador", -12.9718,-38.5011,true)) << endl;
+    Coordinate *teste = new Coordinate(-20,-40,-16,-1);
+    
+    cout << "Num de cidades no intervalo : " << tree->getNumberOfCityInCoordinates(teste) << endl;
+    delete tree;
+    cout << "Arquivo processado com sucesso" << endl;
+  }
+  else
+  {
+
+    cout << "Nao foi possivel abrir o arquivo" << endl;
+  }
+}
