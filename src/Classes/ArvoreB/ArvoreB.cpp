@@ -94,4 +94,18 @@ void ArvoreB::remover(NoB *p)
 
 void ArvoreB::cisao(CityInfo *info, NoB *p)
 {
+    int min = max / 2;
+    NoB* aux = new NoB(min);
+
+  aux->setFolha(false);
+  aux->setFilho(0, p);
+
+  aux->overflow(0, p);
+  
+  int i = 0;
+
+  if(aux->getChave(0) < info) ///Falta o id
+    i++; 
+  aux->getFilho(i)->inserirNo(info, &numComparacoes);
+  raiz = aux;
 }
