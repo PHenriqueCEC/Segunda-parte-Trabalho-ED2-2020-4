@@ -12,17 +12,27 @@ using namespace std;
 class AvlNode
 {
 private:
+  int height;
+  int balanceFactor;
+  int value;
+  AvlNode *nodeFather;
   AvlNode *left;
   AvlNode *right;
-  int data;
-  int height;
-  string key;
-  string value;
-  unsigned short balance;
 
 public:
-  AvlNode(string key, string value);
+  AvlNode(int v);
+  AvlNode();
   ~AvlNode();
+  int getValue();
+  int getBalanceFactor();
+  AvlNode *getLeft();
+  AvlNode *getRight();
+  AvlNode *getNodeFather();
+  void setValue(int v);
+  void setBalanceFactor(int factor);
+  void setLeft(AvlNode *p);
+  void setRight(AvlNode *p);
+  void setNodeFather(AvlNode *p);
 };
 
 #endif
