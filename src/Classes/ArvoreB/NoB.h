@@ -18,8 +18,8 @@ class NoB
         ~NoB();
         bool getFolha();
         void setFolha(bool _folha);
-        NoB* getFilhos(int i);
-        void setFilhos(int i, NoB* val);
+        NoB* getFilho(int i);
+        void setFilho(int i, NoB* val);
         int getChaves(int i);
         void atualizarChave(int i, CityInfo* info);
         NoB* getPai();
@@ -28,8 +28,9 @@ class NoB
         void setChave(int i, CityInfo* val);
         int getN();
         void setN(int _n);
-        void inserirNo(CityInfo* info);
+        void inserirNo(CityInfo* info, int *numComparacoes);
         void overflow(int i, NoB *p);
+        NoB* buscarNo(CityInfo* info, NoB* p, int* numComparacoes);
 
 
         //CityInfo* GetAnt(int i);

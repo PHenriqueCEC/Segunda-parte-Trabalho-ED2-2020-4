@@ -17,14 +17,14 @@ class ArvoreB
         ArvoreB();
         ~ArvoreB();
 
-        NoB* Buscar(CityInfo* info, NoB *p);  
-        void Inserir(CityInfo* p); 
-        void Remover(NoB *p);
-        void cisao(CityInfo* info, NoB* c);
-        NoB* Remocao(CityInfo* info);  
-        NoB* Insercao(CityInfo* info); 
-        NoB* GetRaiz();
-        void SetRaiz(NoB *raiz);
+        CityInfo* buscar(CityInfo* info);  
+        void inserir(CityInfo* p); 
+        void remover(NoB *p);
+        void cisao(CityInfo* info, NoB* p);
+        NoB* remocao(CityInfo* info);  
+        NoB* insercao(CityInfo* info); 
+        NoB* getRaiz();
+        void setRaiz(NoB *raiz);
         void imprimirRaiz();
         int getMin();
         int getMax();

@@ -10,82 +10,88 @@ using namespace std;
 ArvoreB::ArvoreB()
 {
     raiz = nullptr;
-    numTrocas = 0;
     numComparacoes = 0;
 }
 
 ArvoreB::~ArvoreB()
 {
-    //remover(raiz);
+    remover(raiz);
 }
 
-NoB* ArvoreB::Buscar(CityInfo* info, NoB *p)
+CityInfo *ArvoreB::buscar(CityInfo *info)
 {
-    if(raiz == nullptr)
+    if (raiz == nullptr)
     {
         return false;
     }
 
-    else
+    NoB *p = raiz->buscarNo(info, raiz, &numComparacoes);
+
+    int i = 0;
+    //procura a primeira chave maior ou igual a k
+    while (i < p->getN() && info > p->getChave(i))
     {
-        int i = 0;
-        //procura a primeira chave maior ou igual a k
-        while (i < p->GetN() && info > chave[i])
-        {
-            i++; //Precisa de id
-        }
-        
-        //retorna esse no caso a chave foi encontrada
-        if(chave[i] == info)
-        {
-            return chave[i];
-        }
-
-        //Se a chave nao foi encontrada e este eh um no folha
-        if(folha)
-        {
-            return nullptr;
-        }
-
-        return Buscar(info, p);
+        i++; //Precisa de id
     }
 
+    if(i < p->getN() && p->getChave(i) == info)
+    {
+        return p->getChave(i);
+    }
+    return nullptr;
 
 }
 
-void ArvoreB::Inserir(CityInfo* info)
+void ArvoreB::inserir(CityInfo *info)
 {
-    if(raiz == nullptr) //Arvore vazia
+    if (raiz == nullptr) //Arvore vazia
     {
-        NoB* p = new NoB(max / 2); //Memoria alocada para a raiz
+        NoB *p = new NoB(max / 2); //Memoria alocada para a raiz
         raiz = p;
-        raiz->SetN(1); //Atualiza valor de n
-        raiz->AtualizarChave(0, info); //Atualiza chave
+        raiz->setN(1);                 //Atualiza valor de n
+        raiz->atualizarChave(0, info); //Atualiza chave
     }
 
     else
     {
-        if(raiz->GetN() == max - 1)
+        if (raiz->getN() == max - 1)
         {
-            NoB* aux = new NoB(max / 2); //Memoria alocada para o novo no
+            NoB *aux = new NoB(max / 2); //Memoria alocada para o novo no
 
-            cisao(info, raiz); //Faz a cisão 
+            cisao(info, raiz); //Faz a cisão
         }
 
         else
         {
-            raiz->inserirNo(info); //Caso a raiz nao esteja cheia
+            raiz->inserirNo(info, &numComparacoes); //Caso a raiz nao esteja cheia
         }
-        
     }
 }
 
-void ArvoreB::Remover(NoB *p)
+void ArvoreB::remover(NoB *p)
 {
 
+    if (p == nullptr)
+    {
+        return;
+    }
+
+    if (p->getFolha() == true)
+    {
+        delete p;
+    }
+
+    else
+    {
+        for (int i = 0; i < p->getN(); i++)
+        {
+            remover(p->getFilho(i));
+            p->setFilho(i, nullptr);
+        }
+        delete p;
+    }
 }
 
-void ArvoreB::cisao(CityInfo* info, NoB* c)
+void ArvoreB::cisao(CityInfo *info, NoB *p)
 {
-
 }

@@ -70,17 +70,17 @@ void NoB::setPai(NoB *p)
     pai = p;
 }
 
-/*NoB* NoB::GetFilhos(int i)
+NoB* NoB::getFilho(int i)
  {
      return filhos[i];
  }
 
-void NoB:: SetFilhos(int i, NoB* val)
+void NoB:: setFilho(int i, NoB* val)
 {
     filhos[i] = val; 
 }
 
-CityInfo* NoB::GetAnt(int i)
+/*CityInfo* NoB::GetAnt(int i)
 {
 
 }
@@ -90,7 +90,7 @@ CityInfo* NoB::SetProx(int i)
 
 }*/
 
-void NoB::inserirNo(CityInfo *info)
+void NoB::inserirNo(CityInfo *info, int *numComparacoes)
 {
     int i = n - 1; //Indice com o elemento mais a direita
 
@@ -100,7 +100,7 @@ void NoB::inserirNo(CityInfo *info)
         {
             chave[i + 1] = chave[i];
             i--;
-            //numComparacoes += 1;
+            *numComparacoes += 1;
         }
 
         chave[i + 1] = chave[i];
@@ -112,18 +112,18 @@ void NoB::inserirNo(CityInfo *info)
         while (i >= 0 && chave[i] > info) //Procura o filho que terá a nova chave
         {
             i--;
-            //numComparacoes += 1;
+            *numComparacoes += 1;
         }
 
         if (filhos[i + 1]->getN() == max - 1)
         {
-            overflow(i + 1, filhos[i + 1]); //Se o filho esta cheio
+            overflow(i + 1, filhos[i + 1]); //Se o filho está cheio
 
             if (chave[i + 1] < info)
                 i++;
         }
 
-        filhos[i + 1]->inserirNo(info);
+        filhos[i + 1]->inserirNo(info, numComparacoes);
     }
 }
 
@@ -137,8 +137,6 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
     for (int j = 0; j < min - 1; i++) //Copia as chaves
     {
         aux->chave[j] = p->chave[j + min];
-
-        //numCopias += 1;
     }
 
     if (p->getFolha() == false)
@@ -146,7 +144,6 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
         for (int j = 0; j < min; j++) //Copia os filhos
         {
             aux->filhos[j] = p->filhos[j + min];
-            //numCopias += 1;
         }
     }
 
@@ -155,7 +152,6 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
     for (int j = n; j >= i + 1; j--) //Cria espaço para o novo filho
     {
         filhos[j + 1] = filhos[j];
-        //numCopias += 1;
     }
 
     filhos[i + 1] = aux; //Junta o novo filho com o nó
@@ -163,11 +159,34 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
     for (int j = n - 1; j >= i; j--) //Encontra a posição da nova chave e move as chaves maiores para a direita
     {
         chave[j + 1] = chave[j];
-        //numCopias += 1;
     }
 
     chave[i] = p->chave[min - 1];
 
     n += 1; //Incrementa contador de chaves para esse nó
+
+}
+
+NoB* NoB::buscarNo(CityInfo* info, NoB* p, int* numComparacoes)
+{
+    *numComparacoes += 1;
+
+    int i = 0;
+    while (i < n && info->getId() > chave[i]->getId())
+    {
+        i++;
+    }
+    
+    if ( i < n && chave[i]->getId() == info->getId() )
+    {
+        return p;
+    }
+    
+    if (folha == true)
+    {
+        return nullptr;
+    }
+      
+    return filhos[i]->buscarNo(info, filhos[i], numComparacoes);
 
 }
