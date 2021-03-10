@@ -3,6 +3,9 @@
 #include "./Classes/TestingModule/TestingModule.h"
 using namespace std;
 
+using std::cout;
+using std::endl;
+
 int main(int argc, char **argv){
     //string diretorio = argv[1];
     /*FileHandler fileHandler;
