@@ -9,8 +9,8 @@ HashTable::HashTable()
 
     for(int i = 0; i < dESize; i++)
     {
-        Bucket b(this->M, convertDecToSTRBin(i));
-        row newRow(convertDecToSTRBin(i), addressof(b)); 
+        Bucket *b = new Bucket(this->M, convertDecToSTRBin(i));
+        row *newRow = new row(convertDecToSTRBin(i), b); 
         rows.push_back(newRow);
     }
 }
@@ -24,8 +24,8 @@ HashTable::HashTable(int _M, int _B)
 
     for(int i = 0; i < dESize; i++)
     {
-        Bucket b(this->M, convertDecToSTRBin(i));
-        row newRow(convertDecToSTRBin(i), addressof(b)); 
+        Bucket *b = new Bucket(this->M, convertDecToSTRBin(i));
+        row *newRow = new row(convertDecToSTRBin(i), b); 
         rows.push_back(newRow);
     }
 }
@@ -50,35 +50,43 @@ int HashTable::getB()
     return this->B;
 }
 
-void HashTable::insert(CovidInfo _CI) //PARA MODIFICAR
+void HashTable::insert(CovidInfo _CI)
 {
     string hashedKey = convertDecToSTRBin(polynomialRollingHash(_CI));
     string firstB_Key = getFirstBDigits(hashedKey);
+    bool inserted = false;
 
-    for(row i:rows)
+    for(row* i:rows)
     {
-        if(i.first == firstB_Key)
+        if(i->first == firstB_Key)
         {
-            if(i.first != i.second->getBucketKey())
+            if(i->first != i->second->getBucketKey())
             {
-                divideBucket(addressof(i));
-                i.second->addValue(_CI);
+                divideBucket(i);
+                i->second->addValue(_CI);
+                inserted = true;
             }
-            else if(!i.second->addValue(_CI))
+            else if(!i->second->addValue(_CI))
             {
                 duplicateHashTable();
-                for(row i:rows)
-                {
-                    if(i.first == firstB_Key)
-                    {
-                        if(i.first != i.second->getBucketKey())
-                        {
-                            divideBucket(addressof(i));
-                            i.second->addValue(_CI);
-                        }
-                    }
-                }
+                inserted = true;
+                break;
             }
+        }
+    }
+
+    if(!inserted)
+    {
+        for(row* j:rows)
+        {
+            if(j->first == firstB_Key)
+            {
+                if(j->first != j->second->getBucketKey())
+                {
+                    divideBucket(j);
+                    j->second->addValue(_CI);
+                }
+            }   
         }
     }
 }
@@ -88,11 +96,11 @@ CovidInfo HashTable::search(float _cityCode, string _date)
     string hashedKey = convertDecToSTRBin(polynomialRollingHash(_cityCode, _date));
     string firstB_Key = getFirstBDigits(hashedKey);
 
-    for(row i:rows)
+    for(row* i:rows)
     {
-        if(i.first == firstB_Key)
+        if(i->first == firstB_Key)
         {
-            for(CovidInfo j:i.second->getValues())
+            for(CovidInfo j:i->second->getValues())
             {
                 if(j.code == _cityCode and j.date == _date)
                 {
@@ -108,11 +116,11 @@ void HashTable::remove(float _cityCode, string _date)
     string hashedKey = convertDecToSTRBin(polynomialRollingHash(_cityCode, _date));
     string firstB_Key = getFirstBDigits(hashedKey);
 
-    for(row i:rows)
+    for(row *i:rows)
     {
-        if(i.first == firstB_Key)
+        if(i->first == firstB_Key)
         {
-            i.second->removeValue(hashedKey);
+            i->second->removeValue(hashedKey);
         }
     }
 }
@@ -207,39 +215,47 @@ string HashTable::convertDecToSTRBin(long long _dec)
 
 void HashTable::divideBucket(row *r)
 {
-    Bucket b(this->M, r->first);
+    Bucket *b = new Bucket(this->M, r->first);
 
     for(CovidInfo j:r->second->getValues())
     {
         string h = convertDecToSTRBin(polynomialRollingHash(j));
         if(getFirstBDigits(h) != r->second->getBucketKey())
         {
-            b.addValue(r->second->popValue(h));
+            b->addValue(r->second->popValue(h));
         }
     }
 
-    r->second = addressof(b);
+    r->second = b;
 }
 
 void HashTable::duplicateHashTable()
 {
     B*=2;
-    rowArray newRows(B);
+    int i = 0;
+    int j = 0;
 
-    for(int i = 0; i < B; i++)
+    while(i != B/2)
     {
-        if(i % 2 == 0)
+        auto it = rows.begin();
+
+        if(i == 0)
         {
-            rows[i].second->setBucketKey(getFirstBDigits(convertDecToSTRBin(i)));
-            row r(getFirstBDigits(convertDecToSTRBin(i)), rows[i].second);
-            newRows.push_back(r);
+            row *newRow = new row();
+            newRow->second = addressof(**it)->second;
+            rows.insert(it, newRow);
+            i++;
+            continue;
         }
-        else
-        {
-            row r(getFirstBDigits(convertDecToSTRBin(i)), rows[i-1].second);
-            newRows.push_back(r);
-        }
+        row *newRow = new row();
+        newRow->second = addressof(**(it+(2*i)))->second;
+        rows.insert(it+(2*i), newRow);
+        i++;
     }
 
-   rows = newRows;
+    for(auto it = rows.begin(); it != rows.end(); it++)
+    {
+        addressof(**it)->first = getFirstBDigits(convertDecToSTRBin(j));
+        j++;
+    }
 }

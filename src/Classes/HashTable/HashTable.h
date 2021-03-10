@@ -19,7 +19,7 @@ class HashTable
         int M; 
         int B;
         typedef pair<string, Bucket*> row;
-        typedef vector<row> rowArray;
+        typedef vector<row*> rowArray;
         rowArray rows;
 
         long long polynomialRollingHash(CovidInfo CI);
@@ -50,3 +50,4 @@ class HashTable
         void print();
 };
 #endif
+

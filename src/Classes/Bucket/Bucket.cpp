@@ -63,6 +63,7 @@ void Bucket::removeValue(string _hashedValue)
             break;
         }
     }
+    values.shrink_to_fit();
 }
 
 CovidInfo Bucket::popValue(string _hashedValue)
@@ -76,6 +77,7 @@ CovidInfo Bucket::popValue(string _hashedValue)
             return *ci;
         }
     }
+    values.shrink_to_fit();
 }
 
 void Bucket::print()
