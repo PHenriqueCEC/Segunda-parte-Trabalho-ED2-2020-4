@@ -1,8 +1,9 @@
 #ifndef QUADTREE_H_INCLUDED
 #define QUADTREE_H_INCLUDED
-#include "./TreeNode.h"
-#include "../Coordinate/Coordinate.h"
-#include <iostream>
+#include"./TreeNode.h"
+#include"../Coordinate/Coordinate.h"
+#include<iostream>
+#include<fstream>
 #include <string>
 #include <vector>
 
@@ -26,6 +27,8 @@ public:
     void insert(TreeNode *root, CityInfo *toInsert);
     void auxPrint(TreeNode *node);
     void print();
+    void writeTreeInTxtFile(string filename);
+    void auxWriteTreeInTxtFile(TreeNode *node, ofstream &arq);
     bool find(CityInfo *value);
     bool auxFind(TreeNode *tree);
     int getSize();

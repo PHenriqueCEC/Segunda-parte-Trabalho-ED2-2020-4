@@ -15,7 +15,10 @@ void TestingModule::insertInQuadTree(vector<CityInfo*> &data){
         quadtree->insert(quadtree->root,city);
     }
 
-    quadtree->print();
+    if(quadtree->getSize() < 20)
+        quadtree->print();
+    else
+        quadtree->writeTreeInTxtFile("saidaTestes.txt");
 
     delete quadtree;
 }

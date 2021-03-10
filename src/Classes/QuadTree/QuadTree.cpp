@@ -76,11 +76,46 @@ void QuadTree::auxPrint(TreeNode *node)
 {
     if (node != nullptr)
     {
-        cout << node->getRootValue()->city_name << " ,";
+        cout << "--------------------------------------------------------" << endl;
+        cout << "Cidade :  " << node->getRootValue()->city_name << endl;
+        cout << "Latitude :  " << node->getRootValue()->latitude << endl;
+        cout << "longitude :  " << node->getRootValue()->longitude << endl;
+        cout << "Código :  " << node->getRootValue()->city_code << endl;
+        cout << "--------------------------------------------------------" << endl;
         auxPrint(node->getNE());
         auxPrint(node->getNW());
         auxPrint(node->getSE());
         auxPrint(node->getSW());
+    }
+}
+
+void QuadTree::writeTreeInTxtFile(string filename)
+{
+    ofstream arq("saidaTestes.txt");
+
+    arq << "Dados : " << endl;
+    this->auxWriteTreeInTxtFile(this->root, arq);
+
+    arq << endl;
+
+    cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
+}
+
+void QuadTree::auxWriteTreeInTxtFile(TreeNode *node, ofstream &arq)
+{
+    if (node != nullptr)
+    {
+        arq << "--------------------------------------------------------" << endl;
+        arq << "Cidade :  " << node->getRootValue()->city_name << endl;
+        arq << "Latitude :  " << node->getRootValue()->latitude << endl;
+        arq << "longitude :  " << node->getRootValue()->longitude << endl;
+        arq << "Código :  " << node->getRootValue()->city_code << endl;
+        arq << "--------------------------------------------------------" << endl;
+
+        auxWriteTreeInTxtFile(node->getNE(), arq);
+        auxWriteTreeInTxtFile(node->getNW(), arq);
+        auxWriteTreeInTxtFile(node->getSE(), arq);
+        auxWriteTreeInTxtFile(node->getSW(), arq);
     }
 }
 
@@ -92,9 +127,8 @@ void QuadTree::print()
 
 vector<string> QuadTree::getCitysInCoordinates(Coordinate *coordinates)
 {
-    vector<string>citysInRange;
+    vector<string> citysInRange;
     auxGetCitysInCoordinates(this->root, coordinates, citysInRange);
-   
 
     return citysInRange;
 }
@@ -142,5 +176,4 @@ TreeNode *QuadTree::clean(TreeNode *node)
 QuadTree::~QuadTree()
 {
     this->root = this->clean(this->root);
-    cout << "Tree deletada " << endl;
 }
