@@ -82,7 +82,12 @@ CovidInfo Bucket::popValue(string _hashedValue)
 
 void Bucket::print()
 {
-
+    for(CovidInfo i:values)
+    {
+        i.print();
+        cout << "-----------------------------------" << endl;
+    }
+    cout << endl << ":::::::::::::::::::::::::::::::::::::::::::" << endl << endl << endl;
 }
 
 long long Bucket::polynomialRollingHash(CovidInfo &_CI)

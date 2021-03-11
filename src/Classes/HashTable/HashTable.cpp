@@ -127,7 +127,11 @@ void HashTable::remove(float _cityCode, string _date)
 
 void HashTable::print()
 {
-    
+    for(row* i:rows)
+    {
+        cout << "Linha " << i->first << " da tabela: " << endl;
+        i->second->print();
+    }
 }
 
 long long HashTable::polynomialRollingHash(CovidInfo _CI)

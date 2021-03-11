@@ -25,8 +25,9 @@ public:
   CovidInfo();
   CovidInfo(string date, string state, string city, int code, int cases, int deaths);
   CovidInfo(string date, string state, string city, int code, int cases, int totalCases, int deaths);
-
   ~CovidInfo();
+
+  void print();
 };
 
 #endif

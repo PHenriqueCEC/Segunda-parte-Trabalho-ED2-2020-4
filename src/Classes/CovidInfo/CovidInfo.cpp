@@ -39,3 +39,10 @@ CovidInfo::~CovidInfo()
 {
 }
 
+void CovidInfo::print()
+{
+  cout << "Cidade: " << city << endl;
+  cout << "Estado: " << state << endl;
+  cout << "Data: " << date << endl;
+}
+
