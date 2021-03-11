@@ -12,27 +12,23 @@ using namespace std;
 class AvlNode
 {
 private:
-  int height;
-  int balanceFactor;
   int value;
-  AvlNode *nodeFather;
+  int height;
   AvlNode *left;
   AvlNode *right;
 
 public:
   AvlNode(int v);
-  AvlNode();
   ~AvlNode();
-  int getValue();
-  int getBalanceFactor();
   AvlNode *getLeft();
   AvlNode *getRight();
-  AvlNode *getNodeFather();
+  int getValue(); 
+  int getHeight();
+  void setHeight(int v);
   void setValue(int v);
-  void setBalanceFactor(int factor);
   void setLeft(AvlNode *p);
   void setRight(AvlNode *p);
-  void setNodeFather(AvlNode *p);
+
 };
 
 #endif
