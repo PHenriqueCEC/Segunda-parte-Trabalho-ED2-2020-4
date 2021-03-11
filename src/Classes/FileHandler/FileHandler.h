@@ -2,11 +2,13 @@
 #define FILEHANDLER_H_INCLUDED
 #include"../CityInfo/CityInfo.h"
 #include"../QuadTree/Quadtree.h"
+#include"../CovidInfo/CovidInfo.h"
+#include"../HashTable/HashTable.h"
 #include<iostream>
 #include<fstream>
 #include<vector>
-#include <random>
-#include <functional>
+#include<random>
+#include<functional>
 
 
 using namespace std;
@@ -22,6 +24,7 @@ public:
   //Função de processamento do csv
   void processCityInfo(string filename);
   void processCityInfoList(string filename);
+  void processCovidInfo(string filename);
   vector<CityInfo*> getNRandomCityInfo(int n);
   
 };

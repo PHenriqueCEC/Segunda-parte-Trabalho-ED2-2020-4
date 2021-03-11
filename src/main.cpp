@@ -8,9 +8,11 @@ using std::endl;
 
 int main(int argc, char **argv){
     //string diretorio = argv[1];
-    /*FileHandler fileHandler;
-    fileHandler.processCityInfo("teste.csv");*/
-    TestingModule testing;
-    testing.menu();
+    FileHandler fileHandler;
+    //fileHandler.processCityInfo("teste.csv");
+    fileHandler.processCovidInfo("teste");
+    //TestingModule testing;
+    //testing.menu();
+
    
 }
