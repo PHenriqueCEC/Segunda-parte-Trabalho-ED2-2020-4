@@ -1,13 +1,16 @@
 #include "./AvlNode.h"
+#include <iostream>
+#include <string>
+#include <random>
+using namespace std;
 
 AvlNode::AvlNode(int value)
 
 {
-  this->nodeFather = nullptr;
   this->value = value;
   this->left = nullptr;
   this->right = nullptr;
-  this->balanceFactor = 0;
+  this->height= 1;
 }
 
 // Destrutor
@@ -27,29 +30,20 @@ AvlNode *AvlNode::getRight()
   return this->right;
 }
 
-AvlNode *AvlNode::getNodeFather()
-{
-  return this->nodeFather;
-}
 
 int AvlNode::getValue()
 {
   return this->value;
 }
 
-int AvlNode::getBalanceFactor()
+int AvlNode::getHeight()
 {
-  return this->balanceFactor;
+  return this->height;
 }
 
 void AvlNode::setValue(int v)
 {
   this->value = v;
-}
-
-void AvlNode::setBalanceFactor(int factor)
-{
-  this->balanceFactor = factor;
 }
 
 void AvlNode::setLeft(AvlNode *p)
@@ -62,7 +56,7 @@ void AvlNode::setRight(AvlNode *p)
   this->right = p;
 }
 
-void AvlNode::setNodeFather(AvlNode *p)
+void AvlNode::setHeight(int value)
 {
-  this->nodeFather = p;
+  this->height = value;
 }

@@ -13,24 +13,29 @@ class AvlTree
 {
 private:
   AvlNode *root;
-  bool balanced;
   int comparisons;
 
 public:
   AvlTree();
   ~AvlTree();
-  void simpleRotationLeft(AvlNode *node);
-  void simpleRotationRight(AvlNode *node);
-  void doubleRotationLeft(AvlNode *node);
-  void doubleRotationRight(AvlNode *node);
-  void insert(int value);
-  void updateBalanceFactor(AvlNode *p);
-  void verifyBalance(AvlNode *p);
-  int getHeight();
-  int auxGetHeight(AvlNode *p);
+  AvlNode* simpleRotationLeft(AvlNode *node);
+  AvlNode* simpleRotationRight(AvlNode *node);
+  AvlNode* doubleRotationLeft(AvlNode *node);
+  AvlNode* doubleRotationRight(AvlNode *node);
+  AvlNode* verifyBalance(AvlNode *p);
+  AvlNode* insert(AvlNode* p,int value);
+  void doInsert(int value);
+  int height(AvlNode *p);
+  void preOrder();
+  int higherElement(int a,int b);
+  int getHeight(AvlNode *p);
   int getComparisons();
-  bool getBalance();
-  AvlNode *search(int value);
+  int getBalance(AvlNode *p);
+  bool search(int value);
+  void print2DUtil(AvlNode *p, int space);
+  void print2D();
+  void printTree(AvlNode *root, string indent, bool last);
+  void doPrint();
 };
 
 #endif
