@@ -172,12 +172,12 @@ NoB* NoB::buscarNo(CityInfo* info, NoB* p, int* numComparacoes)
     *numComparacoes += 1;
 
     int i = 0;
-    while (i < n && info->getId() > chave[i]->getId())
+    while (i < n && info > chave[i])
     {
         i++;
     }
     
-    if ( i < n && chave[i]->getId() == info->getId() )
+    if ( i < n && chave[i] == info )
     {
         return p;
     }

@@ -1,7 +1,6 @@
 #include<iostream>
 #include "./Classes/FileHandler/FileHandler.h"
 #include "./Classes/TestingModule/TestingModule.h"
-using namespace std;
 
 using std::cout;
 using std::endl;

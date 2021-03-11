@@ -5,7 +5,8 @@
 #include <string>
 #include <ctime>
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 ArvoreB::ArvoreB()
 {
@@ -34,12 +35,11 @@ CityInfo *ArvoreB::buscar(CityInfo *info)
         i++; //Precisa de id
     }
 
-    if(i < p->getN() && p->getChave(i) == info)
+    if (i < p->getN() && p->getChave(i) == info)
     {
         return p->getChave(i);
     }
     return nullptr;
-
 }
 
 void ArvoreB::inserir(CityInfo *info)
@@ -95,17 +95,43 @@ void ArvoreB::remover(NoB *p)
 void ArvoreB::cisao(CityInfo *info, NoB *p)
 {
     int min = max / 2;
-    NoB* aux = new NoB(min);
+    NoB *aux = new NoB(min);
 
-  aux->setFolha(false);
-  aux->setFilho(0, p);
+    aux->setFolha(false);
+    aux->setFilho(0, p);
 
-  aux->overflow(0, p);
-  
-  int i = 0;
+    aux->overflow(0, p);
 
-  if(aux->getChave(0) < info) ///Falta o id
-    i++; 
-  aux->getFilho(i)->inserirNo(info, &numComparacoes);
-  raiz = aux;
+    int i = 0;
+
+    if (aux->getChave(0) < info) ///Falta o id
+        i++;
+    aux->getFilho(i)->inserirNo(info, &numComparacoes);
+    raiz = aux;
+}
+
+void ArvoreB::escritaEmArquivo()
+{
+    ofstream arq("saidaTestes.txt");
+
+    for (int i = 0; i < raiz->getN(); i++)
+    {
+        arq << " " << raiz->getChave(i); //Acho que tem q colocar o Id
+    }
+
+    arq << endl;
+
+    cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
+}
+
+
+void ArvoreB::imprimir()
+{
+
+    for (int i = 0; i < raiz->getN(); i++)
+    {
+        cout << " " << raiz->getChave(i); //Acho que tem q colocar o Id
+    }
+    
+    cout << endl;
 }

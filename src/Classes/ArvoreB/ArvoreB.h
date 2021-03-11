@@ -25,9 +25,10 @@ class ArvoreB
         NoB* insercao(CityInfo* info); 
         NoB* getRaiz();
         void setRaiz(NoB *raiz);
-        void imprimirRaiz();
         int getMin();
         int getMax();
+        void imprimir();
+        void escritaEmArquivo();
 
         //int get_t();
         //void set_t(int T);
