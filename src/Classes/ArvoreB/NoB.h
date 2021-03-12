@@ -1,6 +1,6 @@
 #ifndef NOB_H_INCLUDED
 #define NOB_H_INCLUDED
-#include "./Classes/CityInfo/CityInfo.h"
+#include"../CityInfo/CityInfo.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -21,16 +21,16 @@ class NoB
         NoB* getFilho(int i);
         void setFilho(int i, NoB* val);
         int getChaves(int i);
-        void atualizarChave(int i, CityInfo* info);
+        void atualizarChave(int i, int info);
         NoB* getPai();
         void setPai(NoB *p);
-        CityInfo* getChave(int i);
-        void setChave(int i, CityInfo* val);
+        int getChave(int i);
+        void setChave(int i, int val);
         int getN();
         void setN(int _n);
-        void inserirNo(CityInfo* info, int *numComparacoes);
+        void inserirNo(int info, int *numComparacoes);
         void overflow(int i, NoB *p);
-        NoB* buscarNo(CityInfo* info, NoB* p, int* numComparacoes);
+        NoB* buscarNo(int info, NoB* p, int* numComparacoes);
 
 
         //CityInfo* GetAnt(int i);
@@ -39,7 +39,7 @@ class NoB
     private:
         int max; //tamanho maximo
         int min; //tamanho minimo
-        CityInfo **chave; //vetor de chaves de um tipo qualquer(informações contida no nó)
+        vector<int> chave; //vetor de chaves de um tipo qualquer(informações contida no nó)
         NoB **filhos; //vetor de ponteiros para os m filhos
         int n;       //numero de chaves presente no no
         bool folha;  //indica se o filho eh folha ou nao
