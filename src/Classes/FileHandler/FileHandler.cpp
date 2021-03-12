@@ -50,6 +50,52 @@ void FileHandler::processCityInfoList(string filename){
   }
 }
 
+void FileHandler::processCovidInfo(string filename)
+{
+  HashTable *hashTable = new HashTable();
+  string date, state, city, code, dailyCases, totalCases, deaths, line;
+  //Abre o csv pré-processado
+  ifstream arq("brazil_covid19_cities_processado.csv");
+  int linesProcessed = 0;
+  vector<CovidInfo> file;
+  if (arq.is_open())
+  {
+    //Vai ate o final do arquivo separando cada elemento do csv por ,
+    while (!arq.eof())
+    {
+      getline(arq, date, ',');
+      getline(arq, state, ',');
+      getline(arq, city, ',');
+      getline(arq, code, ',');
+      getline(arq, dailyCases, ',');
+      getline(arq, totalCases, ',');
+      getline(arq, deaths, ',');
+      //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
+      if (linesProcessed >= 1)
+      {
+        //Criado objeto covid info e feito as transformações para int necessarias
+        CovidInfo line;
+        line.date = date;
+        line.state = state;
+        line.city = city;
+        line.code = stoi(code);
+        line.totalCases = stoi(totalCases);
+        cout << line.state << endl;
+        cout << "Antes do insert " << endl;
+        hashTable->insert(line);
+        cout << "Lines : " << linesProcessed << endl;
+        cout << "Passou do insert " << endl;
+      }
+      linesProcessed++;
+    }
+    hashTable->print();
+  }else{
+    cout << "Não foi possível abrir o arquivo!" << endl;
+  }
+  
+}
+
+
 vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
   std::random_device device;
   std::mt19937 generator(device());
@@ -110,6 +156,21 @@ void FileHandler::processCityInfo(string filename)
       }
       line++;
     }
+    delete tree;
+    cout << "Arquivo processado com sucesso" << endl;
+  }
+  else
+  {
+
+    cout << "Nao foi possivel abrir o arquivo" << endl;
+  }
+}
+
+
+
+
+    /* Testes */
+    /*
     tree->print();
     cout << " --------------------------" << endl;
     cout << "Tem salvador ? " << tree->find(new CityInfo(29,"2927408","Salvador", -12.9718,-38.5011,true)) << endl;
@@ -121,13 +182,4 @@ void FileHandler::processCityInfo(string filename)
       cout << city +  ",";
     }
     cout << endl;
-    delete tree;
-    cout << "Arquivo processado com sucesso" << endl;
-  }
-  else
-  {
-
-    cout << "Nao foi possivel abrir o arquivo" << endl;
-  }
-}
-
+    */

@@ -19,7 +19,7 @@ ArvoreB::~ArvoreB()
     remover(raiz);
 }
 
-CityInfo *ArvoreB::buscar(CityInfo *info)
+int ArvoreB::buscar(int info)
 {
     if (raiz == nullptr)
     {
@@ -39,10 +39,10 @@ CityInfo *ArvoreB::buscar(CityInfo *info)
     {
         return p->getChave(i);
     }
-    return nullptr;
+    return NULL;
 }
 
-void ArvoreB::inserir(CityInfo *info)
+void ArvoreB::inserir(int info)
 {
     if (raiz == nullptr) //Arvore vazia
     {
@@ -92,7 +92,7 @@ void ArvoreB::remover(NoB *p)
     }
 }
 
-void ArvoreB::cisao(CityInfo *info, NoB *p)
+void ArvoreB::cisao(int info, NoB *p)
 {
     int min = max / 2;
     NoB *aux = new NoB(min);
