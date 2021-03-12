@@ -14,7 +14,7 @@ class NoB
 {
 
     public:
-        NoB(int _max);
+        NoB(int _min);
         ~NoB();
         bool getFolha();
         void setFolha(bool _folha);

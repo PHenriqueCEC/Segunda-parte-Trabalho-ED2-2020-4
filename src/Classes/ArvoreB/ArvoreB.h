@@ -37,6 +37,7 @@ class ArvoreB
         int numComparacoes;
         NoB *raiz;
         int max;
+        int min;
 };
 
 #endif

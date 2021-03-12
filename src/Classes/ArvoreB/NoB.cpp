@@ -6,16 +6,16 @@
 #include <ctime>
 
 
-NoB::NoB(int _max)
+NoB::NoB(int _min)
 {
-    max = _max;
-    min = max / 2;
+    min = _min;
+    max = min * 2;
     n = 0;
     folha = true;
     pai = nullptr;
 
-    filhos = new NoB *[max];     //cria filhos com o numero maximo m
-    chave.reserve(_max); //Cria chave de ordem m - 1
+    filhos = new NoB *[max];     //cria filhos com o numero minimo 
+    chave.reserve(max - 1); //Cria chave de ordem m - 1
 
     for (int i = 0; i < max; i++) //inicializa os filhos com nullptr
         filhos[i] = nullptr;      //Pq nullptr NAO funciona?
@@ -131,20 +131,20 @@ void NoB::inserirNo(int info, int *numComparacoes)
 void NoB::overflow(int i, NoB *p) //Executa a cisao do no
 {
     //Cria um novo no que armazena min - 1 chaves de p
-    int min = max / 2;
+    //int min = max / 2;
     NoB *aux = new NoB(min);
     aux->setN(min - 1);
 
-    for (int j = 0; j < min - 1; i++) //Copia as chaves
+    for (int j = 0; j < min - 1; j++) //Copia as chaves
     {
-        aux->chave[j] = p->chave[j + min];
+        aux->chave[j] = p->chave[j + min]; //Acho que vou precisar de um setChave e getChave
     }
 
     if (p->getFolha() == false)
     {
         for (int j = 0; j < min; j++) //Copia os filhos
         {
-            aux->filhos[j] = p->filhos[j + min];
+            aux->filhos[j] = p->filhos[j + min]; //Usar setFilho e getFilho??
         }
     }
 
@@ -162,7 +162,7 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
         chave[j + 1] = chave[j];
     }
 
-    chave[i] = p->chave[min - 1];
+    chave[i] = p->chave[min - 1]; //Precisa de getChave?
 
     n += 1; //Incrementa contador de chaves para esse nó
 
