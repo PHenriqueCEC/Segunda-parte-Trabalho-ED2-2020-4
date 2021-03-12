@@ -31,6 +31,7 @@ class NoB
         void inserirNo(int info, int *numComparacoes);
         void overflow(int i, NoB *p);
         NoB* buscarNo(int info, NoB* p, int* numComparacoes);
+        void imprimir();
 
 
         //CityInfo* GetAnt(int i);
