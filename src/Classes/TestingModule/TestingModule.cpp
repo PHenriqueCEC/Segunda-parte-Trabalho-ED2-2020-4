@@ -33,6 +33,18 @@ void TestingModule::insertInBTree(vector<int> values){
 }
 
 
+void TestingModule::insertInAvlTree(vector<int> values){
+    AvlTree *avlTree = new AvlTree();
+     for(int value : values){
+         cout << "Value :  " << value << endl;
+         avlTree->doInsert(value);
+     }
+     avlTree->print2D();
+}
+
+
+
+
 void TestingModule::selectDataStructureToInsert(int choice){
     FileHandler fileHandler;
     int numberOfRegisters;
@@ -51,11 +63,19 @@ void TestingModule::selectDataStructureToInsert(int choice){
         
         case 2 : {
             vector<int> aux;
-            for(int i = 0; i < 100 ; i++){
-                cout << "i " << i <<endl;
+            for(int i = 0; i < numberOfRegisters ; i++){
                 aux.push_back(i);
             }
             insertInBTree(aux);
+            break;
+        }
+
+        case 3 : {
+            vector<int> aux;
+            for(int i = 0; i < numberOfRegisters ; i++){
+                aux.push_back(i);
+            }
+            insertInAvlTree(aux);
             break;
         }
         
@@ -65,10 +85,10 @@ void TestingModule::selectDataStructureToInsert(int choice){
 void TestingModule::menu(){
     int choice;
     while(choice != 0){
-    cout << "----------💻️ Trabalho Estrutura de Dados Parte 2 💻️------------" << endl;
+    cout << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
     cout << "Digite [1] para inserir registro na Quad Tree " << endl;
-    cout << "Digite [2] para inserir registro na Árvore Avl " << endl;
-    cout << "Digite [3] para inserir registro na Árvore B " << endl;
+    cout << "Digite [2] para inserir registro na Arvore B " << endl;
+    cout << "Digite [3] para inserir registro na Arvore Avl " << endl;
     cout << "Digite [0] para encerrar o programa" << endl;
     cout << "---------------------------------------------------------------" << endl;
     cin >> choice;

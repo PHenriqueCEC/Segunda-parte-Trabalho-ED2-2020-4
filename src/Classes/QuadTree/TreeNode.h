@@ -15,8 +15,7 @@ private:
     TreeNode *SW;
     TreeNode *NE;
     TreeNode *NW;
-
-    int size = 0;
+    int size;
 
 public:
     TreeNode();
@@ -32,8 +31,6 @@ public:
     TreeNode* getNW();
     CityInfo* getRootValue();
     TreeNode* getValueInQuadrant(string quadrant);
-    /*void printTree();
-    void auxPrintTree(TreeNode *tree);*/
     void insertInQuadrant(string quadrant , CityInfo* value);
 };
 
