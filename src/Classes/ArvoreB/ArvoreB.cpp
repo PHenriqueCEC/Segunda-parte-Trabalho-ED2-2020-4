@@ -8,10 +8,11 @@
 using std::cout;
 using std::endl;
 
-ArvoreB::ArvoreB()
+ArvoreB::ArvoreB(int _min)
 {
     raiz = nullptr;
     numComparacoes = 0;
+    min = _min;
 }
 
 ArvoreB::~ArvoreB()

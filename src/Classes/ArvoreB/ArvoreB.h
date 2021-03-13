@@ -14,7 +14,7 @@ using namespace std;
 class ArvoreB
 {
     public:
-        ArvoreB();
+        ArvoreB(int _min);
         ~ArvoreB();
 
         int buscar(int info);  
