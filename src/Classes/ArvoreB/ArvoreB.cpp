@@ -8,10 +8,11 @@
 using std::cout;
 using std::endl;
 
-ArvoreB::ArvoreB()
+ArvoreB::ArvoreB(int _min)
 {
     raiz = nullptr;
     numComparacoes = 0;
+    min = _min;
 }
 
 ArvoreB::~ArvoreB()
@@ -21,32 +22,36 @@ ArvoreB::~ArvoreB()
 
 int ArvoreB::buscar(int info)
 {
-    if (raiz == nullptr)
-    {
-        return false;
-    }
 
     NoB *p = raiz->buscarNo(info, raiz, &numComparacoes);
 
-    int i = 0;
-    //procura a primeira chave maior ou igual a k
-    while (i < p->getN() && info > p->getChave(i))
+    if (p == nullptr)
     {
-        i++; //Precisa de id
+        return NULL;
     }
+    else
+    {
 
-    if (i < p->getN() && p->getChave(i) == info)
-    {
-        return p->getChave(i);
+        int i = 0;
+        //procura a primeira chave maior ou igual a k
+        while (i < p->getN() && info > p->getChave(i))
+        {
+            i++; //Precisa de id
+        }
+
+        if (i < p->getN() && p->getChave(i) == info)
+        {
+            return p->getChave(i);
+        }
+        return NULL;
     }
-    return NULL;
 }
 
 void ArvoreB::inserir(int info)
 {
     if (raiz == nullptr) //Arvore vazia
     {
-        NoB *p = new NoB(max / 2); //Memoria alocada para a raiz
+        NoB *p = new NoB(min); //Memoria alocada para a raiz
         raiz = p;
         raiz->setN(1);                 //Atualiza valor de n
         raiz->atualizarChave(0, info); //Atualiza chave
@@ -56,7 +61,7 @@ void ArvoreB::inserir(int info)
     {
         if (raiz->getN() == max - 1)
         {
-            NoB *aux = new NoB(max / 2); //Memoria alocada para o novo no
+            //NoB *aux = new NoB(max / 2); //Memoria alocada para o novo no
 
             cisao(info, raiz); //Faz a cisão
         }
@@ -83,7 +88,7 @@ void ArvoreB::remover(NoB *p)
 
     else
     {
-        for (int i = 0; i < p->getN(); i++)
+        for (int i = 0; i <= p->getN(); i++)
         {
             remover(p->getFilho(i));
             p->setFilho(i, nullptr);
@@ -94,7 +99,7 @@ void ArvoreB::remover(NoB *p)
 
 void ArvoreB::cisao(int info, NoB *p)
 {
-    int min = max / 2;
+    //int min = max / 2;
     NoB *aux = new NoB(min);
 
     aux->setFolha(false);
@@ -124,7 +129,6 @@ void ArvoreB::escritaEmArquivo()
     cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
 }
 
-
 void ArvoreB::imprimir()
 {
 
@@ -132,6 +136,6 @@ void ArvoreB::imprimir()
     {
         cout << " " << raiz->getChave(i); //Acho que tem q colocar o Id
     }
-    
+
     cout << endl;
 }

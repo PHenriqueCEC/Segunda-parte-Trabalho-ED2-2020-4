@@ -4,11 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <utility> 
-#include <algorithm>
-#include <cmath>
 
-#include "../Bucket/Bucket.h"
 #include "../CovidInfo/CovidInfo.h"
 
 using namespace std;
@@ -16,36 +12,21 @@ using namespace std;
 class HashTable
 {
     private:
-        int M; 
-        int B;
-        typedef pair<string, Bucket*> row;
-        typedef vector<row*> rowArray;
-        rowArray rows;
+        unsigned long long size;
+        unsigned long long collisions;
 
-        long long polynomialRollingHash(CovidInfo CI);
-        long long polynomialRollingHash(float _cityCode, string _date);
+       vector<CovidInfo> table;
 
-        string getFirstBDigits(string _info);
-        string convertDecToSTRBin(long long _dec);
-
-        void divideBucket(row *r);
-        void duplicateHashTable();
+        unsigned long long polynomialRollingHash(CovidInfo CI, unsigned long long _a);
+        unsigned long long polynomialRollingHash(float _cityCode, string _date, unsigned long long _a);
 
     public:
         HashTable();
-        HashTable(int _M, int _B);
+        HashTable(unsigned long long _size);
 
-        void setM(int _M);
-        void setB(int _B);
+        void insert(CovidInfo* _CI);
 
-        int getM();
-        int getB();
-
-        void insert(CovidInfo _CI);
-
-        CovidInfo search(float _cityCode, string _date);
-        
-        void remove(float _cityCode, string _date);
+        CovidInfo* search(float _cityCode, string _date);
 
         void print();
 };

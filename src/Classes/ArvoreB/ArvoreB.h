@@ -14,7 +14,7 @@ using namespace std;
 class ArvoreB
 {
     public:
-        ArvoreB();
+        ArvoreB(int _min);
         ~ArvoreB();
 
         int buscar(int info);  
@@ -37,6 +37,7 @@ class ArvoreB
         int numComparacoes;
         NoB *raiz;
         int max;
+        int min;
 };
 
 #endif

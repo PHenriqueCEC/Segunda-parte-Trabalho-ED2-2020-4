@@ -24,7 +24,7 @@ void TestingModule::insertInQuadTree(vector<CityInfo*> &data){
 }
 
 void TestingModule::insertInBTree(vector<int> values){
-    ArvoreB *arvore = new ArvoreB();
+    ArvoreB *arvore = new ArvoreB(20);
      for(int value : values){
          cout << "Value :  " << value << endl;
          arvore->inserir(value);
