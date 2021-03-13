@@ -16,7 +16,7 @@ class HashTable
         unsigned long long collisions;
 
        vector<CovidInfo> table;
-
+       vector<long long int> generatedHashs;
         unsigned long long polynomialRollingHash(CovidInfo CI, unsigned long long _a);
         unsigned long long polynomialRollingHash(float _cityCode, string _date, unsigned long long _a);
 
@@ -30,6 +30,8 @@ class HashTable
 
         void print();
 
+        vector<long long int> getNHashedKeys(int numberOfKeys);    
+        vector<long long int> getHashedKeys();
         int getSize();
 };
 #endif
