@@ -17,7 +17,6 @@ AvlTree::AvlTree()
 
 // Destrutor
 AvlTree::~AvlTree()
-
 {
   delete root;
   this->root = nullptr;

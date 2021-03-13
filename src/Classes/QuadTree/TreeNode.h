@@ -15,7 +15,7 @@ private:
     TreeNode *SW;
     TreeNode *NE;
     TreeNode *NW;
-    int size;
+    int size = 0;
 
 public:
     TreeNode();

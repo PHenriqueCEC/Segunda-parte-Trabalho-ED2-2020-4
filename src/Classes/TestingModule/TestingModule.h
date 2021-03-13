@@ -21,7 +21,7 @@ public:
     ~TestingModule();
     void menu();
     void insertInBTree(vector<int> values);
-    void insertInQuadTree(vector<CityInfo*> &data);
+    void insertInQuadTree(int numberOfRegisters);
     void insertInAvlTree(vector<int> values);
     void selectDataStructureToInsert(int choice);
   

@@ -9,11 +9,9 @@ TestingModule::~TestingModule(){
 }
 
 
-void TestingModule::insertInQuadTree(vector<CityInfo*> &data){
-    QuadTree *quadtree = new QuadTree();
-    for(CityInfo *city : data){
-        quadtree->insert(quadtree->root,city);
-    }
+void TestingModule::insertInQuadTree(int numberOfRegisters){
+    FileHandler fileHandler;
+    QuadTree *quadtree =  fileHandler.insertCityListInQuadTree("brazil_cities_coordinates.csv",numberOfRegisters); 
 
     if(quadtree->getSize() < 20)
         quadtree->print();
@@ -49,15 +47,11 @@ void TestingModule::selectDataStructureToInsert(int choice){
     FileHandler fileHandler;
     int numberOfRegisters;
     cout << "Digite o número de registros : " << endl;
-    cin >> numberOfRegisters;
-    //Obtenção dos n registros
-    
+    cin >> numberOfRegisters;    
 
     switch(choice){
         case 1 : {
-            fileHandler.processCityInfoList("brazil_cities_coordinates.csv");
-            vector<CityInfo*> randomCitys = fileHandler.getNRandomCityInfo(numberOfRegisters);
-            insertInQuadTree(randomCitys);
+            this->insertInQuadTree(numberOfRegisters);
             break;
         }
         

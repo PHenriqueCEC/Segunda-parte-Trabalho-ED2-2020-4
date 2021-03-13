@@ -105,6 +105,7 @@ void FileHandler::processCovidInfo(string filename)
 
 
 vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
+  cout << "Pegando registros aleatórios  " << endl;
   std::random_device device;
   std::mt19937 generator(device());
   std::uniform_int_distribution<int> distribution(0,this->citysList.size() - 1);
@@ -116,7 +117,7 @@ vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
   for(int i = 0 ; i < this->citysList.size() ; i++)
   usedIndexs.push_back(false);
 
-  for(int i = 0 ; i < n - 1 ; i++){
+  for(int i = 0 ; i < n ; i++){
       //Garanto que o indice que gerei ainda não foi utilizado , para não ocorrerem duplicatas.
       while(usedIndexs[drawn])
          drawn = distribution(generator);
@@ -127,15 +128,16 @@ vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
 
   } 
 
+
+ //Desalocando vetor de bools auxiliar da memória
   usedIndexs.~vector();
   return sortedInfos;
 }
 
 
 
-/*Função para armazenar os registros do csv brazil_covid19_cities.csv em um Array da classe CovidInfo*/
 //insertCityListInQuadTree (Mudar o nome)
-void FileHandler::processCityInfo(string filename)
+QuadTree*  FileHandler::insertCityListInQuadTree(string filename,int n)
 {
   int line = 0;
   ifstream arq("brazil_cities_coordinates.csv");
@@ -156,7 +158,7 @@ void FileHandler::processCityInfo(string filename)
       getline(arq, isCapital);
 
       //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
-      if (line >= 1)
+      if (line >= 1 && line < n)
       {
         //@Todo inserção dos dados obtidos na quadtree;
         CityInfo *info = new CityInfo(stoi(state_code), city_code, city_name, stof(latitutde), stof(longitude), isCapital == "TRUE");
@@ -164,14 +166,14 @@ void FileHandler::processCityInfo(string filename)
       }
       line++;
     }
-    delete tree;
-    cout << "Arquivo processado com sucesso" << endl;
+    return tree;
+    cout << "Inserção na quadTree ocorrida com sucesso!" << endl;
   }
   else
   {
-
     cout << "Nao foi possivel abrir o arquivo" << endl;
   }
+  exit(1);
 }
 
 

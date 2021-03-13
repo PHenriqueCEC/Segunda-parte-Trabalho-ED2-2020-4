@@ -22,7 +22,7 @@ public:
   FileHandler();
   ~FileHandler();
   //Função de processamento do csv
-  void processCityInfo(string filename);
+  QuadTree* insertCityListInQuadTree(string filename , int n);
   void processCityInfoList(string filename);
   void processCovidInfo(string filename);
   vector<CityInfo*> getNRandomCityInfo(int n);
