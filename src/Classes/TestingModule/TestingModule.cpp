@@ -40,7 +40,6 @@ void TestingModule::insertInBTree(vector<long long int> values){
 void TestingModule::insertInAvlTree(vector<long long int> values){
     AvlTree *avlTree = new AvlTree();
      for(int value : values){
-         cout << "Value :  " << value << endl;
          avlTree->doInsert(value);
      }
      avlTree->doPrint(values.size() > 20);

@@ -12,32 +12,35 @@ using namespace std;
 class AvlTree
 {
 private:
-  AvlNode *root;
-  int comparisons;
+  AvlNode *root;         //Nó raiz da árvore
+  int comparisonsInsert; //Contador de comparações de valores para inserção
+  int comparisonsSearch; //Contador de comparações de valores para busca
 
 public:
   AvlTree();
   ~AvlTree();
-  AvlNode* simpleRotationLeft(AvlNode *node);
-  AvlNode* simpleRotationRight(AvlNode *node);
-  AvlNode* doubleRotationLeft(AvlNode *node);
-  AvlNode* doubleRotationRight(AvlNode *node);
-  AvlNode* verifyBalance(AvlNode *p);
-  AvlNode* insert(AvlNode* p,int value);
+  AvlNode *simpleRotationLeft(AvlNode *node);
+  AvlNode *simpleRotationRight(AvlNode *node);
+  AvlNode *doubleRotationLeft(AvlNode *node);
+  AvlNode *doubleRotationRight(AvlNode *node);
+  AvlNode *verifyBalance(AvlNode *p);
+  AvlNode *insert(AvlNode *p, int value);
   void doInsert(int value);
   int height(AvlNode *p);
   void preOrder();
-  int higherElement(int a,int b);
+  int higherElement(int a, int b);
   int getHeight(AvlNode *p);
   int getComparisons();
+  int getInsertComparisons();
+  int getSearchComparisons();
   int getBalance(AvlNode *p);
   bool search(int value);
   void print2DUtil(AvlNode *p, int space);
   void print2D();
-  void printTree(AvlNode *root, string indent, bool last , bool isWriteInFile , ofstream &file);
+  void printTree(AvlNode *root, string indent, bool last, bool isWriteInFile, ofstream &file);
   void doPrint(bool isWriteInFile);
-
-  AvlNode* getRoot();
+  void freeNode(AvlNode *p);
+  AvlNode *getRoot();
 };
 
 #endif
