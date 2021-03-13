@@ -29,6 +29,8 @@ class HashTable
         CovidInfo* search(float _cityCode, string _date);
 
         void print();
+
+        int getSize();
 };
 #endif
 

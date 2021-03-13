@@ -1,18 +1,15 @@
 #include<iostream>
 #include "./Classes/FileHandler/FileHandler.h"
 #include "./Classes/TestingModule/TestingModule.h"
+#include<string>
 
-using std::cout;
-using std::endl;
+using namespace std;
 
 int main(int argc, char **argv){
-    cout << "Antes de tudo" << endl;
-    //string diretorio = argv[1];
-    //FileHandler fileHandler;
-    //fileHandler.processCityInfo("teste.csv");
-    //fileHandler.processCovidInfo("teste");
+    string diretorio;
+    if(argv[1])
+     diretorio = argv[1];
+
     TestingModule testing;
     testing.menu();
-
-   
 }

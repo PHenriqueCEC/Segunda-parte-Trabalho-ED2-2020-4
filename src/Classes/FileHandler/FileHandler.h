@@ -9,9 +9,12 @@
 #include<vector>
 #include<random>
 #include<functional>
+#include<ctime>
+
 
 
 using namespace std;
+using std::cout;
 
 class FileHandler
 {
@@ -24,7 +27,7 @@ public:
   //Função de processamento do csv
   QuadTree* insertCityListInQuadTree(string filename , int n);
   void processCityInfoList(string filename);
-  void processCovidInfo(string filename);
+  HashTable* insertCovidInfoInHashTable(string filename,int numberOfRegisters);
   vector<CityInfo*> getNRandomCityInfo(int n);
   
 };

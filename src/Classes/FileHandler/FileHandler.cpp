@@ -16,11 +16,8 @@ void FileHandler::processCityInfoList(string filename){
   int line = 0;
   ifstream arq("brazil_cities_coordinates.csv");
   string state_code, city_code, city_name, latitutde, longitude, isCapital;
-
-
   if (arq.is_open())
   {
-    cout << "Arq opened" << endl;
     //Vai ate o final do arquivo separando cada elemento do csv por ,
     while (!arq.eof()) 
     {
@@ -50,23 +47,20 @@ void FileHandler::processCityInfoList(string filename){
   }
 }
 
-void FileHandler::processCovidInfo(string filename)
+HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfRegisters)
 {
   int i = 0;
-  cout << "Antes da hash table" << endl;
-  HashTable *hashTable = new HashTable();
-  cout << "HashTable instanciada" << endl;
+  HashTable *hashTable = new HashTable(100000);
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
   ifstream arq("brazil_covid19_cities_processado.csv");
   int linesProcessed = 0;
   vector<CovidInfo> file;
-
-  cout << "Antes do if" << endl;
+  clock_t startTime = 0, finalTime;
   if (arq.is_open())
   {
+    startTime = clock();
     //Vai ate o final do arquivo separando cada elemento do csv por ,
-    cout << "Antes do while" << endl;
     while (!arq.eof())
     {
       getline(arq, date, ',');
@@ -76,6 +70,9 @@ void FileHandler::processCovidInfo(string filename)
       getline(arq, dailyCases, ',');
       getline(arq, totalCases, ',');
       getline(arq, deaths, ',');
+      if(linesProcessed % 10000 == 0){
+        cout << "Na iteração " << linesProcessed << "....." << endl;
+      }
       //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
       if (linesProcessed >= 1)
       {
@@ -86,21 +83,22 @@ void FileHandler::processCovidInfo(string filename)
         line.city = city;
         line.code = stoi(code);
         line.totalCases = stoi(totalCases);
-        cout << line.state << endl;
-        cout << "Antes do insert " << endl;
         hashTable->insert(addressof(line));
-        cout << "Lines : " << linesProcessed << endl;
-        cout << "Passou do insert " << endl;
       }
       linesProcessed++;
-      if(linesProcessed == 450)
+      if(linesProcessed == numberOfRegisters){ 
         break;
+      }
     }
-    hashTable->print();
+    finalTime = clock();
+    cout << "Tempo de Processamento : " << (finalTime - startTime) / ((float)CLOCKS_PER_SEC) << " segundos" << endl;
+    return hashTable;
+    //hashTable->print();
   }else{
     cout << "Não foi possível abrir o arquivo!" << endl;
+    exit(1);
   }
-  
+  return new HashTable();  
 }
 
 
@@ -134,9 +132,6 @@ vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
   return sortedInfos;
 }
 
-
-
-//insertCityListInQuadTree (Mudar o nome)
 QuadTree*  FileHandler::insertCityListInQuadTree(string filename,int n)
 {
   int line = 0;

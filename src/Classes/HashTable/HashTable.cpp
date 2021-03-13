@@ -22,6 +22,8 @@ void HashTable::insert(CovidInfo* _CI)
     {
         unsigned long long hashedKey = polynomialRollingHash(*_CI, a);
 
+        cout << "hash : " << hashedKey << endl;
+
         if(table[hashedKey].city == "")
         {
             table[hashedKey] = *_CI;
@@ -99,4 +101,8 @@ unsigned long long HashTable::polynomialRollingHash(float _cityCode, string _dat
     }
 
     return hash_val;
+}
+
+int HashTable::getSize(){
+    return this->table.size();
 }

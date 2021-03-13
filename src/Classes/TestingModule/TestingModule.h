@@ -5,9 +5,10 @@
 #include"../QuadTree/Quadtree.h"
 #include"../CityInfo/CityInfo.h"
 #include"../ArvoreB/ArvoreB.h"
-#include <iostream>
-#include <string>
-#include <vector>
+#include<ctime>
+#include<iostream>
+#include<string>
+#include<vector>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
     void insertInBTree(vector<int> values);
     void insertInQuadTree(int numberOfRegisters);
     void insertInAvlTree(vector<int> values);
+    void insertInHashTable(int numberOfRegisters);
     void selectDataStructureToInsert(int choice);
   
 };
