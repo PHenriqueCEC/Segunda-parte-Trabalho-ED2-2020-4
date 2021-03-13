@@ -14,15 +14,15 @@ HashTable::HashTable(unsigned long long _size)
     this->collisions = 0;
 }
 
-void HashTable::insert(CovidInfo* _CI)
+void HashTable::insert(CovidInfo *_CI)
 {
     unsigned long long a = 0;
 
-    for(unsigned long long i = 0; i < size; i++)
+    for (unsigned long long i = 0; i < size; i++)
     {
         unsigned long long hashedKey = polynomialRollingHash(*_CI, a);
 
-        if(table[hashedKey].city == "")
+        if (table[hashedKey].city == "")
         {
             table[hashedKey] = *_CI;
             this->generatedHashs.push_back(hashedKey);
@@ -36,19 +36,19 @@ void HashTable::insert(CovidInfo* _CI)
     }
 }
 
-CovidInfo* HashTable::search(float _cityCode, string _date) 
+CovidInfo *HashTable::search(float _cityCode, string _date)
 {
     unsigned long long hashedKey = polynomialRollingHash(_cityCode, _date, 0);
-    
-    if(table[hashedKey].code == _cityCode and table[hashedKey].date == _date)
+
+    if (table[hashedKey].code == _cityCode and table[hashedKey].date == _date)
     {
         return addressof(table[hashedKey]);
     }
     else
     {
-        for(CovidInfo i:table)
+        for (CovidInfo i : table)
         {
-            if(i.code == _cityCode and i.date == _date)
+            if (i.code == _cityCode and i.date == _date)
             {
                 return addressof(i);
             }
@@ -57,17 +57,31 @@ CovidInfo* HashTable::search(float _cityCode, string _date)
     return NULL;
 }
 
-void HashTable::print()
+void HashTable::print(bool writeInFile)
 {
-    for(CovidInfo i:table)
+    ofstream arq("saidaTestes.txt");
+    cout << "A saída sera salva no arquivo : saidaTestes.txt";
+    for (CovidInfo i : table)
     {
-        cout << "--------------------------------------" << endl;
-        i.print();
-        cout << "--------------------------------------" << endl;
+        if (writeInFile)
+        {
+            arq << "--------------------------------------" << endl;
+            i.printInFile(arq);
+            arq << "--------------------------------------" << endl;
+        }
+        else
+        {
+            cout << "--------------------------------------" << endl;
+            i.print();
+            cout << "--------------------------------------" << endl;
+        }
     }
+
+     cout << "A saída foi salva no arquivo  saidaTestes.txt";
 }
 
-vector<long long int> HashTable::getHashedKeys(){
+vector<long long int> HashTable::getHashedKeys()
+{
     return this->generatedHashs;
 }
 
@@ -78,8 +92,8 @@ unsigned long long HashTable::polynomialRollingHash(CovidInfo _CI, unsigned long
     unsigned long long hash_val = 0;
     string str = _CI.date + to_string(_CI.code);
     int strSize = str.size();
-    
-    for (int i = 0; i < strSize ; i++)
+
+    for (int i = 0; i < strSize; i++)
     {
         hash_val = ((hash_val + (str[i] - 'a' + 1) * power_of_p) + _a) % size;
         power_of_p = (power_of_p * p) % size;
@@ -95,8 +109,8 @@ unsigned long long HashTable::polynomialRollingHash(float _cityCode, string _dat
     unsigned long long hash_val = 0;
     string str = _date + to_string(_cityCode);
     int strSize = str.size();
-    
-    for (int i = 0; i < strSize ; i++)
+
+    for (int i = 0; i < strSize; i++)
     {
         hash_val = ((hash_val + (str[i] - 'a' + 1) * power_of_p) + _a) % size;
         power_of_p = (power_of_p * p) % size;
@@ -105,6 +119,7 @@ unsigned long long HashTable::polynomialRollingHash(float _cityCode, string _dat
     return hash_val;
 }
 
-int HashTable::getSize(){
+int HashTable::getSize()
+{
     return this->table.size();
 }

@@ -129,13 +129,15 @@ void ArvoreB::escritaEmArquivo()
     cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
 }
 
-void ArvoreB::imprimir()
+void ArvoreB::imprimir(bool isWriteInFile)
 {
-
-    for (int i = 0; i < raiz->getN(); i++)
-    {
-        cout << " " << raiz->getChave(i); //Acho que tem q colocar o Id
+    if(!isWriteInFile){
+        for (int i = 0; i < raiz->getN(); i++)
+        {
+            cout << " " << raiz->getChave(i);
+        }
     }
+        
 
     cout << endl;
 }

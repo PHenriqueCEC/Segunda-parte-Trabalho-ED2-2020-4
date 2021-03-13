@@ -26,7 +26,7 @@ class ArvoreB
         void setRaiz(NoB *raiz);
         int getMin();
         int getMax();
-        void imprimir();
+        void imprimir(bool isWriteInFile);
         void escritaEmArquivo();
 
         //int get_t();

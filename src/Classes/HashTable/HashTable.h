@@ -28,7 +28,7 @@ class HashTable
 
         CovidInfo* search(float _cityCode, string _date);
 
-        void print();
+        void print(bool writeInFile);
 
         vector<long long int> getNHashedKeys(int numberOfKeys);    
         vector<long long int> getHashedKeys();

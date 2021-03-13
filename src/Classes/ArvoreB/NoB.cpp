@@ -93,8 +93,6 @@ CityInfo* NoB::SetProx(int i)
 void NoB::inserirNo(int info, int *numComparacoes)
 {
     int i = n - 1; //Indice com o elemento mais a direita
-
-    cout << "Info a inserir " << info << endl;
     if (folha == true)
     {
         while (i >= 0 && chave[i] > info) //Encontra a posicao da nova chave a ser inserida
