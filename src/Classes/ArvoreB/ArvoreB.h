@@ -1,7 +1,7 @@
 #ifndef ARVOREB_H_INCLUDED
 #define ARVOREB_H_INCLUDED
 #include "./NoB.h"
-#include "./Classes/CityInfo/CityInfo.h"
+#include "../CityInfo/CityInfo.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -17,12 +17,12 @@ class ArvoreB
         ArvoreB();
         ~ArvoreB();
 
-        CityInfo* buscar(CityInfo* info);  
-        void inserir(CityInfo* p); 
+        int buscar(int info);  
+        void inserir(int p); 
         void remover(NoB *p);
-        void cisao(CityInfo* info, NoB* p);
-        NoB* remocao(CityInfo* info);  
-        NoB* insercao(CityInfo* info); 
+        void cisao(int info, NoB* p);
+        NoB* remocao(int info);  
+        NoB* insercao(int info); 
         NoB* getRaiz();
         void setRaiz(NoB *raiz);
         int getMin();

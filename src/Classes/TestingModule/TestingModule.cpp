@@ -23,19 +23,42 @@ void TestingModule::insertInQuadTree(vector<CityInfo*> &data){
     delete quadtree;
 }
 
+void TestingModule::insertInBTree(vector<int> values){
+    ArvoreB *arvore = new ArvoreB();
+     for(int value : values){
+         cout << "Value :  " << value << endl;
+         arvore->inserir(value);
+     }
+     arvore->imprimir();
+}
+
+
 void TestingModule::selectDataStructureToInsert(int choice){
     FileHandler fileHandler;
     int numberOfRegisters;
     cout << "Digite o número de registros : " << endl;
     cin >> numberOfRegisters;
     //Obtenção dos n registros
-    fileHandler.processCityInfoList("brazil_cities_coordinates.csv");
-    vector<CityInfo*> randomCitys = fileHandler.getNRandomCityInfo(numberOfRegisters);
     
+
     switch(choice){
         case 1 : {
+            fileHandler.processCityInfoList("brazil_cities_coordinates.csv");
+            vector<CityInfo*> randomCitys = fileHandler.getNRandomCityInfo(numberOfRegisters);
             insertInQuadTree(randomCitys);
+            break;
         }
+        
+        case 2 : {
+            vector<int> aux;
+            for(int i = 0; i < 100 ; i++){
+                cout << "i " << i <<endl;
+                aux.push_back(i);
+            }
+            insertInBTree(aux);
+            break;
+        }
+        
     }
 } 
 

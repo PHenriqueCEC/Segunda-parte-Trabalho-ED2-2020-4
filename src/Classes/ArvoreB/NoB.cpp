@@ -15,18 +15,18 @@ NoB::NoB(int _max)
     pai = nullptr;
 
     filhos = new NoB *[max];     //cria filhos com o numero maximo m
-    chave = new CityInfo *[max]; //Cria chave de ordem m - 1
+    chave.reserve(_max); //Cria chave de ordem m - 1
 
     for (int i = 0; i < max; i++) //inicializa os filhos com nullptr
         filhos[i] = nullptr;      //Pq nullptr NAO funciona?
-
+    
     for (int i = 0; i < max - 1; i++) //cria chaves com o numero maximo m - 1
-        chave[i] = nullptr;
+        chave[i] = NULL;
 }
 
 NoB::~NoB()
 {
-    delete[] chave;
+    chave.~vector();
     delete[] filhos;
 }
 
@@ -40,12 +40,12 @@ void NoB::setFolha(bool _folha)
     folha = _folha;
 }
 
-CityInfo *NoB::getChave(int i)
+int NoB::getChave(int i)
 {
     return chave[i];
 }
 
-void NoB::atualizarChave(int i, CityInfo *info)
+void NoB::atualizarChave(int i, int info)
 {
     chave[i] = info;
 }
@@ -90,10 +90,11 @@ CityInfo* NoB::SetProx(int i)
 
 }*/
 
-void NoB::inserirNo(CityInfo *info, int *numComparacoes)
+void NoB::inserirNo(int info, int *numComparacoes)
 {
     int i = n - 1; //Indice com o elemento mais a direita
 
+    cout << "Info a inserir " << info << endl;
     if (folha == true)
     {
         while (i >= 0 && chave[i] > info) //Encontra a posicao da nova chave a ser inserida
@@ -167,7 +168,7 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
 
 }
 
-NoB* NoB::buscarNo(CityInfo* info, NoB* p, int* numComparacoes)
+NoB* NoB::buscarNo(int info, NoB* p, int* numComparacoes)
 {
     *numComparacoes += 1;
 
