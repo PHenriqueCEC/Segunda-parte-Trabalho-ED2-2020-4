@@ -22,7 +22,6 @@ class ArvoreB
         void remover(NoB *p);
         void cisao(int info, NoB* p);
         NoB* remocao(int info);  
-        NoB* insercao(int info); 
         NoB* getRaiz();
         void setRaiz(NoB *raiz);
         int getMin();
