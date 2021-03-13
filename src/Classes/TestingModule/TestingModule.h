@@ -1,12 +1,14 @@
 #ifndef TESTINGMODULE_H_INCLUDED
 #define TESTINGMODULE_H_INCLUDED
 #include"../FileHandler/FileHandler.h"
+#include"../AvlTree/AvlTree.h"
 #include"../QuadTree/Quadtree.h"
 #include"../CityInfo/CityInfo.h"
 #include"../ArvoreB/ArvoreB.h"
-#include <iostream>
-#include <string>
-#include <vector>
+#include<ctime>
+#include<iostream>
+#include<string>
+#include<vector>
 
 using namespace std;
 
@@ -19,8 +21,10 @@ public:
     TestingModule();
     ~TestingModule();
     void menu();
-    void insertInBTree(vector<int> values);
-    void insertInQuadTree(vector<CityInfo*> &data);
+    void insertInBTree(vector<long long int> values);
+    void insertInQuadTree(int numberOfRegisters);
+    void insertInAvlTree(vector<long long int> values);
+    void insertInHashTable(int numberOfRegisters);
     void selectDataStructureToInsert(int choice);
   
 };

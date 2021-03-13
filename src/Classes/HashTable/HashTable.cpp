@@ -25,6 +25,7 @@ void HashTable::insert(CovidInfo* _CI)
         if(table[hashedKey].city == "")
         {
             table[hashedKey] = *_CI;
+            this->generatedHashs.push_back(hashedKey);
             break;
         }
         else
@@ -32,7 +33,6 @@ void HashTable::insert(CovidInfo* _CI)
             a++;
             collisions++;
         }
-        
     }
 }
 
@@ -67,6 +67,10 @@ void HashTable::print()
     }
 }
 
+vector<long long int> HashTable::getHashedKeys(){
+    return this->generatedHashs;
+}
+
 unsigned long long HashTable::polynomialRollingHash(CovidInfo _CI, unsigned long long _a)
 {
     short p = 97;
@@ -99,4 +103,8 @@ unsigned long long HashTable::polynomialRollingHash(float _cityCode, string _dat
     }
 
     return hash_val;
+}
+
+int HashTable::getSize(){
+    return this->table.size();
 }

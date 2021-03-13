@@ -16,11 +16,8 @@ void FileHandler::processCityInfoList(string filename){
   int line = 0;
   ifstream arq("brazil_cities_coordinates.csv");
   string state_code, city_code, city_name, latitutde, longitude, isCapital;
-
-
   if (arq.is_open())
   {
-    cout << "Arq opened" << endl;
     //Vai ate o final do arquivo separando cada elemento do csv por ,
     while (!arq.eof()) 
     {
@@ -50,23 +47,21 @@ void FileHandler::processCityInfoList(string filename){
   }
 }
 
-void FileHandler::processCovidInfo(string filename)
+HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfRegisters)
 {
   int i = 0;
-  cout << "Antes da hash table" << endl;
-  HashTable *hashTable = new HashTable();
-  cout << "HashTable instanciada" << endl;
+  //Pré aloco o n de registros na tabela hash
+  HashTable *hashTable = new HashTable(numberOfRegisters);
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
   ifstream arq("brazil_covid19_cities_processado.csv");
   int linesProcessed = 0;
   vector<CovidInfo> file;
-
-  cout << "Antes do if" << endl;
+  clock_t startTime = 0, finalTime;
   if (arq.is_open())
   {
+    startTime = clock();
     //Vai ate o final do arquivo separando cada elemento do csv por ,
-    cout << "Antes do while" << endl;
     while (!arq.eof())
     {
       getline(arq, date, ',');
@@ -76,6 +71,9 @@ void FileHandler::processCovidInfo(string filename)
       getline(arq, dailyCases, ',');
       getline(arq, totalCases, ',');
       getline(arq, deaths, ',');
+      if(linesProcessed % 10000 == 0){
+        cout << "Na iteração " << linesProcessed << "....." << endl;
+      }
       //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
       if (linesProcessed >= 1)
       {
@@ -86,25 +84,27 @@ void FileHandler::processCovidInfo(string filename)
         line.city = city;
         line.code = stoi(code);
         line.totalCases = stoi(totalCases);
-        cout << line.state << endl;
-        cout << "Antes do insert " << endl;
         hashTable->insert(addressof(line));
-        cout << "Lines : " << linesProcessed << endl;
-        cout << "Passou do insert " << endl;
       }
       linesProcessed++;
-      if(linesProcessed == 450)
+      if(linesProcessed == numberOfRegisters){ 
         break;
+      }
     }
-    hashTable->print();
+    finalTime = clock();
+    cout << "Tempo de Processamento : " << (finalTime - startTime) / ((float)CLOCKS_PER_SEC) << " segundos" << endl;
+    return hashTable;
+    //hashTable->print();
   }else{
     cout << "Não foi possível abrir o arquivo!" << endl;
+    exit(1);
   }
-  
+  return new HashTable();  
 }
 
 
 vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
+  cout << "Pegando registros aleatórios  " << endl;
   std::random_device device;
   std::mt19937 generator(device());
   std::uniform_int_distribution<int> distribution(0,this->citysList.size() - 1);
@@ -116,7 +116,7 @@ vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
   for(int i = 0 ; i < this->citysList.size() ; i++)
   usedIndexs.push_back(false);
 
-  for(int i = 0 ; i < n - 1 ; i++){
+  for(int i = 0 ; i < n ; i++){
       //Garanto que o indice que gerei ainda não foi utilizado , para não ocorrerem duplicatas.
       while(usedIndexs[drawn])
          drawn = distribution(generator);
@@ -127,15 +127,13 @@ vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
 
   } 
 
+
+ //Desalocando vetor de bools auxiliar da memória
   usedIndexs.~vector();
   return sortedInfos;
 }
 
-
-
-/*Função para armazenar os registros do csv brazil_covid19_cities.csv em um Array da classe CovidInfo*/
-//insertCityListInQuadTree (Mudar o nome)
-void FileHandler::processCityInfo(string filename)
+QuadTree*  FileHandler::insertCityListInQuadTree(string filename,int n)
 {
   int line = 0;
   ifstream arq("brazil_cities_coordinates.csv");
@@ -156,7 +154,7 @@ void FileHandler::processCityInfo(string filename)
       getline(arq, isCapital);
 
       //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
-      if (line >= 1)
+      if (line >= 1 && line < n)
       {
         //@Todo inserção dos dados obtidos na quadtree;
         CityInfo *info = new CityInfo(stoi(state_code), city_code, city_name, stof(latitutde), stof(longitude), isCapital == "TRUE");
@@ -164,14 +162,14 @@ void FileHandler::processCityInfo(string filename)
       }
       line++;
     }
-    delete tree;
-    cout << "Arquivo processado com sucesso" << endl;
+    return tree;
+    cout << "Inserção na quadTree ocorrida com sucesso!" << endl;
   }
   else
   {
-
     cout << "Nao foi possivel abrir o arquivo" << endl;
   }
+  exit(1);
 }
 
 

@@ -34,8 +34,10 @@ public:
   bool search(int value);
   void print2DUtil(AvlNode *p, int space);
   void print2D();
-  void printTree(AvlNode *root, string indent, bool last);
-  void doPrint();
+  void printTree(AvlNode *root, string indent, bool last , bool isWriteInFile , ofstream &file);
+  void doPrint(bool isWriteInFile);
+
+  AvlNode* getRoot();
 };
 
 #endif

@@ -92,11 +92,10 @@ void QuadTree::auxPrint(TreeNode *node)
 void QuadTree::writeTreeInTxtFile(string filename)
 {
     ofstream arq("saidaTestes.txt");
-
-    arq << "Dados : " << endl;
     this->auxWriteTreeInTxtFile(this->root, arq);
 
     arq << endl;
+    arq.close();
 
     cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
 }

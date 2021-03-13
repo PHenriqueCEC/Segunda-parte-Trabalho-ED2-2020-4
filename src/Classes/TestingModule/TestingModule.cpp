@@ -9,21 +9,26 @@ TestingModule::~TestingModule(){
 }
 
 
-void TestingModule::insertInQuadTree(vector<CityInfo*> &data){
-    QuadTree *quadtree = new QuadTree();
-    for(CityInfo *city : data){
-        quadtree->insert(quadtree->root,city);
-    }
+void TestingModule::insertInQuadTree(int numberOfRegisters){
+    clock_t startTime,finalTime;
+    startTime = clock();
+    FileHandler fileHandler;
+    QuadTree *quadtree =  fileHandler.insertCityListInQuadTree("brazil_cities_coordinates.csv",numberOfRegisters); 
 
     if(quadtree->getSize() < 20)
         quadtree->print();
     else
         quadtree->writeTreeInTxtFile("saidaTestes.txt");
 
+    finalTime = clock();
+
+    cout << "Tempo de Processamento : " << (finalTime - startTime) / ((float)CLOCKS_PER_SEC) << " segundos" << endl;
+
+
     delete quadtree;
 }
 
-void TestingModule::insertInBTree(vector<int> values){
+void TestingModule::insertInBTree(vector<long long int> values){
     ArvoreB *arvore = new ArvoreB(20);
      for(int value : values){
          cout << "Value :  " << value << endl;
@@ -33,30 +38,53 @@ void TestingModule::insertInBTree(vector<int> values){
 }
 
 
+void TestingModule::insertInAvlTree(vector<long long int> values){
+    AvlTree *avlTree = new AvlTree();
+     for(int value : values){
+         cout << "Value :  " << value << endl;
+         avlTree->doInsert(value);
+     }
+     avlTree->doPrint(values.size() > 20);
+}
+
+void TestingModule::insertInHashTable(int numberOfRegisters){
+    FileHandler fileHandler;
+    HashTable *hash = fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
+    cout << "Size da hash : " << hash->getSize() << endl;
+    
+}
+
+
+
+
 void TestingModule::selectDataStructureToInsert(int choice){
     FileHandler fileHandler;
     int numberOfRegisters;
     cout << "Digite o número de registros : " << endl;
-    cin >> numberOfRegisters;
-    //Obtenção dos n registros
-    
+    cin >> numberOfRegisters;    
 
     switch(choice){
         case 1 : {
-            fileHandler.processCityInfoList("brazil_cities_coordinates.csv");
-            vector<CityInfo*> randomCitys = fileHandler.getNRandomCityInfo(numberOfRegisters);
-            insertInQuadTree(randomCitys);
+            this->insertInQuadTree(numberOfRegisters);
             break;
         }
         
         case 2 : {
-            vector<int> aux;
-            for(int i = 0; i < 100 ; i++){
-                cout << "i " << i <<endl;
-                aux.push_back(i);
-            }
-            insertInBTree(aux);
+            HashTable *table =fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
+            vector<long long int> hashedKeys = table->getHashedKeys();
+            insertInBTree(hashedKeys);
             break;
+        }
+
+        case 3 : {
+            HashTable *table =fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
+            vector<long long int> hashedKeys = table->getHashedKeys();
+            insertInAvlTree(hashedKeys);
+            break;
+        }
+
+        case 4 : {
+            this->insertInHashTable(numberOfRegisters);
         }
         
     }
@@ -65,14 +93,14 @@ void TestingModule::selectDataStructureToInsert(int choice){
 void TestingModule::menu(){
     int choice;
     while(choice != 0){
-    cout << "----------💻️ Trabalho Estrutura de Dados Parte 2 💻️------------" << endl;
-    cout << "Digite [1] para inserir registro na Quad Tree " << endl;
-    cout << "Digite [2] para inserir registro na Árvore Avl " << endl;
-    cout << "Digite [3] para inserir registro na Árvore B " << endl;
+    cout << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
+    cout << "Digite [1] para inserir registros na Quad Tree " << endl;
+    cout << "Digite [2] para inserir registros na Arvore B " << endl;
+    cout << "Digite [3] para inserir registros na Arvore Avl " << endl;
+    cout << "Digite [4] para inserir registros na Tabela Hash" << endl;
     cout << "Digite [0] para encerrar o programa" << endl;
     cout << "---------------------------------------------------------------" << endl;
     cin >> choice;
-
     //Parte para a inserção na estrutura selecionada
     this->selectDataStructureToInsert(choice);
     }
