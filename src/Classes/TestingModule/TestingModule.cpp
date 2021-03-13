@@ -28,7 +28,7 @@ void TestingModule::insertInQuadTree(int numberOfRegisters){
     delete quadtree;
 }
 
-void TestingModule::insertInBTree(vector<int> values){
+void TestingModule::insertInBTree(vector<long long int> values){
     ArvoreB *arvore = new ArvoreB(20);
      for(int value : values){
          cout << "Value :  " << value << endl;
@@ -38,19 +38,18 @@ void TestingModule::insertInBTree(vector<int> values){
 }
 
 
-void TestingModule::insertInAvlTree(vector<int> values){
+void TestingModule::insertInAvlTree(vector<long long int> values){
     AvlTree *avlTree = new AvlTree();
      for(int value : values){
          cout << "Value :  " << value << endl;
          avlTree->doInsert(value);
      }
-     avlTree->print2D();
+     avlTree->doPrint(values.size() > 20);
 }
 
 void TestingModule::insertInHashTable(int numberOfRegisters){
     FileHandler fileHandler;
-    HashTable *hash = new HashTable(1400000);
-    hash = fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
+    HashTable *hash = fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
     cout << "Size da hash : " << hash->getSize() << endl;
     
 }
@@ -71,20 +70,16 @@ void TestingModule::selectDataStructureToInsert(int choice){
         }
         
         case 2 : {
-            vector<int> aux;
-            for(int i = 0; i < numberOfRegisters ; i++){
-                aux.push_back(i);
-            }
-            insertInBTree(aux);
+            HashTable *table =fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
+            vector<long long int> hashedKeys = table->getHashedKeys();
+            insertInBTree(hashedKeys);
             break;
         }
 
         case 3 : {
-            vector<int> aux;
-            for(int i = 0; i < numberOfRegisters ; i++){
-                aux.push_back(i);
-            }
-            insertInAvlTree(aux);
+            HashTable *table =fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
+            vector<long long int> hashedKeys = table->getHashedKeys();
+            insertInAvlTree(hashedKeys);
             break;
         }
 

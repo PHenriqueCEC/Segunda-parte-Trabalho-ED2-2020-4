@@ -23,7 +23,7 @@ AvlTree::~AvlTree()
 }
 int AvlTree::height(AvlNode *p)
 {
-  if(p == NULL)
+  if (p == NULL)
   {
     return 0;
   }
@@ -33,27 +33,28 @@ int AvlTree::height(AvlNode *p)
   }
 }
 //Irá verificar qual lado tem maior altura, e irá retornar ou lado esquerdo ou lado direito.
-int AvlTree::getHeight(AvlNode *p){
+int AvlTree::getHeight(AvlNode *p)
+{
   int leftHeight = 0;
   int rightHeight = 0;
 
-
-  if  (p->getLeft())
+  if (p->getLeft())
   {
     leftHeight = getHeight(p->getLeft());
   }
 
-	if (p->getRight())
+  if (p->getRight())
   {
     rightHeight = getHeight(p->getRight());
   }
-		
-	return higherElement(rightHeight, leftHeight) + 1;
+
+  return higherElement(rightHeight, leftHeight) + 1;
 }
 
 //Função que verifica qual maior elemento, será usado para verificar qual é lado tem maior altura.
-int AvlTree::higherElement(int a, int b){ 
-  if(a > b)
+int AvlTree::higherElement(int a, int b)
+{
+  if (a > b)
   {
     return a;
   }
@@ -108,7 +109,7 @@ void AvlTree::doInsert(int value)
 {
   root = insert(root, value);
 }
-AvlNode* AvlTree::insert(AvlNode *p, int value)
+AvlNode *AvlTree::insert(AvlNode *p, int value)
 {
   if (p == NULL)
   {
@@ -123,26 +124,34 @@ AvlNode* AvlTree::insert(AvlNode *p, int value)
   else if (value > p->getValue())
   {
     p->setRight(insert(p->getRight(), value));
-  } 
+  }
   else
   {
     return p;
   }
 
-  p->setHeight( 1 + higherElement(height(p->getLeft()),height(p->getRight())));
+  p->setHeight(1 + higherElement(height(p->getLeft()), height(p->getRight())));
 
   int balanceFactor = getBalance(p);
-  if (balanceFactor > 1) {
-    if (value < p->getLeft()->getValue()) {
+  if (balanceFactor > 1)
+  {
+    if (value < p->getLeft()->getValue())
+    {
       return simpleRotationRight(p);
-    } else if (value > p->getLeft()->getValue()) {
+    }
+    else if (value > p->getLeft()->getValue())
+    {
       return doubleRotationRight(p);
     }
   }
-  if (balanceFactor < -1) {
-    if (value > p->getRight()->getValue()) {
+  if (balanceFactor < -1)
+  {
+    if (value > p->getRight()->getValue())
+    {
       return simpleRotationLeft(p);
-    } else if (value < p->getRight()->getValue()) {
+    }
+    else if (value < p->getRight()->getValue())
+    {
       return doubleRotationLeft(p);
     }
   }
@@ -150,7 +159,7 @@ AvlNode* AvlTree::insert(AvlNode *p, int value)
 }
 
 //Right right rotation
-AvlNode* AvlTree::simpleRotationLeft(AvlNode *p)
+AvlNode *AvlTree::simpleRotationLeft(AvlNode *p)
 {
   //Efetua a rotação para esquerda
   AvlNode *q = p->getRight();
@@ -163,7 +172,7 @@ AvlNode* AvlTree::simpleRotationLeft(AvlNode *p)
   return q;
 }
 //Left left rotation
-AvlNode* AvlTree::simpleRotationRight(AvlNode *p)
+AvlNode *AvlTree::simpleRotationRight(AvlNode *p)
 {
   AvlNode *q = p->getLeft();
   p->setLeft(q->getRight());
@@ -171,74 +180,105 @@ AvlNode* AvlTree::simpleRotationRight(AvlNode *p)
 
   p->setHeight(higherElement(height(p->getLeft()), height(p->getRight())) + 1);
   q->setHeight(higherElement(height(q->getLeft()), height(q->getRight())) + 1);
-  
+
   return q;
 }
 
 //Right left rotation
-AvlNode* AvlTree::doubleRotationLeft(AvlNode *p)
+AvlNode *AvlTree::doubleRotationLeft(AvlNode *p)
 {
   p->setRight(simpleRotationRight(p->getRight()));
   return simpleRotationLeft(p);
 }
 
 //Left right rotation
-AvlNode* AvlTree::doubleRotationRight(AvlNode *p)
+AvlNode *AvlTree::doubleRotationRight(AvlNode *p)
 {
   p->setLeft(simpleRotationLeft(p->getLeft()));
   return simpleRotationRight(p);
 }
 
-// Function to print binary tree in 2D  
-// It does reverse inorder traversal  
-void AvlTree::print2DUtil(AvlNode *p, int space)  
-{  
-    // Base case  
-    if (p == NULL)  
-        return;  
-  
-    // Increase distance between levels  
-    space += COUNT;  
-  
-    // Process right child first  
-    print2DUtil(p->getRight(), space);  
-  
-    // Print current node after space  
-    // count  
-    cout<<endl;  
-    for (int i = COUNT; i < space; i++)  
-        cout<<" ";  
-    cout<<p->getValue()<<"\n";  
-  
-    // Process left child  
-    print2DUtil(p->getLeft(), space);  
-}  
-  
-// Wrapper over print2DUtil()  
-void AvlTree::print2D()  
-{  
-    // Pass initial space count as 0  
-    AvlNode *p = this->root;
-    print2DUtil(p, 0);  
-}  
-
-void AvlTree::printTree(AvlNode *root, string indent, bool last) {
-  if (root != nullptr) {
-    cout << indent;
-    if (last) {
-      cout << "R----";
-      indent += "   ";
-    } else {
-      cout << "L----";
-      indent += "|  ";
-    }
-    cout << root->getValue() << endl;
-    printTree(root->getLeft(), indent, false);
-    printTree(root->getRight(), indent, true);
-  }
+AvlNode *AvlTree::getRoot()
+{
+  return this->root;
 }
 
-void AvlTree::doPrint()
+// Function to print binary tree in 2D
+// It does reverse inorder traversal
+void AvlTree::print2DUtil(AvlNode *p, int space)
 {
- printTree(root,"",true);
+  // Base case
+  if (p == NULL)
+    return;
+
+  // Increase distance between levels
+  space += COUNT;
+
+  // Process right child first
+  print2DUtil(p->getRight(), space);
+
+  // Print current node after space
+  // count
+  cout << endl;
+  for (int i = COUNT; i < space; i++)
+    cout << " ";
+  cout << p->getValue() << "\n";
+
+  // Process left child
+  print2DUtil(p->getLeft(), space);
+}
+
+// Wrapper over print2DUtil()
+void AvlTree::print2D()
+{
+  // Pass initial space count as 0
+  AvlNode *p = this->root;
+  print2DUtil(p, 0);
+}
+
+void AvlTree::printTree(AvlNode *root, string indent, bool last, bool isWriteInFile, ofstream &file)
+{
+  if (root != nullptr)
+  {
+    if (!isWriteInFile)
+    {
+      cout << indent;
+      if (last)
+      {
+        cout << "R----";
+        indent += "   ";
+      }
+      else
+      {
+        cout << "L----";
+        indent += "|  ";
+      }
+      cout << root->getValue() << endl;
+      printTree(root->getLeft(), indent, false , false , file);
+      printTree(root->getRight(), indent, true , false , file);
+    }
+
+    if (isWriteInFile)
+    {
+      file << indent;
+      if (last)
+      {
+        file << "R----";
+        indent += "   ";
+      }
+      else
+      {
+        file << "L----";
+        indent += "|  ";
+      }
+      file << root->getValue() << endl;
+      printTree(root->getLeft(), indent, false ,true , file);
+      printTree(root->getRight(), indent, true , true , file);
+    }
+  }
+}
+void AvlTree::doPrint(bool isWriteInFile)
+{
+  ofstream arq("saidaTestes.txt");
+  printTree(root, "", true ,isWriteInFile,arq);
 }

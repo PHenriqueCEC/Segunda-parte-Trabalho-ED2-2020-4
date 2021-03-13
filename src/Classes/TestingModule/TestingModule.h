@@ -21,9 +21,9 @@ public:
     TestingModule();
     ~TestingModule();
     void menu();
-    void insertInBTree(vector<int> values);
+    void insertInBTree(vector<long long int> values);
     void insertInQuadTree(int numberOfRegisters);
-    void insertInAvlTree(vector<int> values);
+    void insertInAvlTree(vector<long long int> values);
     void insertInHashTable(int numberOfRegisters);
     void selectDataStructureToInsert(int choice);
   
