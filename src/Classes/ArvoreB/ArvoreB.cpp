@@ -13,6 +13,7 @@ ArvoreB::ArvoreB(int _min)
     raiz = nullptr;
     numComparacoes = 0;
     min = _min;
+    max = min * 2;
 }
 
 ArvoreB::~ArvoreB()

@@ -102,7 +102,7 @@ void NoB::inserirNo(int info, int *numComparacoes)
             *numComparacoes += 1;
         }
 
-        chave[i + 1] = chave[i];
+        chave[i + 1] = info;
         n += 1;
     }
 
