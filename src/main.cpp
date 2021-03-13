@@ -6,6 +6,7 @@ using std::cout;
 using std::endl;
 
 int main(int argc, char **argv){
+    cout << "Antes de tudo" << endl;
     //string diretorio = argv[1];
     FileHandler fileHandler;
     //fileHandler.processCityInfo("teste.csv");
