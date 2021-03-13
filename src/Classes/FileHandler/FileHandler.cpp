@@ -52,15 +52,21 @@ void FileHandler::processCityInfoList(string filename){
 
 void FileHandler::processCovidInfo(string filename)
 {
+  int i = 0;
+  cout << "Antes da hash table" << endl;
   HashTable *hashTable = new HashTable();
+  cout << "HashTable instanciada" << endl;
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
   ifstream arq("brazil_covid19_cities_processado.csv");
   int linesProcessed = 0;
   vector<CovidInfo> file;
+
+  cout << "Antes do if" << endl;
   if (arq.is_open())
   {
     //Vai ate o final do arquivo separando cada elemento do csv por ,
+    cout << "Antes do while" << endl;
     while (!arq.eof())
     {
       getline(arq, date, ',');
@@ -82,11 +88,13 @@ void FileHandler::processCovidInfo(string filename)
         line.totalCases = stoi(totalCases);
         cout << line.state << endl;
         cout << "Antes do insert " << endl;
-        hashTable->insert(line);
+        hashTable->insert(addressof(line));
         cout << "Lines : " << linesProcessed << endl;
         cout << "Passou do insert " << endl;
       }
       linesProcessed++;
+      if(linesProcessed == 450)
+        break;
     }
     hashTable->print();
   }else{

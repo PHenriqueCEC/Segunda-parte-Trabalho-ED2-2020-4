@@ -8,6 +8,5 @@
     "deque": "cpp",
     "unordered_map": "cpp",
     "vector": "cpp",
-    "random": "cpp"
   }
 }
