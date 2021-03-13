@@ -46,3 +46,10 @@ void CovidInfo::print()
   cout << "Data: " << date << endl;
 }
 
+void CovidInfo::printInFile(ofstream &file)
+{
+  file << "Cidade: " << city << endl;
+  file << "Estado: " << state << endl;
+  file << "Data: " << date << endl;
+}
+

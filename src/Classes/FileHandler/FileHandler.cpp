@@ -50,8 +50,8 @@ void FileHandler::processCityInfoList(string filename){
 HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfRegisters)
 {
   int i = 0;
-  //Pré aloco o n de registros na tabela hash
-  HashTable *hashTable = new HashTable(numberOfRegisters);
+  //Pré aloco o n de registros
+  HashTable *hashTable = new HashTable(numberOfRegisters +  (numberOfRegisters * 0.5));
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
   ifstream arq("brazil_covid19_cities_processado.csv");

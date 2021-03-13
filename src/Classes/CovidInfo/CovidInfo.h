@@ -6,6 +6,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <fstream>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ public:
   ~CovidInfo();
 
   void print();
+  void printInFile(ofstream &file);
 };
 
 #endif

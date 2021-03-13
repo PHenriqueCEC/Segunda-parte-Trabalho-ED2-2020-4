@@ -31,10 +31,9 @@ void TestingModule::insertInQuadTree(int numberOfRegisters){
 void TestingModule::insertInBTree(vector<long long int> values){
     ArvoreB *arvore = new ArvoreB(20);
      for(int value : values){
-         cout << "Value :  " << value << endl;
          arvore->inserir(value);
      }
-     arvore->imprimir();
+     //arvore->imprimir(false);
 }
 
 
@@ -50,12 +49,8 @@ void TestingModule::insertInAvlTree(vector<long long int> values){
 void TestingModule::insertInHashTable(int numberOfRegisters){
     FileHandler fileHandler;
     HashTable *hash = fileHandler.insertCovidInfoInHashTable("",numberOfRegisters);
-    cout << "Size da hash : " << hash->getSize() << endl;
-    
+    hash->print(numberOfRegisters > 20);
 }
-
-
-
 
 void TestingModule::selectDataStructureToInsert(int choice){
     FileHandler fileHandler;
