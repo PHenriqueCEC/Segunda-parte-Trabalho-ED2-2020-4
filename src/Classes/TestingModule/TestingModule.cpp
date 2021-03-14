@@ -87,17 +87,17 @@ void TestingModule::selectDataStructureToInsert(int choice){
 
 void TestingModule::menu(){
     int choice;
-    while(choice != 0){
-    cout << endl << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
-    cout << "Digite [1] para inserir registros na Quad Tree " << endl;
-    cout << "Digite [2] para inserir registros na Arvore B " << endl;
-    cout << "Digite [3] para inserir registros na Arvore Avl " << endl;
-    cout << "Digite [4] para inserir registros na Tabela Hash" << endl;
-    cout << "Digite [0] para encerrar o programa" << endl;
-    cout << "---------------------------------------------------------------" << endl;
-    cin >> choice;
-    //Parte para a inserção na estrutura selecionada
-    this->selectDataStructureToInsert(choice);
+    while(choice >= 1 && choice <= 4){
+        cout << endl << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
+        cout << "Digite [1] para inserir registros na Quad Tree " << endl;
+        cout << "Digite [2] para inserir registros na Arvore B " << endl;
+        cout << "Digite [3] para inserir registros na Arvore Avl " << endl;
+        cout << "Digite [4] para inserir registros na Tabela Hash" << endl;
+        cout << "Digite qualquer outro valor para encerrar o programa" << endl;
+        cout << "---------------------------------------------------------------" << endl;
+        cin >> choice;
+        //Parte para a inserção na estrutura selecionada
+        this->selectDataStructureToInsert(choice);
     }
 
 }

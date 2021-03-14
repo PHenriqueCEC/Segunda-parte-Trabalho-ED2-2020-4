@@ -89,7 +89,7 @@ vector<long long int> HashTable::getHashedKeys()
 vector<long long int> HashTable::getNRandomElements(int numberOfElements)
 {
     vector<bool> sortedIndexs;
-    sortedIndexs.reserve(this->size);
+    //sortedIndexs.reserve(this->size);
     std::random_device device;
     std::mt19937 generator(device());
     //Coloco que os indices a ser gerados vão de 0 ao tamanho da minha hash
@@ -102,13 +102,16 @@ vector<long long int> HashTable::getNRandomElements(int numberOfElements)
     for (int i = 0; i < this->size; i++)
         usedIndexs.push_back(false);
 
-    for (int i = 0; i < this->size; i++)
+    for (int i = 0; i < numberOfElements; i++)
     {
         //Garanto que o indice que gerei ainda não foi utilizado , para não ocorrerem duplicatas.
-        while (usedIndexs[drawn])
+        drawn = distribution(generator);
+        while (usedIndexs[drawn]){
             drawn = distribution(generator);
-
+        }
+        
         //Como a hash pode ter posições vazias, verifico se a posição gerada tem algum elemento
+  
         if (table[drawn].city != "")
         {
             //Adiciono o índice sorteado no meu vetor, que é a propria chave hash
