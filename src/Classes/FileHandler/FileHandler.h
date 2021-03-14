@@ -19,10 +19,12 @@ using std::cout;
 class FileHandler
 {
 private:
+  string directory;
   vector<CityInfo*> citysList;
 public:
 
   FileHandler();
+  FileHandler(string directory);
   ~FileHandler();
   //Função de processamento do csv
   QuadTree* insertCityListInQuadTree(string filename , int n);

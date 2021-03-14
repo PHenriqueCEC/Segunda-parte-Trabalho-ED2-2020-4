@@ -71,13 +71,13 @@ void HashTable::print(bool writeInFile)
         }
         else
         {
-            cout << "--------------------------------------" << endl;
+            cout << "-------------------FileHandler(string directory);-------------------" << endl;
             i.print();
             cout << "--------------------------------------" << endl;
         }
     }
 
-     cout << "A saída foi salva no arquivo  saidaTestes.txt";
+     cout << endl << "A saída foi salva no arquivo  saidaTestes.txt";
 }
 
 vector<long long int> HashTable::getHashedKeys()
