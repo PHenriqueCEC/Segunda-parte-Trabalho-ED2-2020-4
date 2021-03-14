@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "../CovidInfo/CovidInfo.h"
 
@@ -27,6 +28,7 @@ class HashTable
         void insert(CovidInfo* _CI);
 
         CovidInfo* search(float _cityCode, string _date);
+        vector<CovidInfo> getCityInfoByKey(unsigned long long key);
 
         void print(bool writeInFile);
 

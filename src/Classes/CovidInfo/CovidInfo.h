@@ -30,6 +30,11 @@ public:
 
   void print();
   void printInFile(ofstream &file);
+
+  bool operator < (const CovidInfo& c) const
+  {
+      return (city < c.city);
+  }
 };
 
 #endif
