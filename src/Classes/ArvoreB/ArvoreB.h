@@ -29,6 +29,7 @@ class ArvoreB
         void imprimir();
         void escritaEmArquivo();
         void selecionarSaida();
+        void imprimir(bool isWriteInFile);
 
         //int get_t();
         //void set_t(int T);

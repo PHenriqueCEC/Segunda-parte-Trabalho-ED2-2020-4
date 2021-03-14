@@ -193,13 +193,16 @@ NoB* NoB::buscarNo(int info, NoB* p, int* numComparacoes)
 void NoB::imprimir()
 {
     int i;
+    
     for (i = 0; i < n; i++) 
     {
       if (folha == false) 
         filhos[i]->imprimir();  
       cout << " " << chave[i] << "::" << n; //Falta o getId()
     } 
+    
     cout << endl;
+    
     if (folha == false) 
       filhos[i]->imprimir();
 }

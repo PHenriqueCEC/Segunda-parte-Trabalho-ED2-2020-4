@@ -134,12 +134,12 @@ void ArvoreB::escritaEmArquivo()
 void ArvoreB::imprimir()
 {
 
-    for (int i = 0; i < raiz->getN(); i++)
-    {
-        cout << " " << raiz->getChave(i);
-    }
-
-    cout << endl;
+    cout << endl << "Imprimindo Raiz:" << endl;
+  for(int i = 0; i < raiz->getN(); i++)
+  {
+    cout << " " << raiz->getChave(i) << endl;
+  }
+  cout << endl << endl;
 }
 
 void ArvoreB::selecionarSaida()
@@ -162,3 +162,25 @@ void ArvoreB::selecionarSaida()
         escritaEmArquivo();
     }
 }
+
+/*void ArvoreB::imprimir(bool isWriteInFile)
+{
+
+    ofstream arq("saidaTestes.txt");
+    if(isWriteInFile){
+        arq << "--------------------------------------------------------------------" << endl;
+        arq << "Num de comparacoes na inserção : " << this->numComparacoes << endl;
+        arq << "Num de comparacoes na busca : " << this->numComparacoes << endl;
+        arq << "--------------------------------------------------------------------" << endl;
+    }else{
+        cout << "--------------------------------------------------------------------" << endl;
+        cout << "Num de comparacoes na inserção : " << this->numComparacoes << endl;
+        cout << "Num de comparacoes na busca : " << this->numComparacoes << endl;
+        cout << "--------------------------------------------------------------------" << endl;
+    }
+    printTree(raiz, "", true ,isWriteInFile,arq);
+
+    if(isWriteInFile){
+        cout << "O arquivo de saida foi salvo no arquivo : saidaTestes.txt" << endl;
+    }
+}*/

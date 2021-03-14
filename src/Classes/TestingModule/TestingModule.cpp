@@ -32,6 +32,7 @@ void TestingModule::insertInBTree(vector<long long int> values)
     ArvoreB *arvore = new ArvoreB(20);
     for (int value : values)
     {
+        cout << "Value :  " << value << endl;
         arvore->inserir(value);
     }
     arvore->selecionarSaida();
