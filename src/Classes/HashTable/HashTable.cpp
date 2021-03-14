@@ -81,7 +81,7 @@ vector<CovidInfo> HashTable::getCityInfoByKey(unsigned long long key)
     }
     else if((table[key].city[0] >= 'n' and table[key].city[0] <= 'z') or (table[key].city[0] >= 'N' and table[key].city[0] <= 'Z'))
     {
-        for(unsigned long long i = size-1; i >= 0; i++)
+        for(unsigned long long i = size-1; i >= 0; i--)
         {
             if(c[i].city == table[key].city)
             {
