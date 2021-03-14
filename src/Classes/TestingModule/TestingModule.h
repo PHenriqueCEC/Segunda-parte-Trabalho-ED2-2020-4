@@ -20,13 +20,17 @@ private:
 public:
     TestingModule();
     ~TestingModule();
-    void menu();
+    //Funções da parte 4
+    void testingModuleMenu();
     void insertInBTree(vector<long long int> values);
     void insertInQuadTree(int numberOfRegisters);
     void insertInAvlTree(vector<long long int> values);
     void insertInHashTable(int numberOfRegisters);
     void selectDataStructureToInsert(int choice);
-  
+    //Funções da parte 5
+    void statisticModuleMenu();
+    void generateStatistics(int M , int bTreeNodeSize);
+
 };
 
 #endif

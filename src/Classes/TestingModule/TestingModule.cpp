@@ -85,7 +85,7 @@ void TestingModule::selectDataStructureToInsert(int choice){
     }
 } 
 
-void TestingModule::menu(){
+void TestingModule::testingModuleMenu(){
     int choice;
     while(choice >= 1 && choice <= 4){
         cout << endl << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
