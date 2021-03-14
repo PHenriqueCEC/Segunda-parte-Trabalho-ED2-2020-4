@@ -5,6 +5,7 @@
 #include <string>
 #include <ctime>
 
+using std::cin;
 using std::cout;
 using std::endl;
 
@@ -130,15 +131,34 @@ void ArvoreB::escritaEmArquivo()
     cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
 }
 
-void ArvoreB::imprimir(bool isWriteInFile)
+void ArvoreB::imprimir()
 {
-    if(!isWriteInFile){
-        for (int i = 0; i < raiz->getN(); i++)
-        {
-            cout << " " << raiz->getChave(i);
-        }
+
+    for (int i = 0; i < raiz->getN(); i++)
+    {
+        cout << " " << raiz->getChave(i);
     }
-        
 
     cout << endl;
+}
+
+void ArvoreB::selecionarSaida()
+{
+    int saida = -1;
+
+    cout << "Digite um valor MENOR que [20] para saida em console;" << endl;
+    cout << "Digite um valor MAIOR que [20] para saida em TXT;" << endl;
+
+    cin >> saida;
+
+    if (saida <= 20)
+    {
+        cout << "Saida em console selecionada!" << endl;
+        imprimir();
+    }
+    else
+    {
+        cout << "Saida em arquivo TXT selecionada!" << endl;
+        escritaEmArquivo();
+    }
 }
