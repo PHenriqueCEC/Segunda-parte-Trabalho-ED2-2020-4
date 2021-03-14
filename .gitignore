@@ -2,4 +2,5 @@
 *.exe
 //Csv a processar
 *.brazil_cities_coordinates.csv
+*saidaTestes.txt
 *oth.bat

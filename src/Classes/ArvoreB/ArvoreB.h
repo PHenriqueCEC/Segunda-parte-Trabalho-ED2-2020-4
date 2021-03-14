@@ -22,19 +22,21 @@ class ArvoreB
         void remover(NoB *p);
         void cisao(int info, NoB* p);
         NoB* remocao(int info);  
-        NoB* insercao(int info); 
         NoB* getRaiz();
         void setRaiz(NoB *raiz);
         int getMin();
         int getMax();
-        void imprimir(bool isWriteInFile);
+        void imprimir();
         void escritaEmArquivo();
+        void selecionarSaida();
+        void imprimir(bool isWriteInFile);
 
         //int get_t();
         //void set_t(int T);
     private:
         int numTrocas;
-        int numComparacoes;
+        int numComparacoesInsercao;
+        int numComparacoesBusca;
         NoB *raiz;
         int max;
         int min;
