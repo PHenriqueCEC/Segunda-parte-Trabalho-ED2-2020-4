@@ -12,7 +12,8 @@ using std::endl;
 ArvoreB::ArvoreB(int _min)
 {
     raiz = nullptr;
-    numComparacoes = 0;
+    numComparacoesInsercao = 0;
+    numComparacoesBusca = 0;
     min = _min;
     max = min * 2;
 }
@@ -25,7 +26,7 @@ ArvoreB::~ArvoreB()
 int ArvoreB::buscar(int info)
 {
 
-    NoB *p = raiz->buscarNo(info, raiz, &numComparacoes);
+    NoB *p = raiz->buscarNo(info, raiz, &numComparacoesBusca);
 
     if (p == nullptr)
     {
@@ -70,7 +71,7 @@ void ArvoreB::inserir(int info)
 
         else
         {
-            raiz->inserirNo(info, &numComparacoes); //Caso a raiz nao esteja cheia
+            raiz->inserirNo(info, &numComparacoesInsercao); //Caso a raiz nao esteja cheia
         }
     }
 }
@@ -113,13 +114,17 @@ void ArvoreB::cisao(int info, NoB *p)
 
     if (aux->getChave(0) < info) ///Falta o id
         i++;
-    aux->getFilho(i)->inserirNo(info, &numComparacoes);
+    aux->getFilho(i)->inserirNo(info, &numComparacoesInsercao);
     raiz = aux;
 }
 
 void ArvoreB::escritaEmArquivo()
 {
     ofstream arq("saidaTestes.txt");
+
+    arq << "Num de comparacoes na inserção: " << numComparacoesInsercao << endl;
+    arq << "Num de comparacoes na busca: " << numComparacoesBusca << endl;
+    arq << "Num de chaves presente no no: " << raiz->getN() << endl;
 
     for (int i = 0; i < raiz->getN(); i++)
     {
@@ -128,18 +133,23 @@ void ArvoreB::escritaEmArquivo()
 
     arq << endl;
 
-    cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
+    cout << "Arquivo de saída criado com sucesso! O nome do mesmo eh: saidaTestes.txt" << endl;
 }
 
 void ArvoreB::imprimir()
 {
-
-    cout << endl << "Imprimindo Raiz:" << endl;
-  for(int i = 0; i < raiz->getN(); i++)
-  {
-    cout << " " << raiz->getChave(i) << endl;
-  }
-  cout << endl << endl;
+    cout << "Num de comparacoes na inserção: " << numComparacoesInsercao << endl;
+    cout << "Num de comparacoes na busca: " << numComparacoesBusca << endl;
+    cout << "Num de chaves presente no no: " << raiz->getN() << endl;
+    cout << endl;
+    cout << "Imprimindo Raiz:" << endl;
+    
+    for (int i = 0; i < raiz->getN(); i++)
+    {
+        cout << " " << raiz->getChave(i) << endl;
+    }
+    cout << endl;
+         
 }
 
 void ArvoreB::selecionarSaida()

@@ -28,9 +28,9 @@ class NoB
         void setChave(int i, int val);
         int getN();
         void setN(int _n);
-        void inserirNo(int info, int *numComparacoes);
+        void inserirNo(int info, int *numComparacoesInsercao);
         void overflow(int i, NoB *p);
-        NoB* buscarNo(int info, NoB* p, int* numComparacoes);
+        NoB* buscarNo(int info, NoB* p, int* numComparacoesBusca);
         void imprimir();
 
 

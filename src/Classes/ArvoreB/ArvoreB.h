@@ -35,7 +35,8 @@ class ArvoreB
         //void set_t(int T);
     private:
         int numTrocas;
-        int numComparacoes;
+        int numComparacoesInsercao;
+        int numComparacoesBusca;
         NoB *raiz;
         int max;
         int min;
