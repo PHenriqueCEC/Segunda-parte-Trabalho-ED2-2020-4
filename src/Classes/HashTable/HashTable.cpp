@@ -57,6 +57,45 @@ CovidInfo *HashTable::search(float _cityCode, string _date)
     return NULL;
 }
 
+vector<CovidInfo> HashTable::getCityInfoByKey(unsigned long long key)
+{
+    vector<CovidInfo> c(table);
+    vector<CovidInfo> r;
+    bool foundIt = false;
+
+    c.shrink_to_fit();
+    sort(c.begin(), c.end());
+
+    if((table[key].city[0] >= 'a' and table[key].city[0] <= 'm') or (table[key].city[0] >= 'A' and table[key].city[0] <= 'M'))
+    {
+        for(unsigned long long i = 0; i < size; i++)
+        {
+            if(c[i].city == table[key].city)
+            {
+                r.push_back(c[i]);
+                foundIt = true;
+            }
+            else if(c[i].city != table[key].city and foundIt)
+                break;
+        }
+    }
+    else if((table[key].city[0] >= 'n' and table[key].city[0] <= 'z') or (table[key].city[0] >= 'N' and table[key].city[0] <= 'Z'))
+    {
+        for(unsigned long long i = size-1; i >= 0; i++)
+        {
+            if(c[i].city == table[key].city)
+            {
+                r.push_back(c[i]);
+                foundIt = true;
+            }
+            else if(c[i].city != table[key].city and foundIt)
+                break;
+        }
+    }
+
+    return r;
+}
+
 void HashTable::print(bool writeInFile)
 {
     ofstream arq("saidaTestes.txt");
@@ -71,13 +110,13 @@ void HashTable::print(bool writeInFile)
         }
         else
         {
-            cout << "--------------------------------------" << endl;
+            cout << "-------------------FileHandler(string directory);-------------------" << endl;
             i.print();
             cout << "--------------------------------------" << endl;
         }
     }
 
-     cout << "A saída foi salva no arquivo  saidaTestes.txt";
+     cout << endl << "A saída foi salva no arquivo  saidaTestes.txt";
 }
 
 vector<long long int> HashTable::getHashedKeys()
