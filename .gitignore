@@ -2,3 +2,4 @@
 *.exe
 //Csv a processar
 *.brazil_cities_coordinates.csv
+*oth.bat

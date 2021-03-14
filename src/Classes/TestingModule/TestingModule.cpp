@@ -57,46 +57,47 @@ void TestingModule::insertInHashTable(int numberOfRegisters)
 
 void TestingModule::selectDataStructureToInsert(int choice)
 {
-    FileHandler fileHandler;
+    FileHandler fileHandler; 
     int numberOfRegisters;
+    
     cout << "Digite o número de registros : " << endl;
     cin >> numberOfRegisters;
 
     switch (choice)
     {
-    case 1:
-    {
-        this->insertInQuadTree(numberOfRegisters);
-        break;
-    }
+        case 1:
+        {
+            this->insertInQuadTree(numberOfRegisters);
+            break;
+        }
 
-    case 2:
-    {
-        HashTable *table = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters);
-        vector<long long int> hashedKeys = table->getHashedKeys();
-        insertInBTree(hashedKeys);
-        break;
-    }
+        case 2:
+        {
+            HashTable *table = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters);
+            vector<long long int> hashedKeys = table->getHashedKeys();
+            insertInBTree(hashedKeys);
+            break;
+        }
 
-    case 3:
-    {
-        HashTable *table = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters);
-        vector<long long int> hashedKeys = table->getHashedKeys();
-        insertInAvlTree(hashedKeys);
-        break;
-    }
+        case 3:
+        {
+            HashTable *table = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters);
+            vector<long long int> hashedKeys = table->getHashedKeys();
+            insertInAvlTree(hashedKeys);
+            break;
+        }
 
-    case 4:
-    {
-        this->insertInHashTable(numberOfRegisters);
-    }
+        case 4:
+        {
+            this->insertInHashTable(numberOfRegisters);
+        }
     }
 }
 
 void TestingModule::menu()
 {
     int choice;
-
+    
     while (choice != 0)
     {
         cout << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
@@ -107,7 +108,13 @@ void TestingModule::menu()
         cout << "Digite [0] para encerrar o programa" << endl;
         cout << "---------------------------------------------------------------" << endl;
         cin >> choice;
-        //Parte para a inserção na estrutura selecionada
-        this->selectDataStructureToInsert(choice);
+
+        if (choice == 0)
+            break;
+        else if (choice > 4 || choice < 0)
+            cout << "Opcao invalida! Digite novamente" << endl;
+        else
+            //Parte para a inserção na estrutura selecionada
+            this->selectDataStructureToInsert(choice);
     }
 }

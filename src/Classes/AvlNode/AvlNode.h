@@ -12,10 +12,10 @@ using namespace std;
 class AvlNode
 {
 private:
-  int value;
-  int height;
-  AvlNode *left;
-  AvlNode *right;
+  int value; //Valor que será inserido no nó
+  int height; //Altura do nó 
+  AvlNode *left; //Ponteiro para nó filho a esquerda
+  AvlNode *right; //Ponteiro para nó filho a direita
 
 public:
   AvlNode(int v);
