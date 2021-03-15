@@ -198,7 +198,25 @@ void NoB::imprimir()
     {
       if (folha == false) 
         filhos[i]->imprimir();  
-      cout << " " << chave[i] << "::" << n; //Falta o getId()
+      cout << " " << chave[i]; 
+    } 
+    
+    cout << endl;
+    
+    if (folha == false) 
+      filhos[i]->imprimir();
+}
+
+void NoB::escritaEmArquivo()
+{
+    ofstream arq("saidaTestes.txt");
+    int i;
+    
+    for (i = 0; i < n; i++) 
+    {
+      if (folha == false) 
+        filhos[i]->imprimir();  
+      arq << " " << chave[i]; 
     } 
     
     cout << endl;
