@@ -1,2 +1,1 @@
-Modulo de Estatísticas M = 5000
-Tempo para inserçaõ de 1000000 na tabela hash : 4.94602
+Modulo de Estatísticas M = 5

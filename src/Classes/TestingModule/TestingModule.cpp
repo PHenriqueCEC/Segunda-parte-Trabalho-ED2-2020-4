@@ -13,7 +13,7 @@ void TestingModule::insertInQuadTree(int numberOfRegisters)
 {
     clock_t startTime, finalTime;
     startTime = clock();
-    FileHandler fileHandler;
+    FileHandler fileHandler(this->directory);
     QuadTree *quadtree = fileHandler.insertCityListInQuadTree(numberOfRegisters);
 
     if (quadtree->getSize() < 20)
@@ -50,7 +50,7 @@ void TestingModule::insertInAvlTree(vector<long long int> values)
 
 void TestingModule::insertInHashTable(int numberOfRegisters)
 {
-    FileHandler fileHandler;
+    FileHandler fileHandler(this->directory);
     float time;
     HashTable *hash = fileHandler.insertCovidInfoInHashTable(numberOfRegisters, time);
     hash->print(numberOfRegisters > 20);
@@ -58,7 +58,7 @@ void TestingModule::insertInHashTable(int numberOfRegisters)
 
 void TestingModule::selectDataStructureToInsert(int choice)
 {
-    FileHandler fileHandler;
+    FileHandler fileHandler(this->directory);
     int numberOfRegisters;
     if (choice != 5)
     {
@@ -244,7 +244,7 @@ void TestingModule::testingModuleMenu()
         {
             while (choice >= 1 && choice <= 4)
             {
-                cout << "------------Trabalho Estrutura de Dados Parte 2--------------" << endl;
+                cout << endl << "------------Trabalho Estrutura de Dados Parte 2--------------" << endl;
                 cout << "Digite [1] para inserir registros na Quad Tree " << endl;
                 cout << "Digite [2] para inserir registros na Arvore B " << endl;
                 cout << "Digite [3] para inserir registros na Arvore Avl " << endl;

@@ -14,6 +14,7 @@ int main(int argc, char **argv){
     else 
      diretorio = "./";
     
+    cout << "Diretorio " << diretorio << endl;
     TestingModule testing(diretorio);
     testing.testingModuleMenu();
 
