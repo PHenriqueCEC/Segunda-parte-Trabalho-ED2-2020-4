@@ -91,6 +91,7 @@ void TestingModule::selectDataStructureToInsert(int choice)
         case 4:
         {
             this->insertInHashTable(numberOfRegisters);
+            break;
         }
     }
 }
@@ -98,10 +99,8 @@ void TestingModule::selectDataStructureToInsert(int choice)
 void TestingModule::menu()
 {
     int choice;
-    
-    while (choice != 0)
-    {
-        cout << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
+    while(choice >= 1 && choice <= 4){
+        cout << endl << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
         cout << "Digite [1] para inserir registros na Quad Tree " << endl;
         cout << "Digite [2] para inserir registros na Arvore B " << endl;
         cout << "Digite [3] para inserir registros na Arvore Avl " << endl;

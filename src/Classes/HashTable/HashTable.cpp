@@ -99,7 +99,8 @@ vector<CovidInfo> HashTable::getCityInfoByKey(unsigned long long key)
 void HashTable::print(bool writeInFile)
 {
     ofstream arq("saidaTestes.txt");
-    cout << "A saída sera salva no arquivo : saidaTestes.txt";
+    cout << endl
+         << "A saída sera salva no arquivo : saidaTestes.txt";
     for (CovidInfo i : table)
     {
         if (writeInFile)
@@ -116,12 +117,52 @@ void HashTable::print(bool writeInFile)
         }
     }
 
-     cout << endl << "A saída foi salva no arquivo  saidaTestes.txt";
+    cout << endl
+         << "A saída foi salva no arquivo  saidaTestes.txt";
 }
 
 vector<long long int> HashTable::getHashedKeys()
 {
     return this->generatedHashs;
+}
+vector<long long int> HashTable::getNRandomElements(int numberOfElements)
+{
+    vector<bool> sortedIndexs;
+    //sortedIndexs.reserve(this->size);
+    std::random_device device;
+    std::mt19937 generator(device());
+    //Coloco que os indices a ser gerados vão de 0 ao tamanho da minha hash
+    std::uniform_int_distribution<int> distribution(0, this->size);
+    vector<long long int> sortedElements;
+    int drawn = 0;
+
+    //Vetor auxiliar para eu controlar quais indices ja foram gerados
+    vector<bool> usedIndexs;
+    for (int i = 0; i < this->size; i++)
+        usedIndexs.push_back(false);
+
+    for (int i = 0; i < numberOfElements; i++)
+    {
+        //Garanto que o indice que gerei ainda não foi utilizado , para não ocorrerem duplicatas.
+        drawn = distribution(generator);
+        while (usedIndexs[drawn]){
+            drawn = distribution(generator);
+        }
+        
+        //Como a hash pode ter posições vazias, verifico se a posição gerada tem algum elemento
+  
+        if (table[drawn].city != "")
+        {
+            //Adiciono o índice sorteado no meu vetor, que é a propria chave hash
+            sortedElements.push_back(drawn);
+            //Adiciono o número sorteado no meu vetor de indices já sorteados
+            usedIndexs[drawn] = true;
+        }
+    }
+
+    //Desalocando vetor de bools auxiliar da memória
+    usedIndexs.~vector();
+    return sortedElements;
 }
 
 unsigned long long HashTable::polynomialRollingHash(CovidInfo _CI, unsigned long long _a)

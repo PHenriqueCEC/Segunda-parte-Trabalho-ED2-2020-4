@@ -51,7 +51,7 @@ HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfR
 {
   int i = 0;
   //Pré aloco o n de registros
-  HashTable *hashTable = new HashTable(numberOfRegisters +  (numberOfRegisters * 0.5));
+  HashTable *hashTable = new HashTable(numberOfRegisters + (numberOfRegisters * 0.5) );
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
   ifstream arq("brazil_covid19_cities_processado.csv");
@@ -104,7 +104,6 @@ HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfR
 
 
 vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
-  cout << "Pegando registros aleatórios  " << endl;
   std::random_device device;
   std::mt19937 generator(device());
   std::uniform_int_distribution<int> distribution(0,this->citysList.size() - 1);

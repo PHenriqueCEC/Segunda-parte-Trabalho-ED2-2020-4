@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+#include<random>
+#include<functional>
 
 #include "../CovidInfo/CovidInfo.h"
 
@@ -34,6 +35,7 @@ class HashTable
 
         vector<long long int> getNHashedKeys(int numberOfKeys);    
         vector<long long int> getHashedKeys();
+        vector<long long int> getNRandomElements(int numberOfElements);
         int getSize();
 };
 #endif
