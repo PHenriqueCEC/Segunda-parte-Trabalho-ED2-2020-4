@@ -368,3 +368,40 @@ void AvlTree::doPrint(bool isWriteInFile)
     cout << "O arquivo de saida foi salvo no arquivo : saidaTestes.txt" << endl;
   }
 }
+
+vector<int> AvlTree::doGetUniqueCitys(HashTable *hash){
+  vector<int> uniqueCitys;
+  int comparisions = 0;
+  getUniqueCitys(this->root,hash,uniqueCitys,comparisions);
+
+
+  cout << "size q achou " << uniqueCitys.size() << endl;
+  return uniqueCitys;
+}
+
+
+void AvlTree::getUniqueCitys(AvlNode *node, HashTable *hash, vector<int> &uniqueCitys , int &comparisions){
+    if(node != NULL){
+      int searchedCityCode =  hash->table[node->getValue()].code;
+      //Se eu não achar a cidade no meu vetor de cidades únicas, insiro a cidade no mesmo
+  
+      bool a = false;
+
+      //Compara a cidade no nó atual com as cidades no meu vetor de cidades unicas
+      for(int i = 0 ; i < uniqueCitys.size() ; i++){
+        //Se achar a cidadede interrompo o loop
+        comparisions++;
+        if(uniqueCitys[i] == searchedCityCode){
+           a=true;
+           break;
+        }         
+      }
+      //Se a cidade do nó atual não foi encontrada
+      //insiro a mesma no vetor de cidades únicas
+      if(!a && searchedCityCode){
+        uniqueCitys.push_back(searchedCityCode);
+      }
+       getUniqueCitys(node->getLeft(),hash,uniqueCitys,comparisions);
+       getUniqueCitys(node->getRight(),hash,uniqueCitys,comparisions); 
+    }
+}

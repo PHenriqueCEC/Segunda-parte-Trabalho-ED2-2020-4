@@ -29,7 +29,7 @@ public:
   //Função de processamento do csv
   QuadTree* insertCityListInQuadTree(string filename , int n);
   void processCityInfoList(string filename);
-  HashTable* insertCovidInfoInHashTable(string filename,int numberOfRegisters);
+  HashTable* insertCovidInfoInHashTable(string filename,int numberOfRegisters,float &time);
   vector<CityInfo*> getNRandomCityInfo(int n);
   
 };

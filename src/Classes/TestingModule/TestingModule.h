@@ -9,6 +9,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<fstream>
 
 using namespace std;
 
@@ -29,7 +30,8 @@ public:
     void selectDataStructureToInsert(int choice);
     //Funções da parte 5
     void statisticModuleMenu();
-    void generateStatistics(int M , int bTreeNodeSize);
+    void generateStatistics(int M);
+    //void generateStatistics(int M , int bTreeNodeSize);
 
 };
 

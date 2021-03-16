@@ -50,6 +50,11 @@ int ArvoreB::buscar(int info)
     }
 }
 
+//Retorna um vetor com o código de todas cidades unicas no vetor
+vector<string> obterCidadesUnicas(){
+    
+}
+
 void ArvoreB::inserir(int info)
 {
     if (raiz == nullptr) //Arvore vazia

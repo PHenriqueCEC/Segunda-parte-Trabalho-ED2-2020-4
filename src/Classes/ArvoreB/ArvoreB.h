@@ -30,13 +30,15 @@ class ArvoreB
         void escritaEmArquivo();
         void selecionarSaida();
         void imprimir(bool isWriteInFile);
+        vector<string> obterCidadesUnicas();
+
+        int numComparacoesInsercao;
+        int numComparacoesBusca;
 
         //int get_t();
         //void set_t(int T);
     private:
         int numTrocas;
-        int numComparacoesInsercao;
-        int numComparacoesBusca;
         NoB *raiz;
         int max;
         int min;

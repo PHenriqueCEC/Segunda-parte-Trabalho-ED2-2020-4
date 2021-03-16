@@ -111,7 +111,7 @@ void HashTable::print(bool writeInFile)
         }
         else
         {
-            cout << "-------------------FileHandler(string directory);-------------------" << endl;
+            cout << "--------------------------------------" << endl;
             i.print();
             cout << "--------------------------------------" << endl;
         }
@@ -197,6 +197,30 @@ unsigned long long HashTable::polynomialRollingHash(float _cityCode, string _dat
     }
 
     return hash_val;
+}
+
+vector<CovidInfo> HashTable::getValues(){
+    return this->table;
+}
+
+
+long int HashTable::getAllCasesInCity(int cityCode, int &comparisions,float &elapsedTime){
+    clock_t startTime, finalTime;
+    startTime = clock();
+
+    //Contador de casos
+    long int cases = 0;
+
+    for(CovidInfo city : this->table){
+        if(city.code == cityCode){
+            cases+= city.cases;
+            comparisions++;
+        }
+    }
+    finalTime = clock();
+    elapsedTime = (finalTime - startTime) / ((float)CLOCKS_PER_SEC);
+
+    return cases;
 }
 
 int HashTable::getSize()

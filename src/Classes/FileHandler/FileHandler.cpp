@@ -47,14 +47,14 @@ void FileHandler::processCityInfoList(string filename){
   }
 }
 
-HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfRegisters)
+HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfRegisters,float &time)
 {
   int i = 0;
   //Pré aloco o n de registros
   HashTable *hashTable = new HashTable(numberOfRegisters + (numberOfRegisters * 0.5) );
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
-  ifstream arq("brazil_covid19_cities_processado.csv");
+  ifstream arq(filename);
   int linesProcessed = 0;
   vector<CovidInfo> file;
   clock_t startTime = 0, finalTime;
@@ -71,7 +71,7 @@ HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfR
       getline(arq, dailyCases, ',');
       getline(arq, totalCases, ',');
       getline(arq, deaths, ',');
-      if(linesProcessed % 10000 == 0){
+      if(linesProcessed % 100000 == 0){
         cout << "Na iteração " << linesProcessed << "....." << endl;
       }
       //Pula a primeira linha do arquivo , pois é o header informativo o que cada coluna significa
@@ -83,6 +83,7 @@ HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfR
         line.state = state;
         line.city = city;
         line.code = stoi(code);
+        line.cases = stoi(dailyCases);
         line.totalCases = stoi(totalCases);
         hashTable->insert(addressof(line));
       }
@@ -92,7 +93,7 @@ HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfR
       }
     }
     finalTime = clock();
-    cout << "Tempo de Processamento : " << (finalTime - startTime) / ((float)CLOCKS_PER_SEC) << " segundos" << endl;
+    time = (finalTime - startTime) / ((float)CLOCKS_PER_SEC);
     return hashTable;
     //hashTable->print();
   }else{

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "../AvlNode/AvlNode.h"
+#include "../HashTable/HashTable.h"
 using namespace std;
 
 class AvlTree
@@ -41,6 +42,10 @@ public:
   void doPrint(bool isWriteInFile);
   void freeNode(AvlNode *p);
   AvlNode *getRoot();
+
+  //Obter códigos de cidades unicas numa determinada Árvore AVL
+  vector<int> doGetUniqueCitys(HashTable *hash);
+  void getUniqueCitys(AvlNode *node, HashTable *hash, vector<int> &uniqueCitys , int &comparisions);
 };
 
 #endif

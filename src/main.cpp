@@ -11,15 +11,16 @@ int main(int argc, char **argv){
     string diretorio;
     if(argv[1])
      diretorio = argv[1];
-    /*
+    
     TestingModule testing;
-    testing.menu();
-    */
+    testing.testingModuleMenu();
+    
+   /*
    FileHandler fileHandler;
-   HashTable *table = new HashTable(14000000);
+   HashTable *table = new HashTable(1400000);
    table = fileHandler.insertCovidInfoInHashTable("",1000000);
-   vector<long long int> teste = table->getNRandomElements(150);
-
+   vector<long long int> teste = table->getNRandomElements(1000000);
+    */
        
    
    cout << endl;
