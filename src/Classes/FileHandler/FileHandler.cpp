@@ -65,6 +65,7 @@ HashTable* FileHandler::insertCovidInfoInHashTable(int numberOfRegisters,float &
   if (arq.is_open())
   {
     startTime = clock();
+    cout << "Inserçaõ de registros na tabela hash......" << endl;
     //Vai ate o final do arquivo separando cada elemento do csv por ,
     while (!arq.eof())
     {

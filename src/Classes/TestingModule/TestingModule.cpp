@@ -229,19 +229,40 @@ void TestingModule::generateStatistics(int M)
 void TestingModule::testingModuleMenu()
 {
     int choice = 1;
-    while (choice >= 1 && choice <= 5)
+    while (choice >= 1 && choice <= 2)
     {
+        choice = 0;
         cout << endl
-             << "----------Trabalho Estrutura de Dados Parte 2------------" << endl;
-        cout << "Digite [5] para gerar as estatísticas " << endl;
-        cout << "Digite [1] para inserir registros na Quad Tree " << endl;
-        cout << "Digite [2] para inserir registros na Arvore B " << endl;
-        cout << "Digite [3] para inserir registros na Arvore Avl " << endl;
-        cout << "Digite [4] para inserir registros na Tabela Hash" << endl;
+             << "------------------------------------Trabalho Estrutura de Dados Parte 2------------------------------------" << endl;
+        cout << "Digite [1] para ir ao modulo de testes " << endl;
+        cout << "Digite [2] para ir para o modulo de estatísticas" << endl;
         cout << "Digite qualquer outro valor para encerrar o programa" << endl;
-        cout << "---------------------------------------------------------------" << endl;
+        cout << "------------------------------------------------------------------------------------------------------------" << endl;
         cin >> choice;
+
+        if (choice == 1)
+        {
+            while (choice >= 1 && choice <= 4)
+            {
+                cout << "------------Trabalho Estrutura de Dados Parte 2--------------" << endl;
+                cout << "Digite [1] para inserir registros na Quad Tree " << endl;
+                cout << "Digite [2] para inserir registros na Arvore B " << endl;
+                cout << "Digite [3] para inserir registros na Arvore Avl " << endl;
+                cout << "Digite [4] para inserir registros na Tabela Hash" << endl;
+                cout << "Digite [5] sair do programa" << endl;
+                cout << "---------------------------------------------------------------" << endl;
+                cin >> choice;
+                if(choice != 5)
+                    this->selectDataStructureToInsert(choice);
+                else 
+                    break;
+            }
+        }
+        else if (choice == 2)
+        {
+            //Vai chamar o modulo de estatisticas
+            this->selectDataStructureToInsert(5);
+        }
         //Parte para a inserção na estrutura selecionada
-        this->selectDataStructureToInsert(choice);
     }
 }
