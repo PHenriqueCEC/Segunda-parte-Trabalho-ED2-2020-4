@@ -14,11 +14,11 @@ NoB::NoB(int _min)
     folha = true;
     pai = nullptr;
 
-    filhos = new NoB *[max];     //cria filhos com o numero minimo 
+    filhos = new NoB *[max];     //cria filhos com o numero maximo 
     chave.reserve(max - 1); //Cria chave de ordem m - 1
 
     for (int i = 0; i < max; i++) //inicializa os filhos com nullptr
-        filhos[i] = nullptr;      //Pq nullptr NAO funciona?
+        filhos[i] = nullptr;      
     
     for (int i = 0; i < max - 1; i++) //cria chaves com o numero maximo m - 1
         chave[i] = NULL;
@@ -82,15 +82,12 @@ void NoB:: setFilho(int i, NoB* val)
 
 /*CityInfo* NoB::GetAnt(int i)
 {
-
 }
-
 CityInfo* NoB::SetProx(int i)
 {
-
 }*/
 
-void NoB::inserirNo(int info, int *numComparacoes)
+void NoB::inserirNo(int info, int *numComparacoesInsercao)
 {
     int i = n - 1; //Indice com o elemento mais a direita
     if (folha == true)
@@ -99,10 +96,10 @@ void NoB::inserirNo(int info, int *numComparacoes)
         {
             chave[i + 1] = chave[i];
             i--;
-            *numComparacoes += 1;
+            *numComparacoesInsercao += 1;
         }
 
-        chave[i + 1] = chave[i];
+        chave[i + 1] = info;
         n += 1;
     }
 
@@ -111,7 +108,7 @@ void NoB::inserirNo(int info, int *numComparacoes)
         while (i >= 0 && chave[i] > info) //Procura o filho que terá a nova chave
         {
             i--;
-            *numComparacoes += 1;
+            *numComparacoesInsercao += 1;
         }
 
         if (filhos[i + 1]->getN() == max - 1)
@@ -122,7 +119,7 @@ void NoB::inserirNo(int info, int *numComparacoes)
                 i++;
         }
 
-        filhos[i + 1]->inserirNo(info, numComparacoes);
+        filhos[i + 1]->inserirNo(info, numComparacoesInsercao);
     }
 }
 
@@ -166,9 +163,9 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
 
 }
 
-NoB* NoB::buscarNo(int info, NoB* p, int* numComparacoes)
+NoB* NoB::buscarNo(int info, NoB* p, int* numComparacoesBusca)
 {
-    *numComparacoes += 1;
+    *numComparacoesBusca += 1;
 
     int i = 0;
     while (i < n && info > chave[i])
@@ -186,20 +183,27 @@ NoB* NoB::buscarNo(int info, NoB* p, int* numComparacoes)
         return nullptr;
     }
       
-    return filhos[i]->buscarNo(info, filhos[i], numComparacoes);
+    return filhos[i]->buscarNo(info, filhos[i], numComparacoesBusca);
 
 }
 
 void NoB::imprimir()
 {
     int i;
+
+    cout << "Numero de chaves presente no nó: " << n << endl;
+    
     for (i = 0; i < n; i++) 
     {
       if (folha == false) 
-        filhos[i]->imprimir();  
-      cout << " " << chave[i] << "::" << n; //Falta o getId()
+      {
+          filhos[i]->imprimir();
+      }     
+      cout << " " << chave[i];
     } 
+    
     cout << endl;
+    
     if (folha == false) 
       filhos[i]->imprimir();
 }

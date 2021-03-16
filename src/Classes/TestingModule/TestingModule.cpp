@@ -34,6 +34,7 @@ void TestingModule::insertInBTree(vector<long long int> values){
          arvore->inserir(value);
      }
      //arvore->imprimir(false);
+     arvore->selecionarSaida();
 }
 
 

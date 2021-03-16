@@ -5,14 +5,17 @@
 #include <string>
 #include <ctime>
 
+using std::cin;
 using std::cout;
 using std::endl;
 
 ArvoreB::ArvoreB(int _min)
 {
     raiz = nullptr;
-    numComparacoes = 0;
+    numComparacoesInsercao = 0;
+    numComparacoesBusca = 0;
     min = _min;
+    max = min * 2;
 }
 
 ArvoreB::~ArvoreB()
@@ -23,7 +26,7 @@ ArvoreB::~ArvoreB()
 int ArvoreB::buscar(int info)
 {
 
-    NoB *p = raiz->buscarNo(info, raiz, &numComparacoes);
+    NoB *p = raiz->buscarNo(info, raiz, &numComparacoesBusca);
 
     if (p == nullptr)
     {
@@ -36,7 +39,7 @@ int ArvoreB::buscar(int info)
         //procura a primeira chave maior ou igual a k
         while (i < p->getN() && info > p->getChave(i))
         {
-            i++; //Precisa de id
+            i++; 
         }
 
         if (i < p->getN() && p->getChave(i) == info)
@@ -68,7 +71,7 @@ void ArvoreB::inserir(int info)
 
         else
         {
-            raiz->inserirNo(info, &numComparacoes); //Caso a raiz nao esteja cheia
+            raiz->inserirNo(info, &numComparacoesInsercao); //Caso a raiz nao esteja cheia
         }
     }
 }
@@ -99,7 +102,7 @@ void ArvoreB::remover(NoB *p)
 
 void ArvoreB::cisao(int info, NoB *p)
 {
-    //int min = max / 2;
+    
     NoB *aux = new NoB(min);
 
     aux->setFolha(false);
@@ -109,9 +112,9 @@ void ArvoreB::cisao(int info, NoB *p)
 
     int i = 0;
 
-    if (aux->getChave(0) < info) ///Falta o id
+    if (aux->getChave(0) < info) 
         i++;
-    aux->getFilho(i)->inserirNo(info, &numComparacoes);
+    aux->getFilho(i)->inserirNo(info, &numComparacoesInsercao);
     raiz = aux;
 }
 
@@ -119,25 +122,73 @@ void ArvoreB::escritaEmArquivo()
 {
     ofstream arq("saidaTestes.txt");
 
+    arq << "Num de comparacoes na inserção: " << numComparacoesInsercao << endl;
+    arq << "Num de comparacoes na busca: " << numComparacoesBusca << endl;
+    arq << "Num de chaves presente no no: " << raiz->getN() << endl;
+
     for (int i = 0; i < raiz->getN(); i++)
     {
-        arq << " " << raiz->getChave(i); //Acho que tem q colocar o Id
+        arq << " " << raiz->getChave(i); 
     }
 
     arq << endl;
 
-    cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
+    cout << "Arquivo de saída criado com sucesso! O nome do mesmo eh: saidaTestes.txt" << endl;
 }
 
-void ArvoreB::imprimir(bool isWriteInFile)
+void ArvoreB::imprimir()
 {
-    if(!isWriteInFile){
-        for (int i = 0; i < raiz->getN(); i++)
-        {
-            cout << " " << raiz->getChave(i);
-        }
-    }
-        
-
+    cout << "Num de comparacoes na inserção: " << numComparacoesInsercao << endl;
+    cout << "Num de comparacoes na busca: " << numComparacoesBusca << endl;
+    cout << "Num de chaves presente no no: " << raiz->getN() << endl;
     cout << endl;
+    cout << "Imprimindo Raiz:" << endl;
+    
+    for (int i = 0; i < raiz->getN(); i++)
+    {
+        cout << " " << raiz->getChave(i) << endl;
+    }
+    cout << endl;
+         
 }
+
+void ArvoreB::selecionarSaida()
+{
+    int saida = -1;
+
+    cout << "Digite um valor MENOR que [20] para saida em console;" << endl;
+    cout << "Digite um valor MAIOR que [20] para saida em TXT;" << endl;
+
+    cin >> saida;
+
+    if (saida <= 20)
+    {
+        cout << "Saida em console selecionada!" << endl;
+        imprimir();
+    }
+    else
+    {
+        cout << "Saida em arquivo TXT selecionada!" << endl;
+        escritaEmArquivo();
+    }
+}
+
+/*void ArvoreB::imprimir(bool isWriteInFile)
+{
+    ofstream arq("saidaTestes.txt");
+    if(isWriteInFile){
+        arq << "--------------------------------------------------------------------" << endl;
+        arq << "Num de comparacoes na inserção : " << this->numComparacoes << endl;
+        arq << "Num de comparacoes na busca : " << this->numComparacoes << endl;
+        arq << "--------------------------------------------------------------------" << endl;
+    }else{
+        cout << "--------------------------------------------------------------------" << endl;
+        cout << "Num de comparacoes na inserção : " << this->numComparacoes << endl;
+        cout << "Num de comparacoes na busca : " << this->numComparacoes << endl;
+        cout << "--------------------------------------------------------------------" << endl;
+    }
+    printTree(raiz, "", true ,isWriteInFile,arq);
+    if(isWriteInFile){
+        cout << "O arquivo de saida foi salvo no arquivo : saidaTestes.txt" << endl;
+    }
+}*/
