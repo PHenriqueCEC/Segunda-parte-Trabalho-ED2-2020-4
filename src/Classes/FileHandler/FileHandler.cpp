@@ -6,15 +6,19 @@ FileHandler::FileHandler()
 {
 }
 
+FileHandler::FileHandler(string directory){
+  this->directory = directory;
+}
+
 FileHandler::~FileHandler()
 {
 }
 
 //Pega todos os registros do csv de coordenadas da cidade
 //e salva em um vetor local da classe
-void FileHandler::processCityInfoList(string filename){
+void FileHandler::processCityInfoList(){
   int line = 0;
-  ifstream arq("brazil_cities_coordinates.csv");
+  ifstream arq(this->directory + "brazil_cities_coordinates.csv");
   string state_code, city_code, city_name, latitutde, longitude, isCapital;
   if (arq.is_open())
   {
@@ -47,14 +51,14 @@ void FileHandler::processCityInfoList(string filename){
   }
 }
 
-HashTable* FileHandler::insertCovidInfoInHashTable(string filename,int numberOfRegisters,float &time)
+HashTable* FileHandler::insertCovidInfoInHashTable(int numberOfRegisters,float &time)
 {
   int i = 0;
   //Pré aloco o n de registros
   HashTable *hashTable = new HashTable(numberOfRegisters + (numberOfRegisters * 0.5) );
   string date, state, city, code, dailyCases, totalCases, deaths, line;
   //Abre o csv pré-processado
-  ifstream arq(filename);
+  ifstream arq(this->directory + "brazil_covid19_cities_processado.csv");
   int linesProcessed = 0;
   vector<CovidInfo> file;
   clock_t startTime = 0, finalTime;
@@ -133,10 +137,10 @@ vector<CityInfo*> FileHandler::getNRandomCityInfo(int n ){
   return sortedInfos;
 }
 
-QuadTree*  FileHandler::insertCityListInQuadTree(string filename,int n)
+QuadTree*  FileHandler::insertCityListInQuadTree(int n)
 {
   int line = 0;
-  ifstream arq("brazil_cities_coordinates.csv");
+  ifstream arq(this->directory + "brazil_cities_coordinates.csv");
   string state_code, city_code, city_name, latitutde, longitude, isCapital;
   if (arq.is_open())
   {

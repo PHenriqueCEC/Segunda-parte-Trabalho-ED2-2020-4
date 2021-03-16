@@ -1,7 +1,8 @@
 #include "./TestingModule.h"
 
-TestingModule::TestingModule()
+TestingModule::TestingModule(string directory)
 {
+    this->directory = directory;
 }
 
 TestingModule::~TestingModule()
@@ -13,7 +14,7 @@ void TestingModule::insertInQuadTree(int numberOfRegisters)
     clock_t startTime, finalTime;
     startTime = clock();
     FileHandler fileHandler;
-    QuadTree *quadtree = fileHandler.insertCityListInQuadTree("brazil_cities_coordinates.csv", numberOfRegisters);
+    QuadTree *quadtree = fileHandler.insertCityListInQuadTree(numberOfRegisters);
 
     if (quadtree->getSize() < 20)
         quadtree->print();
@@ -51,7 +52,7 @@ void TestingModule::insertInHashTable(int numberOfRegisters)
 {
     FileHandler fileHandler;
     float time;
-    HashTable *hash = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters, time);
+    HashTable *hash = fileHandler.insertCovidInfoInHashTable(numberOfRegisters, time);
     hash->print(numberOfRegisters > 20);
 }
 
@@ -75,7 +76,7 @@ void TestingModule::selectDataStructureToInsert(int choice)
 
     case 2:
     {
-        HashTable *table = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters, time);
+        HashTable *table = fileHandler.insertCovidInfoInHashTable(numberOfRegisters, time);
         vector<long long int> hashedKeys = table->getHashedKeys();
         insertInBTree(hashedKeys);
         break;
@@ -83,7 +84,7 @@ void TestingModule::selectDataStructureToInsert(int choice)
 
     case 3:
     {
-        HashTable *table = fileHandler.insertCovidInfoInHashTable("", numberOfRegisters, time);
+        HashTable *table = fileHandler.insertCovidInfoInHashTable(numberOfRegisters, time);
         vector<long long int> hashedKeys = table->getHashedKeys();
         insertInAvlTree(hashedKeys);
         break;
@@ -111,14 +112,14 @@ void TestingModule::generateStatistics(int M)
     // M de 100000 , M de 50000k e tal
     clock_t startTime, finalTime;
     int numberOfTests[5] = {10000, 50000, 100000, 500000, 1000000};
-    FileHandler fileHandler;
+    FileHandler fileHandler(directory);
     //Insere os 1000000 de  registros na tabela hash e retorna um ponteiro
     //para a tabela criada
     ofstream arq("SaidaEstatistica.txt");
     arq << "Modulo de Estatísticas M = " << M << endl;
     cout << "-------------------------------------------------" << endl;
     float time;
-    HashTable *hashTable = fileHandler.insertCovidInfoInHashTable("brazil_covid19_cities_processado.csv", 1000000, time);
+    HashTable *hashTable = fileHandler.insertCovidInfoInHashTable(1000000, time);
 
     arq << "Tempo para inserçaõ de 1000000 na tabela hash : " << time << endl;
 

@@ -19,7 +19,8 @@ private:
     
 
 public:
-    TestingModule();
+    string directory;
+    TestingModule(string directory);
     ~TestingModule();
     //Funções da parte 4
     void testingModuleMenu();

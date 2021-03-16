@@ -27,9 +27,9 @@ public:
   FileHandler(string directory);
   ~FileHandler();
   //Função de processamento do csv
-  QuadTree* insertCityListInQuadTree(string filename , int n);
-  void processCityInfoList(string filename);
-  HashTable* insertCovidInfoInHashTable(string filename,int numberOfRegisters,float &time);
+  QuadTree* insertCityListInQuadTree(int n);
+  void processCityInfoList();
+  HashTable* insertCovidInfoInHashTable(int numberOfRegisters,float &time);
   vector<CityInfo*> getNRandomCityInfo(int n);
   
 };
