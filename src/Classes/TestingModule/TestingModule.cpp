@@ -143,6 +143,10 @@ void TestingModule::generateStatistics(int M)
         averageTimeArvB = 0;
         averageTimeBLarge = 0;
 
+        comparisionArvB = 0;
+        comparisionArvBLarge = 0;
+        comparisionAvl = 0;
+
         for (int i = 0; i < M; i++)
         {
             //Tempo de geração dos n numeros aleatórios
@@ -187,24 +191,24 @@ void TestingModule::generateStatistics(int M)
         }
         arq << "Tempo Médio Inserção de : " << n << " registros " << M << " vezes "
             << " Na Árvore Avl : " << (averageTimeArvAvl / M) / ((float)CLOCKS_PER_SEC) << " segundos" << endl
-            << "Comparações Médias : " << comparisionAvl/M << endl
+            << "Comparações Médias : " << comparisionAvl / M << endl
             << endl;
 
         arq << "Tempo Médio Inserção de : " << n << " registros " << M << " vezes "
             << " Na Árvore B com d = 20 : " << (averageTimeArvB / M) / ((float)CLOCKS_PER_SEC) << " segundos" << endl
-            << "Comparações Médias : " << comparisionArvB/M << endl
+            << "Comparações Médias : " << comparisionArvB / M << endl
             << endl;
 
         arq << "Tempo Médio Inserção de : " << n << " registros " << M << " vezes "
             << " Na Árvore B com d = 200 : " << (averageTimeBLarge / M) / ((float)CLOCKS_PER_SEC) << " segundos" << endl
-            << "Comparações Médias : " << comparisionArvBLarge/M << endl
+            << "Comparações Médias : " << comparisionArvBLarge / M << endl
             << endl;
 
         arq << "-------------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------------------------------------------------------" << endl;
     }
 
-    int choice = 1,cityCode,comparisions=0;
+    int choice = 1, cityCode, comparisions = 0;
     float elapsedTime;
     while (choice >= 1 && choice <= 2)
     {
@@ -214,14 +218,15 @@ void TestingModule::generateStatistics(int M)
         //cout << "Digite [2] para busca S2" << endl;
         cout << "----------------------------------" << endl;
         cin >> choice;
-        if(choice == 1){
+        if (choice == 1)
+        {
             cout << "Digite o código da cidade para realizar a busca (6 digitos)" << endl;
             cin >> cityCode;
-            hashTable->getAllCasesInCity(cityCode,comparisions,elapsedTime);
-            cout << "Foram feitas : " << comparisions << " comparacoes" <<  endl;
+            hashTable->getAllCasesInCity(cityCode, comparisions, elapsedTime);
+            cout << "Foram feitas : " << comparisions << " comparacoes" << endl;
             cout << "Em um tempo de : " << elapsedTime << endl;
-            cout <<"-----------------------------------------------------------------------" <<endl;
-         }
+            cout << "-----------------------------------------------------------------------" << endl;
+        }
     }
 }
 
