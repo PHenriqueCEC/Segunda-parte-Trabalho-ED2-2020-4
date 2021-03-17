@@ -31,7 +31,7 @@ public:
   void print();
   void printInFile(ofstream &file);
 
-  bool operator < (const CovidInfo& c) const
+  bool operator < (const CovidInfo& c) const //Overload do operador < para servir a propositos de ordenação de vetores de objetos desta classe
   {
       return (city < c.city);
   }
