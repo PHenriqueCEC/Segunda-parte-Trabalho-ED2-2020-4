@@ -7,6 +7,7 @@
 #include<random>
 #include<functional>
 #include <algorithm>
+#include <cmath>   
 
 #include "../CovidInfo/CovidInfo.h"
 

@@ -1,1 +1,52 @@
-Modulo de Estatísticas M = 5
+Modulo de Estatísticas M = 1
+Tempo para inserção de 1000000 de registros na tabela hash : 4.80174
+Tempo Médio Inserção de : 10000 registros 1 vezes  Na Árvore Avl : 0.040274 segundos
+Comparações Médias : 80369
+
+Tempo Médio Inserção de : 10000 registros 1 vezes  Na Árvore B com d = 20 : 0.037983 segundos
+Comparações Médias : 249256
+
+Tempo Médio Inserção de : 10000 registros 1 vezes  Na Árvore B com d = 200 : 0.042619 segundos
+Comparações Médias : 993450
+
+-------------------------------------------------------------------------------------------------------------
+Tempo Médio Inserção de : 50000 registros 1 vezes  Na Árvore Avl : 0.079181 segundos
+Comparações Médias : 555590
+
+Tempo Médio Inserção de : 50000 registros 1 vezes  Na Árvore B com d = 20 : 0.066178 segundos
+Comparações Médias : 2554277
+
+Tempo Médio Inserção de : 50000 registros 1 vezes  Na Árvore B com d = 200 : 0.087424 segundos
+Comparações Médias : 6664973
+
+-------------------------------------------------------------------------------------------------------------
+Tempo Médio Inserção de : 100000 registros 1 vezes  Na Árvore Avl : 0.129343 segundos
+Comparações Médias : 1567666
+
+Tempo Médio Inserção de : 100000 registros 1 vezes  Na Árvore B com d = 20 : 0.104596 segundos
+Comparações Médias : 8776190
+
+Tempo Médio Inserção de : 100000 registros 1 vezes  Na Árvore B com d = 200 : 0.147138 segundos
+Comparações Médias : 20033282
+
+-------------------------------------------------------------------------------------------------------------
+Tempo Médio Inserção de : 500000 registros 1 vezes  Na Árvore Avl : 0.686289 segundos
+Comparações Médias : 7083877
+
+Tempo Médio Inserção de : 500000 registros 1 vezes  Na Árvore B com d = 20 : 0.498303 segundos
+Comparações Médias : 69121283
+
+Tempo Médio Inserção de : 500000 registros 1 vezes  Na Árvore B com d = 200 : 0.691372 segundos
+Comparações Médias : 113709982
+
+-------------------------------------------------------------------------------------------------------------
+Tempo Médio Inserção de : 1000000 registros 1 vezes  Na Árvore Avl : 1.31468 segundos
+Comparações Médias : 17706381
+
+Tempo Médio Inserção de : 1000000 registros 1 vezes  Na Árvore B com d = 20 : 1.03377 segundos
+Comparações Médias : 217835059
+
+Tempo Médio Inserção de : 1000000 registros 1 vezes  Na Árvore B com d = 200 : 1.36647 segundos
+Comparações Médias : 323870831
+
+-------------------------------------------------------------------------------------------------------------

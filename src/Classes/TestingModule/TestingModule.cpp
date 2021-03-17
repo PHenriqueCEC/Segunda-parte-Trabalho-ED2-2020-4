@@ -121,7 +121,7 @@ void TestingModule::generateStatistics(int M)
     float time;
     HashTable *hashTable = fileHandler.insertCovidInfoInHashTable(1000000, time);
 
-    arq << "Tempo para inserçaõ de 1000000 na tabela hash : " << time << endl;
+    arq << "Tempo para inserção de 1000000 de registros na tabela hash : " << time << endl;
 
     int comparacoes;
 
@@ -204,26 +204,25 @@ void TestingModule::generateStatistics(int M)
         cout << "------------------------------------------------------------------------------------" << endl;
     }
 
-    /*
-        vector<int> teste = avl->doGetUniqueCitys(hashTable);
-        for (int cityCode : teste)
-        {
-            cout << "Casos Acrelândia : " << hashTable->getAllCasesInCity(cityCode, comparacoes, tempo) << endl;
-            cout << "Tempo : " << tempo << endl;
-            cout << "Comparações  : " << comparacoes << endl;
-        }
-        */
-
-    //Chamo o destrututor para limpar a memória
-    /*
-    cout << "---------------------------------";
-    cout << "Digite o tipo de busca" << endl;
-    cout << "Digite [1] para busca S1" << endl;
-    cout << "Digite [2] para busca S2" << endl;
-    cout << "----------------------------------";
-    finalTime = clock();
-    cout << "Tempo de Processamento : " << (finalTime - startTime) / ((float)CLOCKS_PER_SEC) << " segundos" << endl;
-    */
+    int choice = 1,cityCode,comparisions=0;
+    float elapsedTime;
+    while (choice >= 1 && choice <= 2)
+    {
+        cout << "---------------------------------" << endl;
+        cout << "Digite o tipo de busca" << endl;
+        cout << "Digite [1] para busca S1" << endl;
+        //cout << "Digite [2] para busca S2" << endl;
+        cout << "----------------------------------" << endl;
+        cin >> choice;
+        if(choice == 1){
+            cout << "Digite o código da cidade para realizar a busca (6 digitos)" << endl;
+            cin >> cityCode;
+            hashTable->getAllCasesInCity(cityCode,comparisions,elapsedTime);
+            cout << "Foram feitas : " << comparisions << " comparacoes" <<  endl;
+            cout << "Em um tempo de : " << elapsedTime << endl;
+            cout <<"-----------------------------------------------------------------------" <<endl;
+         }
+    }
 }
 
 void TestingModule::testingModuleMenu()
@@ -244,7 +243,8 @@ void TestingModule::testingModuleMenu()
         {
             while (choice >= 1 && choice <= 4)
             {
-                cout << endl << "------------Trabalho Estrutura de Dados Parte 2--------------" << endl;
+                cout << endl
+                     << "------------Trabalho Estrutura de Dados Parte 2--------------" << endl;
                 cout << "Digite [1] para inserir registros na Quad Tree " << endl;
                 cout << "Digite [2] para inserir registros na Arvore B " << endl;
                 cout << "Digite [3] para inserir registros na Arvore Avl " << endl;
@@ -252,9 +252,9 @@ void TestingModule::testingModuleMenu()
                 cout << "Digite [5] sair do programa" << endl;
                 cout << "---------------------------------------------------------------" << endl;
                 cin >> choice;
-                if(choice != 5)
+                if (choice != 5)
                     this->selectDataStructureToInsert(choice);
-                else 
+                else
                     break;
             }
         }

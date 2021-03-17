@@ -218,6 +218,7 @@ long int HashTable::getAllCasesInCity(int cityCode, int &comparisions,float &ela
         }
     }
     finalTime = clock();
+    cout << "Casos encontrados na cidade : "  <<  abs(cases) << endl;
     elapsedTime = (finalTime - startTime) / ((float)CLOCKS_PER_SEC);
 
     return cases;

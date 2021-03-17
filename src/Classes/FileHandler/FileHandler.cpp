@@ -145,7 +145,6 @@ QuadTree*  FileHandler::insertCityListInQuadTree(int n)
   string state_code, city_code, city_name, latitutde, longitude, isCapital;
   if (arq.is_open())
   {
-    cout << "Arq opened" << endl;
     QuadTree *tree = new QuadTree();
     //Vai ate o final do arquivo separando cada elemento do csv por ,
     while (!arq.eof())
