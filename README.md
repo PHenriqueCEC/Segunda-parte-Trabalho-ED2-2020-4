@@ -39,7 +39,7 @@ cd src
 
 2. Para dar autorização ao shellscript digite no terminal 
 ```
-chmod +x compilesh 
+chmod +x compile.sh 
 ```
 
 3. execute no terminal
@@ -47,9 +47,11 @@ chmod +x compilesh
 ./compile.sh
 ```
 
-4. Após a compilação , sera gerado o executável main , para executar o programa digite
+
+4. Após a compilação , sera gerado o executável , para executar o programa será necessário passar
+como argumento o diretório onde se encontra os arquivo necessários para executar o programa.
 ```
-./main ./brazil_covid_19_cities.csv (caminho do arquivo csv) 
+./main ../arquivos/csv/ (caminho do arquivo csv) 
 ```
 5. Por fim sera informado se a ação ocorreu com sucesso ou erro
 
@@ -73,9 +75,11 @@ attrib +x compile.sh
 ./compile.sh
 ```
 
-4. Após a compilação , sera gerado o executável , para executar o programa digite
+4. Após a compilação , sera gerado o executável , para executar o programa será necessário passar
+como argumento o diretório onde se encontra os arquivo necessários para executar o programa.
 ```
-./main ./brazil_covid_19_cities.csv (caminho do arquivo csv) 
+./main ../arquivos/csv/ (caminho do arquivo csv) 
 ```
+
 5. Por fim sera informado se a ação ocorreu com sucesso ou erro
 
