@@ -3,7 +3,8 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Trabalho para a disciplina de estrutura de dados 2 , consiste em um processamento e visualização de dados de um csv sobre estatísticas sobre o covid.
+> Trabalho para a disciplina de estrutura de dados 2 , consiste em um processamento de dados sobre infecção de covid 19, e manipulacação e armazenamento desses dados utilizados
+> estruturas como : QuadTree,Tabela Hash, Árvore Avl e Árvore B.
 
 
 ## Autores
