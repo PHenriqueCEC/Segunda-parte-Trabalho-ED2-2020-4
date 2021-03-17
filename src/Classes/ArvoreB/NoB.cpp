@@ -5,6 +5,9 @@
 #include <string>
 #include <ctime>
 
+using std::cin;
+using std::cout;
+using std::endl;
 
 NoB::NoB(int _min)
 {
@@ -12,13 +15,12 @@ NoB::NoB(int _min)
     max = min * 2;
     n = 0;
     folha = true;
-    pai = nullptr;
 
     filhos = new NoB *[max];     //cria filhos com o numero minimo 
     chave.reserve(max - 1); //Cria chave de ordem m - 1
 
     for (int i = 0; i < max; i++) //inicializa os filhos com nullptr
-        filhos[i] = nullptr;      //Pq nullptr NAO funciona?
+        filhos[i] = nullptr;      
     
     for (int i = 0; i < max - 1; i++) //cria chaves com o numero maximo m - 1
         chave[i] = NULL;
@@ -60,16 +62,6 @@ void NoB::setN(int _n)
     n = _n;
 }
 
-NoB *NoB::getPai()
-{
-    return pai;
-}
-
-void NoB::setPai(NoB *p)
-{
-    pai = p;
-}
-
 NoB* NoB::getFilho(int i)
  {
      return filhos[i];
@@ -79,16 +71,6 @@ void NoB:: setFilho(int i, NoB* val)
 {
     filhos[i] = val; 
 }
-
-/*CityInfo* NoB::GetAnt(int i)
-{
-
-}
-
-CityInfo* NoB::SetProx(int i)
-{
-
-}*/
 
 void NoB::inserirNo(int info, int *numComparacoesInsercao)
 {
@@ -128,21 +110,20 @@ void NoB::inserirNo(int info, int *numComparacoesInsercao)
 
 void NoB::overflow(int i, NoB *p) //Executa a cisao do no
 {
-    //Cria um novo no que armazena min - 1 chaves de p
-    //int min = max / 2;
+    //Cria um novo no que armazena min 
     NoB *aux = new NoB(min);
     aux->setN(min - 1);
 
     for (int j = 0; j < min - 1; j++) //Copia as chaves
     {
-        aux->chave[j] = p->chave[j + min]; //Acho que vou precisar de um setChave e getChave
+        aux->chave[j] = p->chave[j + min];
     }
 
     if (p->getFolha() == false)
     {
         for (int j = 0; j < min; j++) //Copia os filhos
         {
-            aux->filhos[j] = p->filhos[j + min]; //Usar setFilho e getFilho??
+            aux->filhos[j] = p->filhos[j + min]; 
         }
     }
 
@@ -160,9 +141,9 @@ void NoB::overflow(int i, NoB *p) //Executa a cisao do no
         chave[j + 1] = chave[j];
     }
 
-    chave[i] = p->chave[min - 1]; //Precisa de getChave?
+    chave[i] = p->chave[min - 1]; 
 
-    n += 1; //Incrementa contador de chaves para esse nó
+    n += 1; //Incrementa o numero de chaves para esse nó
 
 }
 
@@ -197,12 +178,16 @@ void NoB::imprimir()
     for (i = 0; i < n; i++) 
     {
       if (folha == false) 
-        filhos[i]->imprimir();  
-      cout << " " << chave[i] << "::" << n; //Falta o getId()
+      {
+          filhos[i]->imprimir();
+      }  
+      cout << " " << chave[i];
     } 
     
     cout << endl;
     
     if (folha == false) 
-      filhos[i]->imprimir();
+    {
+        filhos[i]->imprimir();
+    }
 }

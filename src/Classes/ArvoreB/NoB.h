@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <time.h>
 
-using namespace std;
+
 
 class NoB
 {
@@ -20,10 +20,7 @@ class NoB
         void setFolha(bool _folha);
         NoB* getFilho(int i);
         void setFilho(int i, NoB* val);
-        int getChaves(int i);
         void atualizarChave(int i, int info);
-        NoB* getPai();
-        void setPai(NoB *p);
         int getChave(int i);
         void setChave(int i, int val);
         int getN();
@@ -32,10 +29,6 @@ class NoB
         void overflow(int i, NoB *p);
         NoB* buscarNo(int info, NoB* p, int* numComparacoesBusca);
         void imprimir();
-
-
-        //CityInfo* GetAnt(int i);
-        //CityInfo* SetProx(int i);
 
     private:
         int max; //tamanho maximo

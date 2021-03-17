@@ -39,7 +39,7 @@ int ArvoreB::buscar(int info)
         //procura a primeira chave maior ou igual a k
         while (i < p->getN() && info > p->getChave(i))
         {
-            i++; //Precisa de id
+            i++; 
         }
 
         if (i < p->getN() && p->getChave(i) == info)
@@ -48,11 +48,6 @@ int ArvoreB::buscar(int info)
         }
         return NULL;
     }
-}
-
-//Retorna um vetor com o código de todas cidades unicas no vetor
-vector<string> obterCidadesUnicas(){
-    
 }
 
 void ArvoreB::inserir(int info)
@@ -107,7 +102,7 @@ void ArvoreB::remover(NoB *p)
 
 void ArvoreB::cisao(int info, NoB *p)
 {
-    //int min = max / 2;
+    
     NoB *aux = new NoB(min);
 
     aux->setFolha(false);
@@ -117,7 +112,7 @@ void ArvoreB::cisao(int info, NoB *p)
 
     int i = 0;
 
-    if (aux->getChave(0) < info) ///Falta o id
+    if (aux->getChave(0) < info) 
         i++;
     aux->getFilho(i)->inserirNo(info, &numComparacoesInsercao);
     raiz = aux;
@@ -133,7 +128,7 @@ void ArvoreB::escritaEmArquivo()
 
     for (int i = 0; i < raiz->getN(); i++)
     {
-        arq << " " << raiz->getChave(i); //Acho que tem q colocar o Id
+        arq << " " << raiz->getChave(i); 
     }
 
     arq << endl;
