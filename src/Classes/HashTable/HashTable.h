@@ -8,7 +8,7 @@
 #include<functional>
 #include <algorithm>
 #include <cmath>   
-
+#include <time.h>
 #include "../CovidInfo/CovidInfo.h"
 
 using namespace std;
