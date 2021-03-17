@@ -8,6 +8,7 @@
 #include<functional>
 #include <algorithm>
 #include <cmath>   
+#include<ctime>
 
 #include "../CovidInfo/CovidInfo.h"
 
