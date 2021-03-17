@@ -30,6 +30,8 @@
 
 # Como rodar o projeto em ambiente linux
 
+**Os arquivos necessários para a execução no projeto se encontram no drive nesse [link](https://drive.google.com/drive/folders/1CPvibdlAqc_4z4Soby8vK-omvUgX6LcH?usp=sharing)
+
 **Certifique-se de ter o g++ instalado no seu ambiente de desenvolvimento**
 
 1. Navegue até a pasta src
