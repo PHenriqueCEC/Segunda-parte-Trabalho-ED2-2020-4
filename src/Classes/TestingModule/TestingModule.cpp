@@ -187,17 +187,17 @@ void TestingModule::generateStatistics(int M)
         }
         arq << "Tempo Médio Inserção de : " << n << " registros " << M << " vezes "
             << " Na Árvore Avl : " << (averageTimeArvAvl / M) / ((float)CLOCKS_PER_SEC) << " segundos" << endl
-            << "Comparações Médias : " << comparisionAvl << endl
+            << "Comparações Médias : " << comparisionAvl/M << endl
             << endl;
 
         arq << "Tempo Médio Inserção de : " << n << " registros " << M << " vezes "
             << " Na Árvore B com d = 20 : " << (averageTimeArvB / M) / ((float)CLOCKS_PER_SEC) << " segundos" << endl
-            << "Comparações Médias : " << comparisionArvB << endl
+            << "Comparações Médias : " << comparisionArvB/M << endl
             << endl;
 
         arq << "Tempo Médio Inserção de : " << n << " registros " << M << " vezes "
             << " Na Árvore B com d = 200 : " << (averageTimeBLarge / M) / ((float)CLOCKS_PER_SEC) << " segundos" << endl
-            << "Comparações Médias : " << comparisionArvBLarge << endl
+            << "Comparações Médias : " << comparisionArvBLarge/M << endl
             << endl;
 
         arq << "-------------------------------------------------------------------------------------------------------------" << endl;
