@@ -40,8 +40,11 @@ void QuadTree::insert(TreeNode *root, CityInfo *toInsert)
     }
     else
     {
+        //Busco o quadrante que meu valor deveria estar
         string quadrant = this->getQuadrant(this->root->getRootValue(), toInsert);
         TreeNode *auxNode = initialNode->getValueInQuadrant(quadrant);
+        //Enquanto não achar um nó NULL, continua re-buscando o 
+        //quadrante a partir do novo valor e navegando para ele
         while (!auxNode->getRootValue()->isEmpty())
         {
             quadrant = this->getQuadrant(auxNode->getRootValue(), toInsert);
@@ -60,7 +63,9 @@ bool QuadTree::find(CityInfo *value)
     {
         //Vejo a qual quadrante o elemento deveria pertencer
         string quadrant = this->getQuadrant(aux->getRootValue(), value);
+        //Navego para o nó que o valor deveria estar
         aux = aux->getValueInQuadrant(quadrant);
+        //Se o valor do nó é igual ao procurado retorno verdadeiro
         if (aux->getRootValue()->city_name == value->city_name)
             return true;
     }
@@ -88,7 +93,7 @@ void QuadTree::auxPrint(TreeNode *node)
         auxPrint(node->getSW());
     }
 }
-
+//Função para imprimir a arvore em um arquivo txt
 void QuadTree::writeTreeInTxtFile(string filename)
 {
     ofstream arq("saidaTestes.txt");
@@ -100,6 +105,7 @@ void QuadTree::writeTreeInTxtFile(string filename)
     cout << "Arquivo de saída criado com sucesso, o nome do mesmo eh : saidaTestes.txt" << endl;
 }
 
+//Função recursiva  para imprimir a arvore em um arquivo txt
 void QuadTree::auxWriteTreeInTxtFile(TreeNode *node, ofstream &arq)
 {
     if (node != nullptr)
@@ -124,6 +130,8 @@ void QuadTree::print()
     cout << endl;
 }
 
+
+//Função de obter cidades em um range x1,y1,x2,y2
 vector<string> QuadTree::getCitysInCoordinates(Coordinate *coordinates)
 {
     vector<string> citysInRange;
@@ -142,6 +150,7 @@ void QuadTree::auxGetCitysInCoordinates(TreeNode *node, Coordinate *coordinates,
             float currentLatitude = node->getRootValue()->latitude;
             float currentLongitude = node->getRootValue()->longitude;
 
+            //Verifica se a cidade no nó corrente esta dentro das coordenadas
             if ((currentLatitude > coordinates->x1 && currentLatitude < coordinates->x2) &&
                 (currentLongitude > coordinates->y1 && currentLongitude < coordinates->y2))
             {
@@ -157,6 +166,7 @@ void QuadTree::auxGetCitysInCoordinates(TreeNode *node, Coordinate *coordinates,
     }
 }
 
+//Função para deletar a arvore da memoria
 TreeNode *QuadTree::clean(TreeNode *node)
 {
     if (node != NULL && !node->getRootValue()->isEmpty())
