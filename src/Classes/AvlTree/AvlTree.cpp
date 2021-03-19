@@ -214,15 +214,15 @@ AvlNode* AvlTree::insert(AvlNode *p, int value)
     return p;
   }
 
-  //Atualiza o fator de balanceamento dos nós
+  //Atualiza a altura do nó inserido
   p->setHeight( 1 + higherElement(height(p->getLeft()),height(p->getRight())));
 
-  //Agora é feito o balanceamento
+  //Calcula o fator de balanceamento do nó inserido
   int balanceFactor = getBalance(p); // obtemos o fator de balanceamento do nó
 
   //Iremos verificar qual lado está mais "pesado".
   //E verificaremos também se será necessario uma rotação dupla ou simples, levando os valores dos nós em consideração.
-  //Caso o lado direito seja o mais pesado o fator de balanceamento é positivo.
+  //Caso o lado esquerdo seja o mais pesado o fator de balanceamento é positivo.
   if (balanceFactor > 1) { 
     if (value < p->getLeft()->getValue()) {
       this->comparisonsInsert++;
@@ -232,7 +232,7 @@ AvlNode* AvlTree::insert(AvlNode *p, int value)
       return doubleRotationRight(p);
     }
   }
-  //Caso o lado esquerdo seja o mais pesado o fator de balanceamento é negativo.
+  //Caso o lado direito seja o mais pesado o fator de balanceamento é negativo.
   if (balanceFactor < -1) {
     if (value > p->getRight()->getValue()) {
       this->comparisonsInsert++;
